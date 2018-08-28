@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="sms"> 
+	<typeAlias alias="SangsuPipeVo" type="suwon.web.facility.vo.SangsuPipeVo"/>
+	<typeAlias alias="HasuPipeVo" type="suwon.web.facility.vo.HasuPipeVo"/>
+ 	<typeAlias alias="UflElcPipeVo" type="suwon.web.facility.vo.UflElcPipeVo"/>
+ 	<typeAlias alias="UflLpgPipeVo" type="suwon.web.facility.vo.UflLpgPipeVo"/>
+ 	<typeAlias alias="UflGasPipeVo" type="suwon.web.facility.vo.UflGasPipeVo"/>
+ 	<typeAlias alias="UflHeatPipeVo" type="suwon.web.facility.vo.UflHeatPipeVo"/>
+  	<typeAlias alias="UflComPipeVo" type="suwon.web.facility.vo.UflComPipeVo"/>
+  	<typeAlias alias="UflWidePipeVo" type="suwon.web.facility.vo.UflWidePipeVo"/> 			 
+	<!-- 툴바 > 상수관로 정보조회 (차후수정) -->
+ 	<select id="getSangsuPipeList" resultClass="SangsuPipeVo">
+				SELECT 
+								PIPE.FTR_IDN, 
+                                PIPE.HJD_CDE, 
+                                PIPE.MNG_CDE, 
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD, 
+                                PIPE.SAA_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'WTL_PIPE_LM' AND ALL_CDE = PIPE.SAA_CDE) AS SAA_NAM, 
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'WTL_PIPE_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM, 
+                                PIPE.STD_DIP, PIPE.BYC_LEN, 
+                                PIPE.JHT_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'WTL_PIPE_LM' AND ALL_CDE = PIPE.JHT_CDE) AS JHT_NAM, 
+                                PIPE.LOW_DEP, PIPE.HGH_DEP, PIPE.CNT_NUM, PIPE.PIP_LBL, 
+                                PIPE.IQT_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'WTL_PIPE_LM' AND ALL_CDE = PIPE.IQT_CDE) AS IQT_NAM                            
+               FROM 
+               					WTL_PIPE_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE   #ftr_idn# 	<!--   '%'|| #ftr_idn# ||'%' '36383'-->
+	</select>
+
+<!-- 툴바 > 하수관거 정보조회  (차후수정) -->
+	<select id="getHasuPipeList"  resultClass="HasuPipeVo">
+				 SELECT 
+				 				PIPE.FTR_IDN, 
+                                PIPE.HJD_CDE, 
+                                PIPE.MNG_CDE,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD, 
+                                SBA_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'SWL_PIPE_LM' AND ALL_CDE = PIPE.SBA_CDE) AS SBA_NAM, 
+                                MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'SWL_PIPE_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM, 
+                                LIT_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'SWL_PIPE_LM' AND ALL_CDE = PIPE.LIT_CDE) AS LIT_NAM, 
+                                FOR_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'SWL_PIPE_LM' AND ALL_CDE = PIPE.FOR_CDE) AS FOR_NAM, 
+                                STD_DIP, BYC_LEN, BEG_DEP, END_DEP, PIP_LBL 
+                                FROM SWL_PIPE_LM PIPE 
+                                WHERE PIPE.FTR_IDN LIKE #ftr_idn#	<!--#ftr_idn#   '%'|| #ftr_idn# ||'%' '35235'-->
+	</select>	
+<!-- 툴바 > 전력지중관로 정보조회  (차후수정) -->
+
+ 	<select id="getElcPipeList" resultClass="UflElcPipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, FTR_CDE,MNG_CDE,SPH_LIN,HOL_DIP,VEL_DIP,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_BPIP_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM, 
+                                PIPE.STD_DIP, PIPE.STD_LEN, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_BPIP_LM' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM, 
+                                PIPE.STD_DEP, PIPE.PIP_LBL, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_BPIP_LM' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM                            
+               FROM 
+                                   UFL_BPIP_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE   #ftr_idn#				
+	</select>	
+
+<!-- 툴바 > LPG배관 정보조회  (차후수정) -->
+	<select id="getLpgPipeList" resultClass="UflLpgPipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, FTR_CDE,MNG_CDE,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM, 
+                                PIPE.STD_DIP, PIPE.STD_LEN, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM, 
+                                PIPE.STD_DEP, PIPE.PIP_LBL, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.OUG_CDE) AS OUG_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.SOO_CDE) AS SOO_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.SGA_CDE) AS SGA_NAM,
+                               (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.SGB_CDE) AS SGB_NAM                              
+               FROM 
+                                   UFL_GLPI_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE   #ftr_idn#	
+	</select>
+<!-- 툴바 > 천연가스배관 정보조회  (차후수정) -->
+	<select id="getGasPipeList" resultClass="UflGasPipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, FTR_CDE,MNG_CDE,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM, 
+                                PIPE.STD_DIP, PIPE.STD_LEN, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GLPI_LM' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM, 
+                                PIPE.STD_DEP, PIPE.PIP_LBL, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GPIP_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GPIP_LM' AND ALL_CDE = PIPE.OUG_CDE) AS OUG_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GPIP_LM' AND ALL_CDE = PIPE.SOO_CDE) AS SOO_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GPIP_LM' AND ALL_CDE = PIPE.SGA_CDE) AS SGA_NAM,
+                               (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_GPIP_LM' AND ALL_CDE = PIPE.SGB_CDE) AS SGB_NAM                              
+               FROM 
+                                   UFL_GLPI_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE #ftr_idn#	
+	</select>
+<!-- 툴바 > 난방열배관 정보조회  (차후수정) -->	
+	<select id="getHeatPipeList" resultClass="UflHeatPipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, FTR_CDE,MNG_CDE,STD_WID,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_HPIP_LM' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM, 
+                                PIPE.STD_DIP, PIPE.STD_LEN, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_HPIP_LM' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM, 
+                                PIPE.STD_DEP, PIPE.PIP_LBL, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_HPIP_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_HPIP_LM' AND ALL_CDE = PIPE.SOO_CDE) AS SOO_NAM                                 
+               FROM 
+                                   UFL_HPIP_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE #ftr_idn#
+	
+	</select>	
+<!-- 툴바 > 통신선로 정보조회  (차후수정) -->
+	<select id="getComPipeList" resultClass="UflComPipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, FTR_CDE,MNG_CDE, SDH_PNT, SDG_PNT, STD_HOL,LEN_NAM,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                PIPE.MOP_CDE, (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_KPIP_LS' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM, 
+                                PIPE.STD_DIP,
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_KPIP_LS' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM, 
+                                PIPE.STD_DEP, PIPE.PIP_LBL, 
+                                (SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_KPIP_LS' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM                              
+               FROM 
+                                   UFL_KPIP_LS PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE #ftr_idn#
+	</select>	
+<!-- 툴바 > 광역상수관 정보조회  (차후수정) -->	
+	<select id="getWidePipeList" resultClass="UflWidePipeVo">
+                SELECT 
+                                PIPE.FTR_IDN, PIPE.STD_DIP, PIPE.STD_DEP, PIPE.STD_LEN,
+                                SUBSTR(PIPE.IST_YMD, 1, 4)||'-'||SUBSTR(PIPE.IST_YMD, 5, 2)||'-'||SUBSTR(PIPE.IST_YMD, 7, 2)  AS IST_YMD,                               
+                                FTR_CDE,(SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_PIPE_LM' AND ALL_CDE = PIPE.FTR_CDE) AS FTR_NAM,                                 
+                                MNG_CDE,(SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_PIPE_LM' AND ALL_CDE = PIPE.MNG_CDE) AS MNG_NAM, 
+                                SOO_CDE,(SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_PIPE_LM' AND ALL_CDE = PIPE.SOO_CDE) AS SOO_NAM,
+                                PIPE.SAA_CDE,(SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_PIPE_LM' AND ALL_CDE = PIPE.SAA_CDE) AS SAA_NAM,
+                                PIPE.MOP_CDE,(SELECT CDE_NAM FROM CMT_CODE WHERE TBL_NAM = 'UFL_PIPE_LM' AND ALL_CDE = PIPE.MOP_CDE) AS MOP_NAM                              
+               FROM 
+                                   UFL_PIPE_LM PIPE 
+               WHERE 
+                                PIPE.FTR_IDN LIKE #ftr_idn#	
+	</select>	
+</sqlMap>   
+
+    

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings useStatementNamespaces="true"	/>
+
+	<transactionManager type="JDBC" commitRequired="false">
+		<dataSource type="DBCP">
+			<property name="JDBC.Driver" value="org.postgresql.Driver" />
+			<property name="JDBC.ConnectionURL" value="jdbc:postgresql://105.1.2.121:15432/postgres" />
+			<property name="JDBC.Username" value="postgres" />
+			<property name="JDBC.Password" value="ngis" />
+		</dataSource>
+	</transactionManager>
+  
+    <sqlMap resource="suwon/web/sqlconf/ThematicPolygon.xml"/> 
+</sqlMapConfig>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+    <!-- iBatis 1-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="locations" value="classpath:config/dbconn.properties" />
+    </bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    	<property name="driverClassName" value="${jdbc.driver}"/>
+    	<property name="url" value="${jdbc.url}" />
+    	<property name="username" value="${jdbc.username}" />
+    	<property name="password" value="${jdbc.password}" />
+    </bean>
+     <!--
+    <bean id="nativeJdbcExtractor"
+  		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"/>
+    lob 핸들러추가 
+    <bean id="oracleLobhandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
+    	<property name="nativeJdbcExtractor" ref="nativeJdbcExtractor" />    
+    </bean> 
+     -->
+   	<bean id="sqlMapClient"
+   		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+   		<property name="dataSource" ref="dataSource" />
+   		<property name="configLocation" value="classpath:/config/sqlMapConfig.xml" />
+   	<!--	<property name="lobHandler" ref="oracleLobhandler" />  lob 핸들러추가 -->	
+   	</bean>
+   	
+   	<bean id="sqlMapClientTemplate"
+   		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+   		<property name="sqlMapClient" ref="sqlMapClient" />	
+   	</bean>
+  
+  <!-- iBatis 2-->
+    <bean id="dataSource2" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    	<property name="driverClassName" value="${jdbc.driver2}"/>
+    	<property name="url" value="${jdbc.url2}" />
+    	<property name="username" value="${jdbc.username2}" />
+    	<property name="password" value="${jdbc.password2}" />
+    </bean>
+    
+  <!-- iBatis 3-->
+    <bean id="dataSource3" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    	<property name="driverClassName" value="${jdbc.driver3}"/>
+    	<property name="url" value="${jdbc.url3}" />
+    	<property name="username" value="${jdbc.username3}" />
+    	<property name="password" value="${jdbc.password3}" />
+    </bean>
+    
+   	<bean id="sqlMapClient2"
+   		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+   		<property name="dataSource" ref="dataSource2" />
+   		<property name="configLocation" value="classpath:/config/sqlMapConfig.xml" />	
+   	</bean>
+   	
+   	<bean id="sqlMapClient3"
+   		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+   		<property name="dataSource" ref="dataSource3" />
+   		<property name="configLocation" value="classpath:/config/postgreSqlMapConfig.xml" />	
+   	</bean>
+   	
+   	<bean id="sqlMapClientTemplate2"
+   		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+   		<property name="sqlMapClient" ref="sqlMapClient2" />	
+   	</bean>
+   	
+   	<bean id="sqlMapClientTemplate3"
+   		class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+   		<property name="sqlMapClient" ref="sqlMapClient3" />	
+   	</bean>
+
+   	<!-- service class -->
+
+   	<bean id="adfInfoService" class="suwon.web.Service.AdfInfoService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>       
+
+   	<bean id="sggService" class="suwon.web.Service.SggService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="jijukSearchService" class="suwon.web.Service.JijukSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="roadSearchService" class="suwon.web.Service.RoadSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="buildSearchService" class="suwon.web.Service.BuildSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="spaceSearchService" class="suwon.web.Service.SpaceSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="buildInfoSearchService" class="suwon.web.Service.BuildInfoSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="layInfoService" class="suwon.web.Service.LayInfoService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="userInfoService" class="suwon.web.Service.UserInfoService">
+   		<property name="sqlMapClientTemplate2" ref="sqlMapClientTemplate2" />
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+    <bean id="autAddLayerService" class="suwon.web.Service.AutAddLayerService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean> 
+   	
+  	<bean id="connectListService" class="suwon.web.Service.UserConnectListService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="libListService" class="suwon.web.Service.ModelLibListService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="layerListService" class="suwon.web.Service.LayerListService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+
+   	<bean id="shelterjibunSearch" class="suwon.web.Service.FloodingService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>	
+    
+   	<bean id="weatherService" class="suwon.web.Service.WeatherService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean> 
+   	<bean id="usrAutService" class="suwon.web.Service.UsrAutService">
+   		<property name="sqlMapClientTemplate2" ref="sqlMapClientTemplate2" />
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>	
+   	<!-- 관리자 > 공지사항  Service -->
+   	<bean id="noticeService" class="suwon.web.Service.NoticeService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	<!-- 관리자 -->
+    <bean id="adminService" class="suwon.web.Service.AdminService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+   	
+   	<bean id="statisticsService" class="suwon.web.Service.StatisticsService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>
+
+   	<!--8개의 지하시설물 Service  -->
+   	<bean id="sangsuPipeSearchService" class="suwon.web.facility.Service.SangsuPipeSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>   	
+
+   	<bean id="hasuPipeSearchService" class="suwon.web.facility.Service.SangsuPipeSearchService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>   	
+   	<!--8개의 지하시설물 Service  End-->
+   	
+   	<!-- 내주제도 -->
+   	<bean id="thematicService" class="suwon.web.thematic.service.ThematicService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>  
+   	 
+   	<!-- 국공유지 -->
+   	<bean id="thematicPolygonService" class="suwon.web.thematic.service.ThematicPolygonService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate3" />
+   	</bean>   
+   	
+   		<!-- 관리자 로그 -->
+   	<bean id="adminLogService" class="suwon.web.Service.AdminLogService">
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean>  
+   	
+   	   	   <!-- 관리자 권한 자동 -->
+   	<bean id="autoChkAdminService" class="suwon.web.Service.AutoChkAdminService">
+   		<property name="sqlMapClientTemplate2" ref="sqlMapClientTemplate2" />
+   		<property name="sqlMapClientTemplate" ref="sqlMapClientTemplate" />
+   	</bean> 
+   	
+</beans>

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller
+END
+RealEstatePostedPriceController.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstatePostedPriceController.java
+END
+RealEstateCadastreController.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateCadastreController.java
+END
+RealEstateGeneralHeaderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateGeneralHeaderController.java
+END
+RealEstateLandUsePlanController.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateLandUsePlanController.java
+END
+RealEstateUsuallyHeaderController.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateUsuallyHeaderController.java
+END
+RealEstateBulidNoController.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateBulidNoController.java
+END
+RealEstateIndividualHouseController.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/suwon/!svn/ver/1012/Suwon3d/src/suwon/web/realestate/controller/RealEstateIndividualHouseController.java
+END

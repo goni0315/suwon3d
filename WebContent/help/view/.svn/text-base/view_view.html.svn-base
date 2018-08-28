@@ -1,0 +1,127 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>경관시뮬레이션 > 가시권</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}
+</script>
+</head>
+
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_20.jpg" width="373" height="214">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help22_t.gif" alt="조망권" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('view_viewAnal')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('view_viewAnal')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;조망권 분석&gt;</strong></p>
+
+  <h4>&nbsp;</h4>
+  	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		조망지점설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [조망지점 설정] 버튼을 클릭한 후 지도화면에 지점을 선택시 알림창이 생깁니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 지도화면에 기준점 및 방향점2개 이상 표시되면 [적용] 버튼을 클릭합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [분석결과삭제] 버튼을 클릭하면 방향점 리스트가 삭제되며, 지도화면에서 <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 조망지점이 사라집니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		방향점 리스트
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 높이값과 시뮬레이션 속도를 입력하여 조절가능<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;- 조망지점 설정 후 [적용] 버튼을 클릭하면 지도화면에서 기준점으로 이동한 후 <br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;각 방향점들을 향해 순차적으로 바라보게 됩니다.
+	</span><br><br>
+	
+<img src="/Suwon3d/images/help/helpImages/help_img_21.jpg" width="373" height="214">
+ <p>&nbsp;</p>
+  <h4><img src="/Suwon3d/images/help/help22_t.gif" alt="조망지점관리" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('view_viewPo')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('view_viewPo')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;조망지점관리&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		가시지점입력
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [가시지점입력] 버튼을 클릭한 후 지도화면에 지점을 선택하면 대상지가 표시됩니다.<br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;- 지점명을 입력하고 바로 밑에 있는 [가시지점명입력] 버튼을 클릭한 후 지도화면에 지점을 <br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택하면 지점명이 표시됩니다. <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [분석결과삭제] 버튼을 클릭하면 조망점 리스트가 삭제되며, 지도화면에서 가시지점이<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사라집니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		조망점 리스트
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 가시지점 설정 후 [적용] 버튼을 클릭하면 지도화면에서 지점명으로 이동한 후<br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대상지를 향해 바라봄니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 현재위치의 X, Y, Z 좌표 값이 반영됩니다. 
+	</span><br><br>
+	
+<img src="/Suwon3d/images/help/helpImages/help_img_22.jpg" width="373" height="214">
+ <p>&nbsp;</p>
+  <h4><img src="/Suwon3d/images/help/help22_t.gif" alt="조망축관리" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('view_viewAix')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('view_viewAix')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;조망축관리&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		조망지점 설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [조망지점 설정] 버튼을 클릭한 후 지도화면에 시작점과 끝점을 선택합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 지점명에 입력을 하고 [등록] 버튼을 클릭합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [분석결과삭제] 버튼을 클릭하면 지점명이 삭제되며, 지도화면에서 조망축이 사라집니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 관측시점란에 [저장]버튼을 클릭하면 등록된 조망축이 저장됩니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 관측시점란에 주요지점 리스트를 선택하면 [불러오기]버튼이 생성됩니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 관측시점란에 [불러오기]버튼을 클릭하면 저장된 지점명 리스트를 불러옵니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		관찰높이 설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 관찰높이 수치(숫자)를 입력하고 지점명을 선택하면 입력한 수치의 높이에서 관찰합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		지점명목록
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 조망지점 설정 후 [등록] 버튼을 클릭하면 지도화면에서 조망축이 나타나며 등록한<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;지점명이 지점명 리스트에 생깁니다.
+	</span><br><br>	  	  
+</div>
+</body>
+</html>

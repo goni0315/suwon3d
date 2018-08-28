@@ -1,0 +1,47 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>침수 시뮬레이션 > 침수시뮬레이션</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}
+</script>
+</head>
+<body>
+
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_30.jpg" width="373" height="214">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help33_t.gif" alt="침수시뮬레이션" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('floodingS')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('floodingS')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>편집영역을 선택하여 물상을 생성합니다.</strong></p>
+  	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>&nbsp;</SPAN>
+	<br>
+	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>① </SPAN>
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";font-weight:bold;text-decoration:underline;color:#0000ff;line-height:160%;'>침수편집</SPAN>
+	<br>
+	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [편집영역선택] 버튼을 이용하여 편집을 위한 영역을 선택합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 선택된 영역에따라 최대높이/최저높이/침수수위가 표시되며 이동단위(m)를 선택하여<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;설정가능합니다.<br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;- 영역을 선택한 후 [물판생성] 버튼을 클릭하면 물판이 생성되며 생성된 물판을<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이동단위만큼 [상하이동]버튼으로 물높이 조절 가능합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [편집영역삭제] 버튼을 클릭하면 3차원 화면에서 물판이 사라집니다.
+	</SPAN>
+  	<br><br>
+</div>
+</body>
+</html>

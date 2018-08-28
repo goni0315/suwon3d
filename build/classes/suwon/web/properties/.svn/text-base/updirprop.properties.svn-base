@@ -1,0 +1,16 @@
+#\ud14c\uc2a4\ud2b8 \uc11c\ubc84
+#poiUPDirInfo
+#poiVurl=C:/apache-tomcat-6.0.26/webapps/DataProvider/UP/POI/VURL/
+#poiPurl=C:/apache-tomcat-6.0.26/webapps/DataProvider/UP/POI/PURL/
+#bldgUPDirInfo
+#bldgVurl=C:/apache-tomcat-6.0.26/webapps/DataProvider/UP/BLDG/VURL/
+#bldgPurl=C:/apache-tomcat-6.0.26/webapps/DataProvider/UP/BLDG/PURL/
+
+
+#\uc9c0\uc801\uacf5\uc0ac \uc2e4\uc11c\ubc84
+#poiUPDirInfo
+poiVurl=C:/Tomcat 6.0/webapps/DataProvider/UP/POI/VURL/
+poiPurl=C:/Tomcat 6.0/webapps/DataProvider/UP/POI/PURL/
+#bldgUPDirInfo
+bldgVurl=C:/Tomcat 6.0/webapps/DataProvider/UP/BLDG/VURL/
+bldgPurl=C:/Tomcat 6.0/webapps/DataProvider/UP/BLDG/PURL/

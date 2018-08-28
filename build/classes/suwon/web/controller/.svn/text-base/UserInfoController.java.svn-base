@@ -1,0 +1,103 @@
+package suwon.web.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONArray;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import suwon.web.Service.UserInfoService;
+import suwon.web.vo.MlogVo;
+import suwon.web.vo.UserInfoVo;
+@Controller
+public class UserInfoController {
+	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
+	private UserInfoService userInfoService = (UserInfoService) context.getBean("userInfoService");//본번,부
+	
+	
+	@RequestMapping("/getUserInfo.do")
+	@ResponseBody
+	public JSONArray boardList(HttpServletRequest request, HttpServletResponse response){
+		
+		String pUsrId= (String)request.getParameter("usrid"); //사용자 아이디 파라미터로 받음
+		
+		UserInfoVo userInfo =  new UserInfoVo();	//사용자 정보 담을 객체
+		
+		userInfo = userInfoService.getUserInfo(pUsrId);
+		Map returnMap = new HashMap();
+		
+		//System.out.println(userInfo);
+		
+		if(userInfo == null){
+			returnMap.put("returnCode", "E");
+		
+		}else{
+			returnMap.put("returnCode", "S");
+			returnMap.put("userInfo", userInfo);
+		}
+		
+		JSONArray jsonarr = JSONArray.fromObject(returnMap); //json으로 캐스팅 		   
+		
+		return  jsonarr;
+		
+	}
+	/**
+	 * 로그 기록 하는 모듈 
+	 * 사용자 이름, 아이디, 부서, 작업일, 메뉴 아이디, 메뉴 이름
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/writeLog.do")
+	@ResponseBody
+	public JSONArray writeLog(@ModelAttribute MlogVo vo){
+		
+		Map returnMap = new HashMap();
+		
+		String sucFlag = "E";
+		
+		sucFlag = userInfoService.writeLog(vo);
+		
+		returnMap.put("returnCode", sucFlag);
+		
+		JSONArray jsonarr = JSONArray.fromObject(returnMap); //json으로 캐스팅
+		
+		return  jsonarr;
+		
+	}
+	/**
+	 * 메뉴 권한 조회 
+	 * @param request menuid 메뉴 아이디
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping("/checkMenuAut.do")
+	@ResponseBody
+	public JSONArray checkMenuAut(HttpServletRequest request, HttpServletResponse response){
+		
+		String pMenuid = (String)request.getParameter("menuid"); //사용자 아이디 파라미터로 받음
+		
+		Map returnMap = new HashMap();
+				
+		String menuaut = "SYS003";
+		
+		menuaut = userInfoService.checkMenuAut(pMenuid);
+		
+		returnMap.put("menuaut", menuaut);
+		
+		JSONArray jsonarr = JSONArray.fromObject(returnMap); //json으로 캐스팅 		   
+		
+		return  jsonarr;
+		
+	}
+	
+}

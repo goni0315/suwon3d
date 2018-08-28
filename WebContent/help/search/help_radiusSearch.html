@@ -1,0 +1,107 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}	
+</script>
+</head>
+
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_5.jpg" width="480" height="300">
+ <p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help04_t.gif" alt="건물명" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('radiusSearch')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('radiusSearch')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;반경검색&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		반경검색
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+ 		&nbsp;&nbsp;&nbsp;&nbsp;- [기준위치선택] 버튼을 클릭하여 지도화면에 검색할 위치를 클릭합니다.<br>
+ 		&nbsp;&nbsp;&nbsp;&nbsp;- 반경검색옵션을 입력 한 후 검색버튼을 클릭합니다.<br>
+ 		&nbsp;&nbsp;&nbsp;&nbsp;※ 건물분류 : 특정 건물들 검색의 가독성 <br>
+ 		&nbsp;&nbsp;&nbsp;&nbsp;ex) 건물분류 : 공공기관 ⇨ 수원시청, 수원시 견인사무소
+	</span><br> 
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		검색결과
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		 &nbsp;&nbsp;&nbsp;&nbsp;- 검색결과 반경 안에 있는 건물들의 건물명, 도로명 주소를 조회합니다.
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		대장조회
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		 &nbsp;&nbsp;&nbsp;&nbsp;- 검색결과에서 [대장조회] 버튼을 클릭하면 건축물대장, 토지이용계획, 개별공시지가 등<br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 가능합니다.
+	</span><br><br>
+
+<img src="/Suwon3d/images/help/helpImages/help_img_6.jpg" width="373" height="214">
+ <p>&nbsp;</p>
+  <h4><img src="/Suwon3d/images/help/help04_t.gif" alt="건물명" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('regionSearch')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;영역검색&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		영역검색
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		 &nbsp;&nbsp;&nbsp;&nbsp;- [영역그리기] 버튼을 클릭하여 지도화면에 검색할 영역 3지점이상을 클릭하여 지정합니다.
+		 &nbsp;&nbsp;&nbsp;&nbsp;- 검색 옵션을 입력 한 후 검색 버튼을 클릭합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		검색결과
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 검색결과 반경 안에 있는 건물들의 건물명, 도로명 주소를 조회합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		대장조회
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		 &nbsp;&nbsp;&nbsp;&nbsp;- 검색결과에서 [대장조회] 버튼을 클릭하면 건축물대장, 토지이용계획, 개별공시지가 등<br>
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조회 가능합니다.
+	</span><br><br>
+<!--   <h4>&nbsp;</h4>
+  <p class="bullet_mf">검색하고자 하는 위치지점을 선택합니다.  </p>
+  <p class="bullet_mf">검색반경/건물분류/검색어를 설정합니다.  </p>
+  <p class="bullet_mf">검색되어진 리스트에서 원하는 명칭을 클릭하면 해당건물의 위치로 카메라가 이동합니다.  </p>  
+  <p class="bullet_mf">
+	  대장 버튼은 토지 대장을 말하는 것으로 클릭 시 토지대앙을 확인할 수 있습니다.</p>  -->
+	  
+	  
+</div>
+</body>
+</html>

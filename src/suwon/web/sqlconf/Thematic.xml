@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="thematic">
+	<typeAlias alias="ThematicVo" type="suwon.web.thematic.vo.ThematicVo"/>    
+	<typeAlias alias="ExcelDoroVo" type="suwon.web.thematic.vo.ExcelDoroVo"/>
+    
+    <select id="getPNUInfoList" parameterClass="java.util.HashMap" resultClass="ThematicVo">
+<!-- 	select 
+			pnu
+		from 
+			lp_pa_cbnd,lp_aa_emd 
+		where 
+			emd_cd like substr(pnu,1,8)
+			and emd_nm like #emdName#
+			and substr(pnu,9,2) like '00'
+			and substr(pnu,11,1) like #sanCD#
+			and substr(pnu,12,4) like #bonCD#
+			and substr(pnu,16,4) like #booCD# --> 
+		select 
+			pnu
+		from 
+			lp_pa_cbnd 
+		where 
+			substr(pnu,1,8) like (select emd_cd from lp_aa_emd where emd_nm like #emdName#)
+			and substr(pnu,9,2) like '00'
+			and substr(pnu,11,1) like #sanCD#
+			and substr(pnu,12,4) like #bonCD#
+			and substr(pnu,16,4) like #booCD#
+		group by 
+			pnu
+	</select>
+	
+	<select id="getDoroList" parameterClass="java.util.HashMap" resultClass="ThematicVo">
+		select distinct
+			bd_mgt_sn
+		from 
+			tl_spbd_buld b
+		where 
+			rn_cd like (select distinct 
+							rn_cd 
+						from 
+							tl_sprd_manage 
+						where 
+							rn like #doroNm# 
+							and b.rds_sig_cd like sig_cd)
+			and sig_cd like (select sgg_cd from lp_aa_sgg where sgg_nm like #sggNm#)				
+			and buld_mnnm like #buldBonCd# 
+			and buld_slno like #buldBooCd# 
+			and rownum like 1
+<!--         select distinct 
+            bd_mgt_sn
+        from 
+            tl_spbd_buld 
+        where 
+            rds_man_no like (select rds_man_no from tl_sprd_manage where rn like #doroNm#)
+            and buld_mnnm like #buldBonCd#
+            and buld_slno like #buldBooCd#    -->
+	</select>
+</sqlMap>
+
+
+
+

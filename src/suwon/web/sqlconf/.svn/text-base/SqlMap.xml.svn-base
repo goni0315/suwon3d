@@ -1,0 +1,1373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="sms">
+	<typeAlias alias="AdfInfoVo" type="suwon.web.vo.AdfInfoVo"/>
+	<typeAlias alias="EmdVo" type="suwon.web.vo.EmdVo"/>
+	<typeAlias alias="SggVo" type="suwon.web.vo.SggVo"/>
+	<typeAlias alias="CbndVo" type="suwon.web.vo.CbndVo"/>
+	<typeAlias alias="ManageVo" type="suwon.web.vo.ManageVo"/>
+	<typeAlias alias="BuildSearchVo" type="suwon.web.vo.BuildSearchVo"/>
+	<typeAlias alias="SpaceVo" type="suwon.web.vo.SpaceVo"/>
+	<typeAlias alias="LayInfoVo" type="suwon.web.vo.LayInfoVo"/>
+    <typeAlias alias="UserInfoVo" type="suwon.web.vo.UserInfoVo"/>
+    <typeAlias alias="LayAutVo" type="suwon.web.vo.LayAutVo"/>
+    <typeAlias alias="UserConnectListVo" type="suwon.web.vo.UserConnectListVo"/>
+	<typeAlias alias="ModelLibListVo" type="suwon.web.vo.ModelLibListVo"/>
+	<typeAlias alias="LayerListVo" type="suwon.web.vo.LayerListVo"/>
+	<typeAlias alias="DeptVo" type="suwon.web.vo.DeptVo"/>
+	<typeAlias alias="UsrAutVo" type="suwon.web.vo.UsrAutVo"/>
+	<typeAlias alias="AutVo" type="suwon.web.vo.AutVo"/>
+	<typeAlias alias="MlogVo" type="suwon.web.vo.MlogVo"/>
+	<typeAlias alias="SttParamVo" type="suwon.web.vo.SttParamVo"/>	
+	<typeAlias alias="ShelterSearchVo" type="suwon.web.vo.ShelterSearchVo"/>
+	<typeAlias alias="FloodVo" type="suwon.web.vo.FloodVo"/>
+	<typeAlias alias="NoticeVo" type="suwon.web.vo.NoticeVo"/> 
+	<typeAlias alias="hashmap" type="java.util.HashMap"/>	 	   
+    <typeAlias alias="map" type="java.util.Map"/>
+ 	<typeAlias alias="str" type="java.lang.String"/>
+ 	<typeAlias alias="int" type="java.lang.Integer"/>
+ 	<typeAlias alias="MenuVo" type="suwon.web.vo.MenuVo"/>
+	<typeAlias alias="UsrLayerLoadVo" type="suwon.web.vo.UsrLayerLoadVo"/>
+	
+	
+ 	<delete id="deleteLayer" parameterClass="String">
+ 		delete from 
+ 			usr_lay 
+ 		where 
+ 			usrid = #usrid#
+ 	</delete>
+  	 <!-- 사용자 설정 저장 --> 
+    <insert id="writeLayer" parameterClass="java.util.HashMap">
+		insert into 
+			usr_lay
+				(usrid,lay_seq,f_view)
+		values
+			(#usrid#,#lay_seq#,#f_view#)			
+	</insert>
+	
+ 	<!-- 사용자 설정 저장되어있는 지 확인 -->
+    <select id="getUsrLayerChk" parameterClass="java.util.HashMap" resultClass="UsrLayerLoadVo">
+		select 
+			distinct usrid 
+		from 
+			usr_lay 
+		where 
+			usrid 
+		like 
+			#usr_id#
+	</select>
+	
+ 	<!-- 사용자 설정 레이어 목록 불러오기 -->
+    <select id="getUsrLayerList" parameterClass="java.util.HashMap" resultClass="UsrLayerLoadVo">
+        select 
+            lay_info.lay_seq,
+            lay_info.grp_nm,
+            lay_info.file_nm,
+            lay_info.hide_low,
+            lay_info.hide_high,
+            lay_info.eng_nm,
+            lay_info.kor_nm,
+            lay_info.data_type,
+            nvl(to_Number(lay_info.color_r), 0) as color_r,
+            nvl(to_Number(lay_info.color_g), 0) as color_g,
+            nvl(to_Number(lay_info.color_b), 0) as color_b,
+            usr_lay.f_view,
+            lay_info.f_sel,
+            lay_info.f_alpha,
+            lay_info.f_use
+             
+        from 
+            lay_info, 
+            usr_lay 
+        where 
+            lay_info.lay_seq = usr_lay.lay_seq 
+        and 
+            usrid 
+        like 
+            #usr_id#
+        order by lay_info.lay_seq     
+	</select>
+ 	
+    <!-- 레이어 목록 불러오기 -->
+    <select id="getLayerList" parameterClass="java.util.HashMap" resultClass="LayerListVo">
+        select
+            lay_seq,
+            grp_nm,
+            file_nm,
+            hide_low,
+            hide_high,
+            eng_nm,
+            kor_nm,
+            data_type,
+            nvl(to_Number(color_r), 0) as color_r,
+            nvl(to_Number(color_g), 0) as color_g,
+            nvl(to_Number(color_b), 0) as color_b,
+			f_view,
+			f_sel,
+			f_alpha,
+			f_use
+        from 
+            lay_info
+        order by
+			lay_seq       
+	</select>
+	<!-- 사용자 접속 정보 조회 -->
+	<select id="getUserconlist" parameterClass="java.util.HashMap" resultClass="UserConnectListVo">
+        select
+            *
+        from 
+            conn_info
+        where
+            str_tme between trunc(to_date(#startDate#,'yyyymmdd')) and last_day(to_date(#endDate#,'yyyymmdd'))
+            and usrid like #usrid#
+	</select>
+	
+	
+	<!-- <select id="getModelLibList" parameterClass="java.util.HashMap" resultClass="ModelLibListVo">
+        select
+            *
+        from 
+            lib_data
+	</select> -->
+	<select id="getModelLibList" resultClass="ModelLibListVo">
+        select 
+        	libl_cde, libm_cde, libm_nm
+		from 
+			lib_data 
+		where 
+			libl_cde like '%' || #lib_ajax# || '%'
+		group by libl_cde, libm_cde, libm_nm
+		order by libm_cde
+	</select>
+	
+	<select id="getModel" resultClass="ModelLibListVo">
+<!-- 	select 
+		lib_nm, lib_file
+	from 
+		lib_data 
+	where 
+		libl_cde like '%' || #libl_cde# || '%'
+	    and libm_cde like '%' || #libm_cde# || '%'
+	order by 
+		lib_seq -->
+	select 
+		libl_cde,libm_cde,lib_nm, lib_file, texture_file
+	from 
+		lib_data 
+	where 
+		libl_cde like '%' || #libl_cde# || '%' 
+		and libm_cde like '%' || #libm_cde# || '%'
+	order by 
+		lib_seq
+	</select>
+	
+   <!--ADF_INFO  -->
+   	<insert id="writeArticle2" parameterClass="AdfInfoVo">
+		insert into 
+			ADF_INFO
+				(ADF_SEQ, 
+				BOD_SEQ, 
+				ADF_NM, 
+				ADF_TYP, 
+				REG_DAT)
+		values
+			(SEQ_ADF_INFO_ADF_SEQ.nextVal,
+			SEQ_ADF_INFO_BOD_SEQ.nextVal,
+			#ADF_NM#, 
+			#ADF_TYP#,
+			sysdate)			
+	</insert>
+	
+	
+	<!--LP_AA_EMD 시공구코드로 읍면동조회 Ajax로 구현-->
+	<select id="getEmdSearch"  resultClass="EmdVo">
+		 select 
+			emd_cd, emd_nm
+		from
+			lp_aa_emd
+		where
+			emd_cd like 	'%' || #sggName# || '%'
+		order by emd_nm 	
+		<!-- select distinct
+			emd_cd, emd_nm
+		from
+		 	lp_aa_emd b, lp_aa_sgg a 
+		 where
+		 	 substr(b.emd_cd,1,5) like 	'%' || #sggName# || '%' 
+		 order by emd_nm -->
+	</select>
+
+	<select id="getSggList" parameterClass="java.util.HashMap" resultClass="SggVo">
+		select 
+			sgg_cd, sgg_nm
+		from
+			lp_aa_sgg
+		order by sgg_nm	
+	</select>
+	
+	<!--LP_PA_CBND 본번 부번으로 조회 -->
+	<select id="getCbndList" parameterClass="java.util.HashMap" resultClass="CbndVo"><!-- '%' || #bonbun# || '%' -->
+	 select  
+        pnu, 
+         '수원시' ||  ' ' ||(select SGG_NM  from LP_AA_SGG where substr(pnu, 1, 5) like SGG_CD ) 
+         			|| ' ' ||  (select EMD_NM from LP_AA_EMD where substr(pnu, 1, 8)  like emd_cd )
+         		    || jibun  as addr, 
+         jibun
+	from 
+	 lp_pa_cbnd 
+	where 
+		substr(pnu, 1, 8) like '41115141'     						<!--읍면동코드 emdcd-->    
+    	and substr(pnu, 11, 1) like '1'             
+      	and substr(pnu, 12, 4) like '%' || #bonbun# || '%'  <!-- '%1111%' -->
+ 		and substr(pnu, 16, 4) like '%'|| #bubun# ||'%'		<!-- '%0000%' 		'%'|| #bubun# ||'%'   -->
+ 	 
+ 		<!-- select  #bonbun# ,  #bubun# from dual -->
+	</select>
+	
+	<!-- 검색기능 > 도로명주소 >  시/군/구 선택시 도로명조회 (수정) -->
+	<!-- <select id="getRnSearch"  resultClass="ManageVo">
+		select 
+			distinct rn
+		from 
+			tl_sprd_manage
+		where
+		  SIG_CD like 	'%' || #sggName# || '%' order by rn	'41111' 장안구 #manageSel#
+		  
+	</select> -->
+	
+	<!--검색기능 > 도로명주소 > 시/군/구 선택시 초성조회  -->
+	<select id="getChoList"  remapResults="true" resultClass="ManageVo">
+		select distinct 
+    		m.rn, b.sig_cd 
+		from 
+    		TL_SPRD_MANAGE m,tl_spbd_buld b 
+		where
+		    b.rn_cd = m.rn_cd and b.sig_cd like #sggName#
+		order by 
+			m.rn
+	
+	
+	
+	
+	
+<!-- 		select 
+			distinct m.rn, m.rn_cd, b.sig_cd
+        from 
+            tl_sprd_manage m, TL_SPBD_BULD b
+		where
+		     b.sig_cd like #sggName# || '%' order by rn -->			  
+	</select>	
+	
+		<!--검색기능 > 도로명주소 > 초성검색  -->
+	 <select id="getRnSearch" remapResults="true"  parameterClass="java.util.HashMap" resultClass="ManageVo">
+		SELECT 
+		  DISTINCT m.rn_cd, RN, b.SIG_CD
+		FROM TL_SPRD_MANAGE m,TL_SPBD_BULD b
+		WHERE 
+		  UPPER(SUBSTR(RN,0,1)) >= #startVal#
+          AND #endVal# > UPPER(SUBSTR(RN,0,1)) 
+		  AND b.sig_cd like '%' || #sggName# || '%'
+		  and b.rn_cd = m.rn_cd 
+		ORDER BY RN ASC
+	</select>
+		
+	<!--검색기능 > 도로명주소 > 도로명 검색 조회 -->
+	<select id="getManageSearch2"  resultClass="ManageVo">
+		 select 
+		 distinct rn,b.SIG_CD, (select sgg_nm from lp_aa_sgg where sgg_cd like sig_cd) as addr
+   		 from 
+   		 	tl_sprd_manage m, TL_SPBD_BULD b
+   		 where
+			 rn like '%' || #manageSel# || '%' 		<!--'%' || #manageSel# || '%'   '%광교%'-->
+			 and b.rn_cd = m.rn_cd 
+	</select>		
+	 	
+	<!--검색기능 > 도로명주소 > 건물본번, 부번 입력시 주소 조회 -->
+	<select  id="getManageSearch"  resultClass="ManageVo">
+		select distinct    
+  	  		(select SGG_NM  from LP_AA_SGG where SGG_CD like SIG_CD ) || ' ' ||
+   	 		(select EMD_NM from LP_AA_EMD where emd_cd  like  substr(BD_MGT_SN, 1, 8)) || ' ' ||
+    		(select jibun from LP_PA_CBND where pnu  like  substr(BD_MGT_SN, 1, 19)) as addr
+		from 
+			TL_SPBD_BULD 
+		where 
+    		BULD_mnnm like '15'				<!-- 건물본번  --> 
+    		and buld_slno like '4'				<!-- 건물부번 -->	
+	</select>
+	
+	<!-- 검색기능 > 도로명주소 >건물본번, 부번 입력시 주소 조회 ***페이징처리 수정-->
+<!-- 	<select id="getManageList"  resultClass="ManageVo">
+        SELECT 
+            rn, buld_mnnm, buld_slno,lnbr_mnnm, lnbr_slno, rds_man_no,BULD_NAM,
+            (SELECT sgg_nm FROM lp_aa_sgg  WHERE sgg_cd = sig_cd)AS sgg_nm,
+            (SELECT emd_nm FROM lp_aa_emd  WHERE emd_cd = dcd) AS emd_nm,
+            (SELECT jibun  FROM lp_pa_cbnd WHERE pnu    = SUBSTR(bd_mgt_sn, 0, 19)) AS jibun,
+            (SELECT pnu    FROM lp_pa_cbnd WHERE pnu    = SUBSTR(bd_mgt_sn, 0, 19)) AS pnu
+          FROM ( 
+              SELECT 
+                  	ROWNUM AS RNUM, BULD_SLNO, BULD_MNNM, RN, RDS_MAN_NO, SIG_CD, EMD_CD,LNBR_MNNM, LNBR_SLNO,BULD_NAM,
+              		BD_MGT_SN, SIG_CD||EMD_CD AS DCD
+              FROM (SELECT
+                        SPBD.BULD_SLNO, SPBD.BULD_MNNM,LNBR_MNNM, LNBR_SLNO,SPBD.BULD_NM||' '||SPBD.BULD_NM_DC AS BULD_NAM,
+                        SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19) AS BD_MGT_SN
+                    FROM
+                        (SELECT * FROM LP_AA_SGG WHERE SGG_CD LIKE '%' || #SGG_CD# || '%') SGG,
+                        (SELECT * FROM TL_SPRD_MANAGE WHERE RN_CD LIKE #RN_CD#) SPRD,
+                        (SELECT * FROM TL_SPBD_BULD WHERE BULD_MNNM LIKE '%' || #BONBUN# || '%' AND BULD_SLNO LIKE '%' || #BUBUN# || '%') SPBD
+                    WHERE
+                        SPBD.RDS_MAN_NO = SPRD.RDS_MAN_NO AND SGG.SGG_CD = SPRD.SIG_CD AND SGG.SGG_CD LIKE SUBSTR(BD_MGT_SN,1,5)
+                    GROUP BY SPBD.BULD_NM , SPBD.BULD_SLNO, SPBD.BULD_MNNM, LNBR_MNNM, LNBR_SLNO,SPBD.BULD_NM_DC ,
+                        SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19)
+                    ORDER BY SPBD.BULD_NM||' '||SPBD.BULD_NM_DC DESC
+                    )     
+               )     
+         WHERE 
+             RNUM between #startArticleNum# and #endArticleNum#	  
+	  	  
+	</select> -->
+	<select id="getManageList"  resultClass="ManageVo">
+        SELECT 
+		    rn, buld_mnnm, buld_slno,lnbr_mnnm, lnbr_slno, rds_man_no,
+		    (SELECT sgg_nm FROM lp_aa_sgg  WHERE sgg_cd = sig_cd)AS sgg_nm,
+		    (SELECT emd_nm FROM lp_aa_emd  WHERE emd_cd = dcd) AS emd_nm,
+		    (SELECT jibun  FROM lp_pa_cbnd WHERE pnu    = SUBSTR(bd_mgt_sn, 0, 19)) AS jibun,
+		    (SELECT pnu    FROM lp_pa_cbnd WHERE pnu    = SUBSTR(bd_mgt_sn, 0, 19)) AS pnu
+		  FROM ( 
+		      SELECT 
+		              ROWNUM AS RNUM, BULD_SLNO, BULD_MNNM, RN, RDS_MAN_NO, SIG_CD, EMD_CD,LNBR_MNNM, LNBR_SLNO,
+		              BD_MGT_SN, SIG_CD||EMD_CD AS DCD
+		      FROM (SELECT
+		                SPBD.BULD_SLNO, SPBD.BULD_MNNM,LNBR_MNNM, LNBR_SLNO,
+		                SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19) AS BD_MGT_SN
+		            FROM
+		                (SELECT * FROM LP_AA_SGG WHERE SGG_CD LIKE #sgg_cd#) SGG,
+		                (SELECT * FROM TL_SPRD_MANAGE WHERE RN_CD LIKE  #rn_cd#) SPRD,
+		                (SELECT * FROM TL_SPBD_BULD WHERE BULD_MNNM LIKE '%' || #bonbun# || '%' AND BULD_SLNO LIKE '%' || #bubun# || '%') SPBD
+		            WHERE
+		                SPBD.RDS_MAN_NO = SPRD.RDS_MAN_NO AND SGG.SGG_CD = SPBD.SIG_CD AND SGG.SGG_CD LIKE SUBSTR(BD_MGT_SN,1,5)
+		            GROUP BY SPBD.BULD_NM , SPBD.BULD_SLNO, SPBD.BULD_MNNM, LNBR_MNNM, LNBR_SLNO,
+		                SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19)
+		            )     
+		       )       
+		         WHERE 
+		             RNUM between #startArticleNum# and #endArticleNum#
+	</select>
+	<!-- 검색기능 > 도로검색 COUNT  ****************** 페이징처리 ******************-->
+	<select id="getRoadTotalNum" resultClass="int">
+
+<!--                 
+             SELECT  count(*)                 
+  			FROM ( 
+                             SELECT ROWNUM AS RNUM,   BULD_SLNO, BULD_MNNM, RN, RDS_MAN_NO, SIG_CD, EMD_CD,lnbr_mnnm, lnbr_slno,BUL_MAN_NO,BULD_NAM, 
+                                BD_MGT_SN, SIG_CD||EMD_Cd AS DCD    
+                                FROM ( 
+                                    SELECT  SPBD.BULD_SLNO, SPBD.BULD_MNNM,lnbr_mnnm, lnbr_slno,SPBD.BUL_MAN_NO,SPBD.BULD_NM||' '||SPBD.BULD_NM_DC AS BULD_NAM,
+                                    SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SPBD.BD_MGT_SN    
+                                    FROM 
+                                   		(select * FROM  LP_AA_sgg where sgg_cd LIKE '%' || #sgg_cd# || '%') SGG,
+                                        (select * FROM  TL_SPRD_MANAGE where RN_cd LIKE #rn_cd#) SPRD,
+                                        (select * FROM TL_SPBD_BULD where BULD_MNNM LIKE '%' || #bonbun# || '%' AND BULD_SLNO LIKE '%' || #bubun# || '%') SPBD
+                                    WHERE     
+                                    SPBD.RDS_MAN_NO = SPRD.RDS_MAN_NO   and sgg.sgg_cd = sprd.sig_cd  and sgg.sgg_cd like substr(bd_mgt_sn,1,5)   
+                                    group by SPBD.BULD_SLNO, SPBD.BULD_MNNM, lnbr_mnnm, lnbr_slno,SPBD.BULD_NM_DC ,SPBD.BULD_NM ,
+			                        SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19)
+                                    ORDER BY SPBD.BULD_NM||' '||SPBD.BULD_NM_DC DESC    
+                                )     
+                        )                       
+-->				
+             SELECT  count(*)                 
+  			FROM ( 
+              SELECT 
+                  ROWNUM AS RNUM,  BULD_SLNO, BULD_MNNM, RN, RDS_MAN_NO, SIG_CD, EMD_CD,lnbr_mnnm, lnbr_slno,<!-- BULD_NAM, -->
+                BD_MGT_SN, SIG_CD||EMD_Cd AS DCD    
+              FROM (SELECT 
+                         SPBD.BULD_SLNO, SPBD.BULD_MNNM,lnbr_mnnm, lnbr_slno,<!-- SPBD.BULD_NM||' '||SPBD.BULD_NM_DC AS BULD_NAM, -->
+                        SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19) as BD_MGT_SN    
+                    FROM
+                        (select * FROM  LP_AA_sgg where sgg_cd LIKE '%' || #sgg_cd# || '%') SGG,
+                        (select * FROM  TL_SPRD_MANAGE where RN_cd LIKE #rn_cd#) SPRD,
+                        (select * FROM TL_SPBD_BULD where BULD_MNNM LIKE '%' || #bonbun# || '%' AND BULD_SLNO LIKE '%' || #bubun# || '%') SPBD
+                    WHERE     
+                        SPBD.RDS_MAN_NO = SPRD.RDS_MAN_NO  and sgg.sgg_cd = sprd.sig_cd  and sgg.sgg_cd like substr(bd_mgt_sn,1,5)   
+                    group by   SPBD.BULD_NM ,  SPBD.BULD_SLNO, SPBD.BULD_MNNM, lnbr_mnnm, lnbr_slno,<!-- SPBD.BULD_NM_DC  -->
+                        SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD, SUBSTR(BD_MGT_SN, 0, 19)
+                    <!-- ORDER BY SPBD.BULD_NM||' '||SPBD.BULD_NM_DC DESC -->
+                    )     
+               ) 	
+	</select>
+	
+	<!-- 	검색기능 > 지번검색  ****************** 페이징처리 ******************-->																	<!--산체크 테스트중 -->
+	<select id="getJibun" parameterClass="java.util.HashMap" resultClass="CbndVo">
+		<!--     
+   		 select pnu , jibun, sgg_nm, emd_nm, rn, buld_mnnm, buld_slno 
+	from (
+	    select  pnu ,jibun, 
+	        (select SGG_NM  from LP_AA_SGG where SGG_CD like substr(pnu, 1, 5) ) as sgg_nm,
+	        (select EMD_NM from LP_AA_EMD where emd_cd  like  substr(pnu, 1, 8)) as emd_nm,
+	         (select  rn  from tl_sprd_manage  where  b.rds_man_no =  rds_man_no) as rn,
+	        buld_mnnm, 
+	        buld_slno
+    	from lp_pa_cbnd a,  tl_spbd_buld b 
+    where 
+    	 substr(pnu, 1, 5) like '%' || #sggNm# || '%'
+        and substr(pnu, 1, 8) like '%' || #emdNm# || '%'
+        and  substr(pnu, 9, 3) like  '%' || #sanChk# || '%'
+        and substr(pnu, 12, 4) like '%' || #bonbun# || '%'
+        and  substr(pnu, 16, 4) like  '%' || #bubun# || '%'            
+        and  substr(bd_mgt_sn,1, 19) = pnu
+        and rownum BETWEEN #startArticleNum# and #endArticleNum#
+)
+group by pnu ,jibun, sgg_nm, emd_nm, rn, buld_mnnm, buld_slno -->
+		
+		select sgg_nm, emd_nm,  pnu, bd_mgt_sn , lnbr_slno, buld_mnnm, buld_slno, rn ,idx, lnbr_mnnm, replace(jibun,'-',' - ')
+		<isEmpty property="lnbr_mnnm">jibun</isEmpty>
+from 
+    (
+    select 
+    (select sgg_nm from lp_aa_sgg where sgg_cd like substr(pnu,1,5)) as sgg_nm, 
+    (select emd_nm from lp_aa_emd where emd_cd like substr(pnu,1,8)) as emd_nm,
+    <!-- (select  rn  from tl_sprd_manage  where  b.rds_man_no =  rds_man_no) as rn, --> 
+    jibun,
+    pnu,
+    row_number() over (order by pnu asc) idx
+	    from LP_PA_CBND 
+	    where 
+	     substr(pnu,1,8) like '%' || #emdNm# || '%'
+	    and  substr(pnu, 11, 1) like  '%' || #sanChk# || '%'
+	    and substr(pnu, 12, 4) like '%' || #bonbun# || '%'
+        and  substr(pnu, 16, 4) like '%' || #bubun# || '%' 
+        <!-- and rownum BETWEEN #startArticleNum# and #endArticleNum# -->         
+     ) tempTable1
+left outer join 
+    (
+    select   substr(bd_mgt_sn,1, 19) as bd_mgt_sn , lnbr_mnnm, lnbr_slno, buld_mnnm, buld_slno, rds_man_no
+    <!--(select rn from tl_sprd_manage  where  b.rds_man_no =  rds_man_no) as rn)  -->
+    from tl_spbd_buld 
+    group by  substr(bd_mgt_sn,1, 19),  lnbr_mnnm, lnbr_slno, buld_mnnm, buld_slno, rds_man_no
+    ) tempTable2
+on substr(bd_mgt_sn,1, 19) = pnu
+left outer join 
+    (
+    select   rn  , rds_man_no
+    from tl_sprd_manage     
+    group by  rn, rds_man_no
+    ) tempTable3
+on tempTable2.rds_man_no = tempTable3.rds_man_no
+where	
+	idx BETWEEN #startArticleNum# and #endArticleNum# 
+    order by lnbr_slno desc 
+	</select>
+	<!--pnu like  #pnuCode# || '%'  
+		substr(pnu, 1, 5) like '41115'
+        and substr(pnu, 6, 3) like '141'
+        and  substr(pnu, 9, 3) like  '001'
+        and substr(pnu, 12, 4) like '1111'
+        and  substr(pnu, 16, 4) like  '0000'
+        
+        substr(pnu, 1, 5) like '%' #sggNm# || '%'
+        and substr(pnu, 6, 3) like '%' #emdNm# || '%'
+        and  substr(pnu, 9, 3) like  '%' #sanChk# || '%'
+        and substr(pnu, 12, 4) like '%' #bonbun# || '%'
+        and  substr(pnu, 16, 4) like  '%' #bubun# || '%'-->
+        
+        
+	<!-- 검색기능 > 지번검색 COUNT  ****************** 페이징처리 ******************-->
+	<select id="jibunTotalNum" resultClass="int">
+		select count(*)
+from 
+    (
+    select 
+    (select sgg_nm from lp_aa_sgg where sgg_cd like substr(pnu,1,5)) as sgg_nm, 
+    (select emd_nm from lp_aa_emd where emd_cd like substr(pnu,1,8)) as emd_nm,
+    jibun,
+    pnu
+	    from LP_PA_CBND 
+	    where 
+	     substr(pnu,1,8) like '%' || #emdNm# || '%'
+	    and  substr(pnu, 11, 1) like  '%' || #sanChk# || '%'
+	    and substr(pnu, 12, 4) like '%' || #bonbun# || '%'
+        and  substr(pnu, 16, 4) like '%' || #bubun# || '%'        
+     ) tempTable1
+left outer join 
+    (
+    select   substr(bd_mgt_sn,1, 19) as bd_mgt_sn , lnbr_mnnm, lnbr_slno, buld_mnnm, buld_slno, rds_man_no
+    from tl_spbd_buld 
+    group by  substr(bd_mgt_sn,1, 19),  lnbr_mnnm, lnbr_slno, buld_mnnm, buld_slno, rds_man_no
+    ) tempTable2
+on substr(bd_mgt_sn,1, 19) = pnu          
+left outer join 
+    (
+    select   rn  , rds_man_no
+    from tl_sprd_manage 
+    group by  rn, rds_man_no
+    ) tempTable3
+on tempTable2.rds_man_no = tempTable3.rds_man_no
+<!-- where rownum BETWEEN #startArticleNum# and #endArticleNum#	        -->
+		
+		 <!-- #pnuCode# +'%' -->
+	</select>
+	
+	<!--검색기능 > 건물 > 건물검색-->
+	<select id="getBuildList" parameterClass="java.util.HashMap" resultClass="BuildSearchVo">
+		<!-- select  
+   			 BULD_NM ,
+   			 (select SGG_NM  from LP_AA_SGG where SGG_CD like SIG_CD ) || ' ' ||
+   			 (select EMD_NM from LP_AA_EMD where emd_cd  like  substr(BD_MGT_SN, 1, 8)) as addr
+		from
+			 TL_SPBD_BULD 
+		where 
+    		BULD_NM like  '%'|| #build_name# ||'%' 			건물명'%' || #buld_nm# || '%' '%학교%' -->
+		
+		select  
+   			 distinct  BULD_NM ,
+    		(select RN   from TL_SPRD_MANAGE  where RDS_MAN_NO like BD.RDS_MAN_NO) as rn,
+   			 BD.buld_mnnm, 
+    		BD.buld_slno, 
+    		(select SGG_NM  from LP_AA_SGG where SGG_CD like BD.SIG_CD ) as sgg_nm,
+    		(select EMD_NM from LP_AA_EMD where emd_cd  like  substr(BD.BD_MGT_SN, 1, 8)) as addr,
+   			 BD.LNBR_mnnm,
+   			 BD.LNBR_slno     
+		from
+			 TL_SPBD_BULD BD
+		where 
+    		BULD_NM like '%'|| #build_name# ||'%'				<!--'%수원시청%'	  -->
+	</select>
+
+	<!--페이징처리 *********(건물검색)*********-->
+<select id="buildSearchList" parameterClass="java.util.HashMap" resultClass="BuildSearchVo">
+	select * from(
+				select  
+	                distinct  BULD_NM ,bd_mgt_sn,
+	                BD.BULD_NM_DC,
+	            	(select RN from TL_SPRD_MANAGE  where RDS_MAN_NO like BD.RDS_MAN_NO) as rn,
+	                BD.buld_mnnm, 
+	            	BD.buld_slno, 
+	            	(select SGG_NM  from LP_AA_SGG where SGG_CD like BD.SIG_CD ) as sgg_nm,
+	            	(select EMD_NM from LP_AA_EMD where emd_cd  like  substr(BD.BD_MGT_SN, 1, 8)) as addr,
+	            	(select PNU from LP_PA_CBND where pnu  like  substr(BD.BD_MGT_SN, 1, 19)) as pnu,
+	                BD.LNBR_mnnm,
+	                BD.LNBR_slno,
+	                rownum as idx     
+		        from
+		           (
+	                    select  BD.RDS_MAN_NO, BULD_NM, BD.BULD_NM_DC, BD.buld_mnnm, BD.buld_slno,  BD.SIG_CD, substr(BD.BD_MGT_SN, 1, 19) as BD_MGT_SN,  BD.LNBR_mnnm,  BD.LNBR_slno
+	                    from  TL_SPBD_BULD BD
+	                    where  BULD_NM like '%'|| #build_name# ||'%'
+	                    group by BD.RDS_MAN_NO, BULD_NM, BD.BULD_NM_DC, BD.buld_mnnm, BD.buld_slno,  BD.SIG_CD,  substr(BD.BD_MGT_SN, 1, 19),  BD.LNBR_mnnm,  BD.LNBR_slno
+	                ) BD
+	             )  
+       where  idx BETWEEN #startArticleNum# and #endArticleNum#
+
+	</select>
+	<!--페이징처리********* (건물검색 카운트)*********-->
+<select id="buildTotalNum" resultClass="int">
+		select 
+			count(BULD_NM) 
+		from 
+			(
+                    select  BD.RDS_MAN_NO, BULD_NM, BD.BULD_NM_DC, BD.buld_mnnm, BD.buld_slno,  BD.SIG_CD, substr(BD.BD_MGT_SN, 1, 19) as BD_MGT_SN,  BD.LNBR_mnnm,  BD.LNBR_slno
+                    from  TL_SPBD_BULD BD
+                    where  BULD_NM like '%'|| #build_name# ||'%'
+                    group by BD.RDS_MAN_NO, BULD_NM, BD.BULD_NM_DC, BD.buld_mnnm, BD.buld_slno,  BD.SIG_CD,  substr(BD.BD_MGT_SN, 1, 19),  BD.LNBR_mnnm,  BD.LNBR_slno
+             ) BD 
+			 
+</select>
+
+	<!-- 검색기능 > 공간 > 반경검색 > 검색반경  -->
+	<select id="getSpaceList"  resultClass="SpaceVo">
+		select  
+    		distinct  BULD_NM ,
+    		(select SGG_NM  from LP_AA_SGG where SGG_CD like BD.SIG_CD ) as sgg_nm,    
+    		(select RN   from TL_SPRD_MANAGE  where RDS_MAN_NO like BD.RDS_MAN_NO) as rn,
+    		BD.buld_mnnm, 
+    		BD.buld_slno
+	from
+		 TL_SPBD_BULD BD
+	where 
+    	BD_MGT_SN like #spaceList#	<!--list담을 변수 #spaceList# , '4111710500109630002000072' -->
+	</select>
+
+	<!--  툴바 > 건물정보 조회 -->
+	<select id="getBuildInfoList" resultClass="BuildSearchVo">
+			SELECT 
+						BULD.bul_man_no, 
+						rtrim(bldg_id,'.3DS') as bldg_id,
+                        (select sgg_nm from lp_aa_sgg where sgg_cd = buld.sig_cd) as sgg_nm,
+                        (SELECT EMD_NM FROM LP_AA_EMD WHERE EMD_CD = BULD.SIG_CD||BULD.EMD_CD) AS emd_nm, 
+                        CASE WHEN ROAD.RN = '' THEN '' ELSE CASE WHEN ROAD.RN = NULL THEN '' ELSE ROAD.RN END END AS rn, 
+                        BULD.buld_mnnm, BULD.buld_slno,                     
+                        (SELECT JIBUN FROM LP_PA_CBND WHERE PNU = SUBSTR(BULD.BD_MGT_SN, 0, 19)) AS jibun, 
+                        BULD.BULD_NM||' '||BULD.BULD_NM_DC AS buld_nm, 
+                        BULD.bdtyp_cd  
+
+            FROM 	
+            			TL_SPBD_BULD BULD 
+                    	LEFT OUTER JOIN TL_SPRD_MANAGE ROAD 
+                    	ON BULD.RDS_MAN_NO = ROAD.RDS_MAN_NO
+                    	LEFT OUTER JOIN BLDG_NEWADD_JOIN BLDG
+                        ON BULD.bd_mgt_sn = BLDG.bd_mgt_sn 
+            WHERE 
+                        BLDG.bldg_id like #bul_man_no# ||'%'	<!--'%'||  -->
+                        
+	</select>
+	
+	<!--  > (레이어 권한을 가진 사용자)레이어 정보조회  -->
+	<select id="getLayInfoList" resultClass="LayInfoVo">
+	
+		select 
+			(select grp_nm from lay_info where lay_seq like lay_mng  )as grp_nm,
+			(select file_nm from lay_info where lay_seq like lay_mng  )as file_nm,
+			(select hide_low from lay_info where lay_seq like lay_mng  )as hide_low,
+			(select hide_high from lay_info where lay_seq like lay_mng  )as hide_high,
+			(select eng_nm from lay_info where lay_seq like lay_mng  )as eng_nm,
+			(select kor_nm from lay_info where lay_seq like lay_mng  )as kor_nm
+		from	
+			 LAY_AUT 
+		where 
+			AUT_CDE like #aut_cde#<!--SYS001 -->
+		
+	</select>  
+	
+	<!--  -->
+	<select id="getUserInfoList" resultClass="UserInfoVo">
+		select 
+			 (select usrid from conn_info  where usrid like AD.usrid)as usrid,
+			 (select com_add from conn_info  where usrid like AD.usrid)as com_add,
+			 (select str_tme from conn_info  where usrid like AD.usrid)as str_tme,
+			 (select con_brw from conn_info  where usrid like AD.usrid)as con_brw,
+			 (select con_pth from conn_info  where usrid like AD.usrid)as con_pth
+		from
+    		usr AD
+		where 
+    		usrid = #src#<!--001017521  -->
+	</select>
+
+	<select id="getLayGrpNmList"  resultClass="LayInfoVo">		<!-- ajax레이어 테이블에서 레이어 그룹명을 조회하는 쿼리  -->
+	select  lay_seq, kor_nm from lay_info order by kor_nm		
+	</select>
+	  
+	<select id="listLayer" resultClass="LayAutVo">
+	<!-- select 
+        (select aut_cde from lay_aut where  lay_mng like LA.grp_nm)as aut_cde,
+        (select aut_nm from lay_aut where  lay_mng like LA.grp_nm)as aut_nm,
+        (select lay_mng from lay_aut where  lay_mng like LA.grp_nm)as lay_mng        
+        from 
+        lay_info LA where kor_nm like #grpName# --> 
+        select 
+        (select aut_cde from lay_aut where  lay_mng like LA.grp_nm)as aut_cde,
+        (select aut_nm from lay_aut where  lay_mng like LA.grp_nm)as aut_nm,
+        (select lay_mng from lay_aut where  lay_mng like LA.grp_nm)as aut_mng,
+        lay_seq, 
+        kor_nm         
+        from 
+        lay_info LA where kor_nm like  #grpName#
+        
+        <!-- select aut_cde, lay_mng from lay_aut where  lay_mng like '시군구경계' --><!-- '%' || #grpName# || '%' --><!--korName  시군구경계--> 
+	</select>
+   
+   <!--특정 권한이 볼 수 있는 레이어를 추가하는 쿼리  -->
+   	 <insert id="autAddLayer" parameterClass="LayAutVo">
+   		insert into lay_aut(aut_id, aut_cde, lay_mng) 
+   		values (seq_lay_aut_aut_id.nextVal, #codeNm#, #grpName#)<!--  -->
+   	
+	 </insert>
+<!--****************대피소 ********************* -->
+	 <!-- 침수시뮬레이션	> 대피소 > 대피소 검색	(동,지번조회)	  -->
+	<select id="shelterjibunSearch"	resultClass="ShelterSearchVo">
+		select 
+			distinct emd_nm,emd_cd
+		from 
+			dep_area de,(select emd_nm,emd_cd from lp_aa_emd where substr(emd_cd,1,5) like #sgg_cd#) emd
+		where 
+			substr(pnu,1,8) like emd.emd_cd		<!-- #emd_cd#-->
+	</select>
+	<!--  -->
+	
+	 <!-- 침수시뮬레이션	> 대피소 > 대피소 검색	(전체 검색)	  -->	
+	<select id="shelterSearch" resultClass="ShelterSearchVo">
+	select   dep_seq, fac_nm, dep_addr, use_nm, def_grd, emd_nm, emd_cd, pnu
+	from(select dep_seq, fac_nm, dep_addr, use_nm, def_grd, emd_nm, emd_cd,pnu, rownum as rnum
+		from 
+			dep_area de,
+			(select 
+				emd_nm,emd_cd 
+			from
+				 lp_aa_emd
+		<isEmpty property="sgg_cd" >
+		)
+		</isEmpty>	
+		<isNotEmpty property="sgg_cd">	 			  
+			where
+			 substr(emd_cd,1,5) like #sgg_cd#) emd
+		</isNotEmpty>	 
+		where 
+		substr(pnu,1,8) like emd_cd
+		
+		<isEmpty property="emd_cd" >
+		</isEmpty>	
+		<isNotEmpty property="emd_cd">	 
+		and emd_cd like #emd_cd# 
+		</isNotEmpty>
+		
+		<isEmpty property="grade" >
+		</isEmpty>	
+		<isNotEmpty property="grade">
+		and substr(def_grd,1,1) like #grade# 	
+		</isNotEmpty >
+		
+		<isEmpty  property="useText" >
+		 and use_nm like '%%'
+		</isEmpty>	
+		<isNotEmpty property="useText">
+		and use_nm like '%'|| #useText# ||'%'
+		</isNotEmpty>
+		
+		<isEmpty property="facNm" >
+		</isEmpty>	
+		<isNotEmpty property="facNm">	
+		and fac_nm like #facNm# 
+		</isNotEmpty>
+		)
+	where  rnum between #startArticleNum# and #endArticleNum# order by fac_nm asc
+	</select>	
+<!--		<isEqual prepend="AND" property="useText" compareValue="전체" >
+		 use_nm like '%%'
+		</isEqual>	  -->	
+	 	 
+	 <!-- 침수시뮬레이션	> 대피소 > 대피소 검색 CPUNT(전체 검색) --><!-- 백인록 -->	 	 
+	 <select id="shelterjibunSearchTotalNum" resultClass="int">
+	 select  count(*)
+	from 
+		dep_area de,
+		(select emd_nm,emd_cd from lp_aa_emd where substr(emd_cd,1,5) like '%'|| #sgg_cd# ||'%') emd
+	where 
+		substr(pnu,1,8) like emd_cd  
+		and emd_cd like  '%'|| #emd_cd# ||'%'   
+		and def_grd like '%'|| #grade# ||'%'  
+		and use_nm like '%'|| #useText# ||'%'  
+		and fac_nm like '%'|| #facNm# ||'%'
+	 </select>
+
+	<!-- 침수시뮬레이션	> 대피소 > 대피소 검색 > 상세정보 팝업창 --><!-- 백인록 -->
+	<select id="shelterInfoPopUpList"  resultClass="ShelterSearchVo">
+	select	* from  dep_area where dep_seq like #flo_seq#
+	</select>	 
+	  <!-- 운영시스템 > 권한관리 | 시작  -->
+	 
+	 <!-- 운영시스템 > 권한 관리> 메인부서명 조회  -->
+	 <select id="getMainDeptList" resultClass="DeptVo">
+		select  * from(
+            select dept_grpid, substr(dept_path_name, 5, length(dept_path_name)) dept_name,  location, status 
+            from DEPT
+            where length(location) between 2 and  6
+            and state_flag='Y'
+            order by dept_path_name asc
+        ) where dept_name != '테스트'  and dept_name not like '%폐지%' and status=1
+
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 하위부서명 조회  -->
+	 <select id="getSubDeptList" resultClass="DeptVo" parameterClass="String">
+ 	     select * from (
+            
+            select 
+                   grpid dept_grpid, 
+                   replace(substr(dept_path_name,instr(dept_path_name,'.',1,2)+1),'.','>') dept_name 
+            from dept
+            where substr(dept_path_name, 5,instr(dept_path_name,'.',1,2) - instr(dept_path_name,'.',1,1)-1 )= #deptname#
+             
+            union all
+            
+            select 
+                   grpid dept_grpid, 
+                   substr(dept_path_name,instr(dept_path_name,'.',1,1)+1) dept_name 
+            from dept
+            where substr(dept_path_name, 5, length(dept_path_name))  =  #deptname#
+             
+         )order by dept_name asc
+	 	<!-- 
+	 	select 
+               grpid dept_grpid, 
+               replace(substr(dept_path_name,replace(instr(dept_path_name,'.',1,2),0,instr(dept_path_name,'.',1,1))+1),'.','>') dept_name 
+        from dept
+        where nvl(substr(dept_path_name, 5,instr(dept_path_name,'.',1,2) - instr(dept_path_name,'.',1,1)-1 ),substr(dept_path_name, 5, length(dept_path_name)) ) =  #deptname#
+         -->
+        <!-- select 
+               grpid dept_grpid, 
+               replace(substr(dept_path_name,instr(dept_path_name,'.',1,2)+1),'.','>') dept_name 
+        from dept
+        where substr(dept_path_name, 5,instr(dept_path_name,'.',1,2) - instr(dept_path_name,'.',1,1)-1 ) =  #deptname# -->
+
+		
+		<!-- select grpid dept_grpid, deptname dept_name from dept where substr(location,0,5) like #location# ||'%'  -->
+		<!-- select grpid dept_grpid, deptname dept_name from dept where DEPT_GRPID = #dept_grpid# -->  
+	
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 사용자 목록 조회  -->
+	 <select id="getUsrAutList" resultClass="UsrAutVo" parameterClass="java.util.HashMap">
+		select * from(
+			select usrid, usrname, part, duty_name, maindept, rownum as idx from(
+				select
+		            usrid, 
+		            usrname, 
+		            part,
+		            duty_name,
+		            (select substr(dept_path_name, 5, length(dept_path_name))  dept_name    from dept  where  grpid=part) maindept
+		         from usr 
+		         where 1=1
+		         <isNotEmpty property="usrName" prepend="and">
+		         	usrName like '%'||#usrName#||'%'
+		         </isNotEmpty>
+		         <isEmpty property="usrName">
+			         <isNotEmpty property="idList" prepend="and">
+			         	part in
+				         <iterate property="idList" open="(" close=")" conjunction=",">
+				         	#idList[]#
+				         </iterate>
+			         </isNotEmpty>
+			         <isEmpty property="idList" prepend="and">
+			         	1=2
+			         </isEmpty> 	
+		        </isEmpty> 
+		         order by maindept asc
+	         )
+         ) where idx between #startArticleNum# and #endArticleNum# 
+         
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 사용자 목록 카운팅  -->
+	  <select id="getUsrAutListCount" resultClass="int" parameterClass="java.util.HashMap">
+		select count(*) from(
+			select
+	            usrid, 
+	            usrname, 
+	            part,
+	            duty_name,
+	            (select substr(dept_path_name, 5, length(dept_path_name))  dept_name    from dept  where  grpid=part) maindept
+	         from usr 
+	         where 1=1
+	         <isNotEmpty property="usrName" prepend="and">
+	         	usrName = '%'||#usrName#||'%'
+	         </isNotEmpty>
+	         <isEmpty property="usrName">
+		         <isNotEmpty property="idList" prepend="and">
+		         	part in
+			         <iterate property="idList" open="(" close=")" conjunction=",">
+			         	#idList[]#
+			         </iterate>
+		         </isNotEmpty> 	
+	             <isEmpty property="idList" prepend="and">
+		         	1=2
+		         </isEmpty> 
+	        </isEmpty> 
+	         
+         )  
+         
+	 </select>
+  	 <!-- 운영시스템 > 권한 관리> 사용자 목록 조회  -->
+	 <select id="getUsrAutCde" resultClass="AutVo" parameterClass="String">
+	 	select  aut_cde, (select aut_des from aut_info where aut_cde=a.aut_cde)  aut_des  from usr_aut a where usrid=#usrid#
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 권한목록조회  -->
+	 <select id="getAutList" resultClass="AutVo">
+	 	select * from aut_info
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 권한 입력  -->
+	 <update id="insertUsrAut" parameterClass="java.util.HashMap" >
+	 	insert into usr_aut 
+	 		   values(#usrid#,#autcde#,sysdate)
+	 </update>
+	 
+	 <!-- 운영시스템 > 권한 관리> 권한 수정  -->
+	 <update id="modifyUsrAut" parameterClass="java.util.HashMap">
+	 	update 	usr_aut 
+	 	set aut_cde=#autcde#,
+	 		reg_dat=sysdate
+	 	where usrid = #usrid# 
+	 </update>
+	  <!-- 운영시스템 > 권한 관리> 사용자 목록 조회  -->
+	 <select id="getMenuList" resultClass="MenuVo" parameterClass="String">
+	 	select * from(
+						select * from menu where mnu_on_off =1 and pme_id != 1 order by mnu_nam
+					  ) 
+				where lim_aut > #autcde# or  lim_aut = #autcde# 
+	 </select>
+	 
+	 <!-- 운영시스템 > 권한 관리> 메뉴 권한 변경  -->
+	 <update id="updateMenuAut"  parameterClass="java.util.HashMap">
+	 	 update menu set lim_aut = #autcde# 
+	         where mnu_id in
+			         <iterate property="addlist" open="(" close=")" conjunction=",">
+			         	#addlist[]#
+			         </iterate>	         	         
+	 </update>
+	 
+ 	 <update id="removeMenuAut"  parameterClass="java.util.HashMap">
+	 	 update menu set lim_aut = 'SYS001' 
+	         where mnu_id in
+			         <iterate property="removelist" open="(" close=")" conjunction=",">
+			         	#removelist[]#
+			         </iterate>	         	         
+	 </update>
+	 
+	 
+     <!-- 운영시스템 > 권한관리 | 종료  -->
+     
+     <!-- 로그인 및 로그, 메뉴 권한 체크 | 시작  -->
+     
+     <select id="getUserInfo" resultClass="UserInfoVo" parameterClass="String">
+                select
+                    usrid, 
+                    usrname, 
+                    part,
+                    duty_name,
+                    (select replace(substr(dept_path_name, 5, length(dept_path_name)), '.', ' > ')  dept_name    from dept  where  grpid=part) deptname
+                 from usr 
+                 where usrid=#usrid#
+	 </select>
+	 
+	 <!-- 로그기록 -->
+	 <update id="writeLog" parameterClass="MlogVo" >
+	 	insert into mnlog_info 
+	 		   values(#usrname#,#usrid#,#deptname#,sysdate,#menuid#,#menuname#,#part#,MNLOG_INFO_SEQ.nextval)
+	 </update>            
+     
+    <select id="chceckMenuAut" resultClass="Str" parameterClass="Str">
+         select lim_aut from menu where mnu_id = #menuid# 
+	 </select>
+     
+     
+     <!-- 로그인 및 로그, 메뉴 권한 체크 | 종료 -->
+     
+     <!-- 통계 | 시작 -->
+   	<select id="getConnList" resultClass="MlogVo" parameterClass="java.util.HashMap">
+   		select * from (
+   			select a.* , rownum idx from(
+	   			select usrname, usrid, deptname, to_char(wdate,'yyyy-mm-dd') wdate, menuid, menuname, part, logseq
+	   			from mnlog_info
+	   			where to_char(wdate,'yyyy-mm-dd')  &gt;= #startdate# and to_char(wdate,'yyyy-mm-dd')  &lt;= #enddate#
+	   				and menuid=#menuid#
+			         <isNotEmpty property="partlist" prepend="and">
+			         	part in
+				         <iterate property="partlist" open="(" close=")" conjunction=",">
+				         	#partlist[]#
+				         </iterate>
+			         </isNotEmpty>
+			    order by logseq desc
+		    ) a
+   		)where idx between #startArticleNum# and #endArticleNum#
+                
+	 </select>
+	 
+	 <select id="getConnListCount" resultClass="int" parameterClass="java.util.HashMap">
+   		
+   			select count(*) total
+   			from mnlog_info
+   			where to_char(wdate,'yyyy-mm-dd')  &gt;= #startdate# and to_char(wdate,'yyyy-mm-dd')  &lt;= #enddate#
+   				and menuid=#menuid#
+		         <isNotEmpty property="partlist" prepend="and">
+		         	part in
+			         <iterate property="partlist" open="(" close=")" conjunction=",">
+			         	#partlist[]#
+			         </iterate>
+		         </isNotEmpty>
+	 </select>
+	 
+	<select id="getDayGraphData" resultClass="MlogVo" parameterClass="java.util.HashMap">
+   		select wdate, count(usrid) usrid from (
+    		select to_char(wdate,'dd') wdate, usrid from(
+				select usrid, wdate
+					from mnlog_info
+			   		where to_char(wdate,'yyyy-mm-dd')  &gt;= #startdate# and to_char(wdate,'yyyy-mm-dd')  &lt;= #enddate#
+			   			and menuid=#menuid#
+				         <isNotEmpty property="partlist" prepend="and">
+				         	part in
+					         <iterate property="partlist" open="(" close=")" conjunction=",">
+					         	#partlist[]#
+					         </iterate>
+				         </isNotEmpty>
+				         
+				)
+			)	 group by wdate
+				 order by wdate 	    
+	 </select>
+	 
+	 <select id="getMonthGraphData" resultClass="MlogVo" parameterClass="java.util.HashMap">
+   		select wdate, count(usrid) usrid from (
+    		select to_char(wdate,'mm') wdate, usrid from(
+				select usrid, wdate
+					from mnlog_info
+			   		where to_char(wdate,'yyyy-mm-dd')  &gt;= #startdate# and to_char(wdate,'yyyy-mm-dd')  &lt;= #enddate#
+			   			and menuid=#menuid#
+				         <isNotEmpty property="partlist" prepend="and">
+				         	part in
+					         <iterate property="partlist" open="(" close=")" conjunction=",">
+					         	#partlist[]#
+					         </iterate>
+				         </isNotEmpty>
+				) 
+			)	group by wdate	    
+                order by wdate 
+	 </select>
+    
+    
+     
+     <!-- 통계 | 종료-->
+	 
+	 
+	 <!--**************** 침수정보 ********************* -->
+	 <!-- 침수시뮬레이션	> 침수정보 > 침수지역 등록 	--><!-- 백인록 -->
+   	<insert id="floodInsert" parameterClass="FloodVo">		
+		insert into 
+		flood_info
+		(flo_seq,flo_year, flo_loc, dmg_are, str_year, end_year, flo_hour, dmg_nm, flo_cau, flo_sot)	
+		values
+		(seq_flood_info_flo_seq.nextval, 
+		#flo_year#, #flo_loc#, #dmg_are#, #str_year#,
+		 #end_year#, #flo_hour#, #dmg_nm#, #flo_cau#, #flo_sot#)  
+	</insert>	
+
+	 <!-- 침수시뮬레이션	> 침수정보 > 침수지역 검색 	--><!-- 백인록 -->
+	 <select id="floodSearch" resultClass="FloodVo">
+	 	select
+	 	 * 
+	 	from 
+	 		flood_info
+		where 
+			flo_year like '%'|| #flo_year# ||'%'
+			and flo_loc like '%'|| #flo_loc# ||'%'
+			and flo_sot like '%'|| #flo_sot# ||'%'
+	 </select>
+
+	<!-- 침수시뮬레이션	> 침수정보 > 침수지역 검색 > 상셍정보 팝업창 --><!-- 백인록 -->
+	<select id="floodInfoPopUpList"  resultClass="FloodVo">
+	select	* from  flood_info where flo_seq like #flo_seq#
+	</select>
+	                    
+	<!--  공지사항     -->	                    
+		                                        
+	<!--  공지사항 전체 리스트 불러오기 쿼리 --><!-- 이상국  -->
+	<select id="getNoticeList" resultClass="NoticeVo">
+ 		select
+ 			BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, to_char(REG_DAT,'yyyy-mm-dd')reg_dat, 
+ 			IMP_TYP, REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILE1,	BOD_FILENAME2, BOD_FILE2, bod_start, bod_end
+ 		from 
+ 			TN_BOARD
+ 		order by bod_seq desc
+ 	</select>
+ 	
+ 	<!--  공지글 가져오기 쿼리 --> <!-- 이상국  -->
+ 	<select id="getNotice" parameterClass="int" resultClass="NoticeVo">
+ 		select 
+ 			BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, to_char(REG_DAT,'yyyy-mm-dd')reg_dat, 
+ 			IMP_TYP, REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILE1,	BOD_FILENAME2, BOD_FILE2, bod_start, bod_end
+ 		from 
+ 			TN_BOARD 
+ 		where  BOD_SEQ = #value#	
+ 	</select>
+ 
+	<!-- 공지글 이동 -->	
+ 	<select id="movingNotice" parameterClass="map" resultClass="NoticeVo">
+ 		select 
+ 			BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, to_char(REG_DAT,'yyyy-mm-dd')reg_dat, 
+ 			IMP_TYP, REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILE1,	BOD_FILENAME2, BOD_FILE2, bod_start, bod_end
+ 		from 
+ 			TN_BOARD 
+ 			<dynamic prepend="where">
+				<isEqual property="moveType" compareValue="1">
+				  BOD_SEQ = (select max(BOD_SEQ) 
+	 							from TN_BOARD 
+	 							where BOD_SEQ <![CDATA[ < ]]> #bod_seq#)
+	 			</isEqual>
+	 			<isEqual property="moveType" compareValue="2">
+	 			 BOD_SEQ = (select min(BOD_SEQ) 
+	 							from TN_BOARD 
+	 							where BOD_SEQ <![CDATA[ > ]]> #bod_seq#)	
+				</isEqual> 						
+			</dynamic>	
+ 	</select>
+ 	
+ 	<!--  긴급사항 가져오기 쿼리 --> <!-- 이상국  -->
+ 	<select id="getImpNotice" parameterClass="str" resultClass="NoticeVo">
+ 		select 
+ 			BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, to_char(REG_DAT,'yyyy-mm-dd')REG_DAT, 
+ 			IMP_TYP, REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILE1,	BOD_FILENAME2, BOD_FILE2, BOD_start, bod_end
+ 		from 
+ 			TN_BOARD 
+ 		where IMP_TYP = #value#
+ 		order by bod_seq desc
+ 	</select>
+ 	
+ 	<!--  공지글 작성 쿼리 --> <!-- 이상국  -->
+ 	<insert id="insertNotice" parameterClass="NoticeVo">
+ 		INSERT INTO TN_BOARD
+ 			(BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, REG_DAT, IMP_TYP, 
+ 			REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILE1, BOD_FILENAME2, BOD_FILE2, bod_start, bod_end)
+  		VALUES
+ 			(TN_BOARD_BOD_SEQ_SEQ.nextval, #mng_id#, #bod_yn#, #bod_sub#, #bod_ctt#, sysdate, #imp_typ#, 
+ 			#reg_ip#, #bod_cnt#, #bod_filename1#, empty_blob(), #bod_filename2#, empty_blob(), #bod_start#, #bod_end#)
+ 	</insert>       
+ 							 
+ 	<!-- 공지글 삭제 쿼리 -->	<!-- 이상국  -->		 
+ 	<delete id="deleteNotice" parameterClass="int">
+ 		delete from TN_BOARD where BOD_SEQ = #value#
+ 	</delete>
+ 	 
+ 	<!-- 공지글 조회수 업데이트 -->
+	<update id="setNoticeCount" parameterClass ="NoticeVo">
+ 		update TN_BOARD set bod_cnt = #bod_cnt# where bod_seq = #bod_seq#
+ 	</update>
+  	   
+	<!--  공지글 수정 쿼리 -->  <!-- 이상국 -->
+ 	<update id="updateNotice" parameterClass="NoticeVo">
+		update
+			TN_BOARD
+ 		set
+ 			BOD_YN  = #bod_yn#,
+ 			IMP_TYP = #imp_typ#,
+			BOD_SUB = #bod_sub#,
+			BOD_CTT = #bod_ctt#,
+			BOD_FILENAME1 = #bod_filename1#,
+			BOD_FILENAME2 = #bod_filename2#,
+			bod_start = #bod_start#,
+ 			bod_end = #bod_end#
+ 		where
+ 			BOD_SEQ = #bod_seq#	
+	</update> 
+	
+	<!-- 공지 전체글 카운트 -->
+	<select id="getNoticeRecord" resultClass="str">
+		select count(*) from TN_BOARD
+	</select> 
+	
+	<!-- 검색 글 카운트 --> 
+	<select id="getSearchNoticeRecord" parameterClass="map" resultClass="str">
+		select count(*) from TN_BOARD
+		<dynamic prepend="where">
+			<isEqual property="searchType" compareValue="bod_seq">
+				BOD_SEQ like '%'|| #searchItem# ||'%' 
+			</isEqual>
+			<isEqual property="searchType" compareValue="bod_sub">
+			 	BOD_SUB like '%'|| #searchItem# ||'%'
+			</isEqual>
+			<isEqual property="searchType" compareValue="bod_ctt">
+				 BOD_CTT like '%'|| #searchItem# ||'%' 		
+			</isEqual>
+			<isEqual property="searchType" compareValue="reg_dat">
+				REG_DAT >= TO_DATE(#searchItem#, 'yyyy-mm-dd')
+		  		and REG_DAT <![CDATA[ < ]]> TO_DATE(#searchItem#, 'yyyy-mm-dd') + 1	
+			</isEqual>
+		</dynamic>
+	</select>
+
+	<!-- 공지글 검색리스트 -->
+	<select id="searchNotice" parameterClass="map" resultClass="NoticeVo">
+		select 
+	 		BOD_SEQ, MNG_ID, BOD_YN, BOD_SUB, BOD_CTT, to_char(REG_DAT,'yyyy-mm-dd')reg_dat, 
+	 		IMP_TYP, REG_IP, BOD_CNT, BOD_FILENAME1, BOD_FILENAME2, bod_start, bod_end
+		from TN_BOARD
+		<dynamic prepend="where">
+			<isEqual property="searchType" compareValue="bod_seq">
+				 BOD_SEQ like '%'|| #searchItem# ||'%' 
+			</isEqual>
+			<isEqual property="searchType" compareValue="bod_sub">
+				 BOD_SUB like '%'|| #searchItem# ||'%'
+			</isEqual>
+			<isEqual property="searchType" compareValue="bod_ctt">
+				 BOD_CTT like '%'|| #searchItem# ||'%' 		
+			</isEqual>
+			<isEqual property="searchType" compareValue="reg_dat">
+				reg_dat >= TO_DATE(#searchItem#, 'yyyy-mm-dd')
+		  		and reg_dat <![CDATA[ < ]]> TO_DATE(#searchItem#, 'yyyy-mm-dd') + 1
+			</isEqual>
+		</dynamic>
+		order by bod_seq desc
+	</select>
+
+	<!-- 공지사항 종료 -->
+	 <!-- 침수시뮬레이션	> 대피소 > 대피소 등록 	-->
+   	<insert id="shelterInsert" parameterClass="ShelterSearchVo">
+<!-- 		insert into 
+			DEP_AREA
+				(fac_nm, 
+				dep_addr, 
+				use_nm)
+		values
+			(
+			#fac_nm#, 
+			#dep_addr#,
+			#use_nm#) -->			
+		insert into 
+		DEP_AREA
+		(DEP_SEQ,FAC_NM, DEP_ADDR, DEP_SIZE, APT_YEAR, USE_NM, EMB_CNT, DEF_GRD, FAC_EQU)	
+		values
+		(seq_DEP_AREA_dep_seq.nextval, 
+		#fac_nm#, #dep_addr#, #dep_size#, #apt_year#,
+		 #use_nm#, #emb_cnt#, #def_grd#, #fac_equ#)  
+
+	</insert>	 	
+	 	 
+<!--****************관리자페이지 > 레이어관리 > 레이어리스트 조회 ********************* -->
+	<select id="getLayerListForManager"	  parameterClass="java.util.HashMap" resultClass="LayInfoVo">
+ 	   SELECT LAY_SEQ, ENG_NM, KOR_NM FROM(
+         SELECT ROWNUM AS  RN, LAY_SEQ, ENG_NM, KOR_NM FROM LAY_INFO 
+         ORDER BY LAY_SEQ
+       )WHERE RN BETWEEN #start# AND #end# 
+	</select>
+	<select id="getLayerInfoForManager"	resultClass="LayInfoVo">
+		 SELECT
+		    LAY_SEQ,GRP_NM,FILE_NM,HIDE_LOW,HIDE_HIGH,ENG_NM,KOR_NM,
+		    DATA_TYPE,COLOR_R,COLOR_G,COLOR_B,F_VIEW,F_SEL,F_ALPHA,GRP_CDE
+		FROM LAY_INFO
+		where lay_seq=#seq#
+	</select>
+	<select id="getGroupListForManager"	resultClass="LayInfoVo">
+ 		SELECT DISTINCT(GRP_CDE) AS GRP_CDE, GRP_NM FROM LAY_INFO ORDER BY GRP_CDE
+	</select>	
+	<update id="doLayerInfoUpdate"	parameterClass="LayInfoVo">
+ 		UPDATE LAY_INFO SET 
+ 			GRP_NM=#grp_nm#
+ 			, GRP_CDE=#grp_cde#
+ 			, HIDE_LOW=#hide_low#
+ 			, HIDE_HIGH=#hide_high#
+ 			, KOR_NM=#kor_nm#
+ 			, F_VIEW=#f_view#
+ 			WHERE LAY_SEQ=#lay_seq#
+	</update>
+	<select id="getLayerListForManagerInlayerListPage" parameterClass="java.util.HashMap"  resultClass="LayInfoVo">
+		SELECT  LAY_SEQ, ENG_NM, KOR_NM FROM(
+		    SELECT LAY_SEQ, ENG_NM, KOR_NM , ROWNUM AS RN
+		     FROM LAY_INFO 
+		     WHERE GRP_CDE=#grp_cde#  
+		     ORDER BY LAY_SEQ
+		)WHERE RN BETWEEN #start# AND #end#
+	</select>
+	<select id="getLayerListCntForManager"	resultClass="int">
+ 	    SELECT count(LAY_SEQ) as layCnt FROM LAY_INFO 
+	</select>	
+	<select id="getLayerListCntForManagerInlayerListPage" parameterClass="String" 	resultClass="int">
+ 	    SELECT  count(LAY_SEQ) as layCnt FROM LAY_INFO WHERE GRP_CDE=#grp_cde#  
+	</select>	
+	
+
+	
+	<!-- 반경검색 -->
+	<select id="getBuildListForRadiousSearch" parameterClass="java.util.HashMap" 	resultClass="BuildSearchVo">
+		SELECT BD_MGT_SN,
+		              BULD_NM, 
+		              RN,
+		              BULD_MNNM,
+		              BULD_SLNO,
+		              LNBR_mnnm,
+		              LNBR_slno,
+		              BLDG_ID,     
+		              (SELECT B.SGG_NM FROM LP_AA_SGG B WHERE B.SGG_CD = SUBSTR(A.BD_MGT_SN, 0,5)) SGG_NM,
+		              (SELECT C.EMD_NM FROM LP_AA_EMD C WHERE C.EMD_CD = SUBSTR(A.BD_MGT_SN, 0,8)) EMD_NM,
+		              SUBSTR(BD_MGT_SN, 0, 19) PNU,
+		              RNUM 
+		    FROM( 
+		                <isNotEmpty property="searchList">
+		                SELECT 
+		                	BD_MGT_SN, BULD_NM, RN, BULD_MNNM, BULD_SLNO, LNBR_mnnm, LNBR_slno,BLDG_ID, ROWNUM RNUM FROM(
+		                   		 <iterate prepend="" property="searchList"  conjunction="union all">
+		                            SELECT 
+		                                A.BD_MGT_SN BD_MGT_SN, A.BULD_NM BULD_NM, B.RN RN, A.BULD_MNNM BULD_MNNM, A.BULD_SLNO BULD_SLNO, A.LNBR_mnnm LNBR_mnnm, A.LNBR_slno LNBR_slno, A.MNTN_YN, C.BLDG_ID 
+		                            FROM 
+		                     	           <!--   TL_SPBD_BULD A, TL_SPRD_MANAGE B, (SELECT BD_MGT_SN FROM BLDG_NEWADD_JOIN WHERE BLDG_ID IN (#searchList[]#)) C -->
+		                                 TL_SPBD_BULD A, 
+		                                 TL_SPRD_MANAGE B, 
+		                                 <!-- (SELECT BD_MGT_SN, BLDG_ID FROM BLDG_NEWADD_JOIN WHERE IN ($searchList[]$)) C --><!--수정한 부분 upper()함수를 썼음-->
+		                                 (SELECT BD_MGT_SN, BLDG_ID FROM BLDG_NEWADD_JOIN WHERE upper(BLDG_ID) IN ($searchList[]$)) C  
+		                            WHERE
+		                                	A.RDS_MAN_NO = B.RDS_MAN_NO 
+		                                AND A.BULD_NM IS NOT NULL
+		                                AND A.BD_MGT_SN = C.BD_MGT_SN
+		                            </iterate>    
+		                     ) ORDER BY BULD_NM
+		                 </isNotEmpty>
+		             <isEmpty property="searchList">
+		               SELECT 
+		                        A.BD_MGT_SN, A.BULD_NM, B.RN, A.BULD_MNNM, A.BULD_SLNO, A.LNBR_mnnm, A.LNBR_slno 
+		                    FROM 
+		                        TL_SPBD_BULD A, TL_SPRD_MANAGE B   
+		                    WHERE
+		                       1 = 2
+		             </isEmpty>
+		      ) A
+	       WHERE 
+	       		BULD_NM LIKE '%'|| #keyword# ||'%'       
+	       AND 
+	       		RNUM BETWEEN #start# AND #end# 
+     
+	</select>	
+	<!-- 반경검색 카운트 -->
+<select id="getBuildCntForRadiousSearch" parameterClass="java.util.HashMap" 	resultClass="int">
+ 	SELECT count(BD_MGT_SN)
+		    FROM( 
+		                <isNotEmpty property="searchList">
+		                SELECT 
+		                	BD_MGT_SN, BULD_NM, RN, BULD_MNNM, BULD_SLNO, LNBR_mnnm, LNBR_slno FROM(
+		                   		 <iterate prepend="" property="searchList"  conjunction="union all">
+		                            SELECT 
+		                                A.BD_MGT_SN BD_MGT_SN, A.BULD_NM BULD_NM, B.RN RN, A.BULD_MNNM BULD_MNNM, A.BULD_SLNO BULD_SLNO, A.LNBR_mnnm LNBR_mnnm, A.LNBR_slno LNBR_slno 
+		                            FROM 
+		                     	           <!--   TL_SPBD_BULD A, TL_SPRD_MANAGE B, (SELECT BD_MGT_SN FROM BLDG_NEWADD_JOIN WHERE BLDG_ID IN (#searchList[]#)) C -->
+		                                 TL_SPBD_BULD A, 
+		                                 TL_SPRD_MANAGE B, 
+		                                 (SELECT BD_MGT_SN FROM BLDG_NEWADD_JOIN WHERE upper(BLDG_ID)IN ($searchList[]$)) C
+		                                 
+		                            WHERE
+		                                	A.RDS_MAN_NO = B.RDS_MAN_NO 
+		                                AND A.BULD_NM IS NOT NULL
+		                                AND A.BD_MGT_SN = C.BD_MGT_SN
+		                            </iterate>    
+		                     ) ORDER BY BULD_NM
+		                 </isNotEmpty>
+		             <isEmpty property="searchList">
+		               SELECT 
+		                        A.BD_MGT_SN, A.BULD_NM, B.RN, A.BULD_MNNM, A.BULD_SLNO, A.LNBR_mnnm, A.LNBR_slno 
+		                    FROM 
+		                        TL_SPBD_BULD A, TL_SPRD_MANAGE B   
+		                    WHERE
+		                       1 = 2
+		             </isEmpty>
+		      ) A
+	       WHERE 
+	       		BULD_NM LIKE '%'|| #keyword# ||'%'       
+       
+	</select>	
+
+	<select  id="countPopup"  resultClass="NoticeVo">
+	<![CDATA[
+		SELECT
+		BOD_SEQ
+		FROM(
+		    SELECT BOD_SEQ, TO_DATE(BOD_START) AS B_START,
+		            TO_DATE(BOD_END) AS B_END 
+		     FROM TN_BOARD 
+		     WHERE BOD_YN=1 AND BOD_START IS NOT NULL AND BOD_END IS NOT NULL
+		) A
+		WHERE B_START < SYSDATE AND B_END > SYSDATE
+		]]>
+	</select>
+	<select id="openPopup" parameterClass="String" resultClass="NoticeVo">
+		<![CDATA[
+    SELECT BOD_SEQ, MNG_ID BOD_YN,BOD_SUB, BOD_CTT, REG_DAT, IMP_TYP, REG_IP,  BOD_CNT,
+            BOD_FILENAME1,  BOD_FILE1, BOD_FILENAME2, BOD_FILE2, TO_DATE(BOD_START) AS B_START,
+            TO_DATE(BOD_END) AS B_END 
+     FROM TN_BOARD 
+     WHERE BOD_SEQ=#bod_seq#
+		]]>
+	</select>
+	
+</sqlMap>
+
+
+
+
+

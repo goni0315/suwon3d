@@ -1,0 +1,701 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/gislayout.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3차원공간정보활용시스템</title>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
+<script type="text/javascript"> 
+var high = new Array;
+var seqLast = "";
+
+//레이어 로드
+function loadLayer() {
+	<c:forEach var="item" items="${layerListVos}">
+		if("${item.f_use}" == "Y"){
+			switch ("${item.grp_nm}") {
+			case '지형':	
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppendTerr("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "1","${item.f_view}");
+				break;
+			case '법정경계':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "2","${item.f_view}");
+				break;
+			case '행정경계':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "3","${item.f_view}");
+				break;
+			case '지적':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "4","${item.f_view}");
+				break;
+			case '새주소':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "5","${item.f_view}");
+				break;
+			case '건물':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "6","${item.f_view}");
+				break;
+			case '도로':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "7","${item.f_view}");
+				break;
+			case '보안등':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "8","${item.f_view}");
+				break;
+			case 'CCTV':
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "9","${item.f_view}");
+				break;
+			case '대피소':
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "10","${item.f_view}");
+				break;
+			case '교량':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "11","${item.f_view}");
+				break;
+			case '시설물':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "12","${item.f_view}");
+				break;
+			case '교통시설물':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "12","${item.f_view}");
+				break;
+			case '하천':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "13","${item.f_view}");
+				break;
+			case '침수흔적':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "13","${item.f_view}");
+				break;
+			case '수자원데이터':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "14","${item.f_view}");
+				break;
+			case '녹':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "15","${item.f_view}");
+				break;
+			case '역사적유산':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "16","${item.f_view}");
+				break;
+			case '기반시설':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "17","${item.f_view}");
+				break;
+			case '현황자료':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '도시축경관':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '역사축경관':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '시가지경관':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '용도지역':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "18","${item.f_view}");
+				break;
+			case '용도지역세분':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "18","${item.f_view}");
+				break;
+			case '토지이용':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "18","${item.f_view}");
+				break;
+			case '용도지구':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "19","${item.f_view}");
+				break;
+			case '용도지구세분':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "19","${item.f_view}");
+				break;
+			case '용도구역':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "20","${item.f_view}");
+				break;
+			case '용도구역세분':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "20","${item.f_view}");
+				break;
+			case '수치지형도':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "21","${item.f_view}");
+				break;
+			case '역':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '터미널':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "22","${item.f_view}");
+				break;
+			case '시장':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "23","${item.f_view}");
+				break;
+			case '관광지':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				break;
+			case '지하시설물':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend2("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "24","${item.f_view}","${item.color_r}","${item.color_g}","${item.color_b}");
+				break;
+			case '문화재':			
+				high["${item.lay_seq}"] = "${item.hide_low}#${item.hide_high}#${item.kor_nm}";
+				layerAppend("${item.hide_low}#${item.hide_high}","${item.kor_nm}","'${item.eng_nm}'","${item.lay_seq}", "25","${item.f_view}");
+				break;
+			}
+		}
+	</c:forEach>
+}
+
+//레이어 삽입
+function layerAppend(high, kor_nm, eng_nm, num, appLayNum, view) {
+	$("#layer" + appLayNum).append($(
+		'<table width="310" border="0" cellpadding="2" cellspacing="0">'+
+			'<tr>'+
+				'<td></td>' +
+				'<td></td>' +
+				'<td width="227" onclick="layerHighClick(high[' + num + '])"  style="cursor: pointer;">' + 
+					kor_nm + 
+				'</td>' +
+				'<td width="16">' +
+					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' + 
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+					'</a>' +
+				'</td>' +
+			'</tr>'+
+		'</table>'
+	));
+	if(view == "Y"){
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_on.gif";
+	}else{
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_off.gif";
+	}
+	if(high != ""){
+		var infoHi = high.split("#");
+		var maxHi = 0;
+		var minHi = 0;
+		if(infoHi[0] == ''){
+			infoHi[0] = 0;
+		}else{
+			minHi = infoHi[0];
+		}
+		if(infoHi[1] == ''){
+			infoHi[1] = 0;
+		}else{
+			maxHi = infoHi[0];
+		}
+		top.XDOCX.XDLaySetHiddenValue(eng_nm,minHi,maxHi);
+	}
+}
+//지하시설물 레이어 삽입
+function layerAppend2(high, kor_nm, eng_nm, num, appLayNum, view, r,g,b) {
+	$("#layer" + appLayNum).append($(
+		'<table width="310" border="0" cellpadding="2" cellspacing="0">'+
+			'<tr>'+
+				'<td></td>' +
+				'<td style="background-color:rgb(' + r +','+ g +',' + b + '); margin:2px;"></td>' +
+				'<td width="227" onclick="layerHighClick(high[' + num + '])"  style="cursor: pointer;">' + 
+					kor_nm + 
+				'</td>' +
+				'<td width="16">' +
+					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' + 
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+					'</a>' +
+				'</td>' +
+			'</tr>'+
+		'</table>'
+	));
+	if(view == "Y"){
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_on.gif";
+	}else{
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_off.gif";
+	}
+	if(high != ""){
+		var infoHi = high.split("#");
+		var maxHi = 0;
+		var minHi = 0;
+		if(infoHi[0] == ''){
+			infoHi[0] = 0;
+		}else{
+			minHi = infoHi[0];
+		}
+		if(infoHi[1] == ''){
+			infoHi[1] = 0;
+		}else{
+			maxHi = infoHi[0];
+		}
+		top.XDOCX.XDLaySetHiddenValue(eng_nm,minHi,maxHi);
+	}
+}
+//지형 레이어 - 투명값 추가
+function layerAppendTerr(high, kor_nm, eng_nm, num, appLAyNM, view) {
+	
+	$("#layer" + appLAyNM).append($(
+		'<table width="310" border="0" cellpadding="5" cellspacing="0">'+
+			'<tr>'+
+				'<td></td>' +
+				'<td></td>' +
+				'<td width="227" onclick="layerHighClick(high[' + num + '])"  style="cursor: pointer;">' + 
+					kor_nm + 
+				'</td>' +
+				'<td width="16">' +
+					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' +
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+					'</a>' +
+				'</td>' +
+				'<td width="13">' +
+					'<a href="#" onclick="setLayerAlp(aImg' + num + ')">' +
+						'<img id="aImg' + num + '" src="${ctx}/images/layer/icon_opacity_off.gif" title="vImg' + num + '" width="17" height="17">' +
+					'</a>' +
+				'</td>'+
+			'</tr>'+
+		'</table>'
+	));
+	if(view == "Y"){
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_on.gif";
+	}else{
+		document.getElementById("vImg" + num).src = "${ctx}/images/layer/icon_light_off.gif";
+	}
+	if(high != ""){
+		var infoHi = high.split("#");
+		if(infoHi[0] == ''){
+			infoHi[0] = 0;
+		}
+		if(infoHi[1] == ''){
+			infoHi[1] = 0;
+		}
+		top.XDOCX.XDLaySetHiddenValue(eng_nm,infoHi[1],infoHi[0]);
+	}
+}
+
+//레이어 visible 설정
+function setLayerVis(obj, layer_name){
+	obj = $(obj);
+	var src = obj.attr('src');
+	if(src.indexOf('on.gif') != -1){
+		top.XDOCX.XDLaySetVisible(layer_name, false);
+		$(obj).attr('src', '${ctx}/images/layer/icon_light_off.gif');
+	}else{
+		top.XDOCX.XDLaySetVisible(layer_name, true);
+		$(obj).attr('src', '${ctx}/images/layer/icon_light_on.gif');
+	}
+	
+	top.XDOCX.XDMapResetRTT();
+	top.XDOCX.XDMapRender();
+}
+//레이어 투명값 설정
+function setLayerAlp(obj) {
+	obj = $(obj);
+	var src = obj.attr('src');
+	if(src.indexOf('on.gif') != -1){
+		top.XDOCX.XDLaySetAlpha("KO3D_SUWON_TERRAIN", 255);
+		top.XDOCX.XDMapSetUnderGround(false);//지하보기 설정
+		$(obj).attr('src', '${ctx}/images/layer/icon_opacity_off.gif');
+	}else{
+		top.XDOCX.XDLaySetAlpha("KO3D_SUWON_TERRAIN", 100);
+		top.XDOCX.XDMapSetUnderGround(true);//지하보기 설정
+		$(obj).attr('src', '${ctx}/images/layer/icon_opacity_on.gif');
+	}
+	
+	top.XDOCX.XDMapResetRTT();
+	top.XDOCX.XDMapRender();
+}
+//레이어 별 최소최고 고도값 표출
+function layerHighClick(value) {
+	var info;
+	for(var i=0;i<value.length;i++){
+		info = value.split("#");
+		if(info[0] == ''){
+	 		info[0] = 0;
+		}
+		if(info[1] == ''){
+			info[1] = 0;
+		}
+		document.getElementById("minHigh").value = info[0];
+		document.getElementById("maxHigh").value = info[1];
+		document.getElementById("highLayer").value = info[2];
+	}
+}
+
+//레이어 하위메뉴 Display
+function layerCheck(checkId,layerId) {
+	checkId = document.getElementById(checkId);
+	layerId = document.getElementById(layerId);
+	var src = checkId.src;
+	if(src.indexOf('plus.gif') != -1){
+		layerId.style.display = "block";
+		$(checkId).attr('src', '${ctx}/images/layer/minus.gif');
+	}else{
+		layerId.style.display = "none";
+		$(checkId).attr('src', '${ctx}/images/layer/plus.gif');
+	}
+}
+
+
+//레이어 고도 입력
+var infoHigh;
+function setLayerHiddenValue(){
+	if ($('#minHigh').val() == '') {
+		alert("최소고도를 입력하세요");
+		return;
+	}
+	if ($('#maxHigh').val() == '') {
+		alert("최대고도를 입력하세요");
+		return;
+	}
+	var layer = document.getElementById("highLayer").value;
+	//alert(layer + '//' + $('#minHigh').val() + '//' + $('#maxHigh').val());
+	
+	for(var i=1;i<high.length;i++){
+		
+		if(high[i] == undefined){
+			
+		}else{
+			infoHigh = high[i].split("#");
+			if(infoHigh[2] == layer){
+				high[i] = $('#minHigh').val()+ "#"+ $('#maxHigh').val() + "#" + layer;
+			}
+		}
+	}
+	top.XDOCX.XDLaySetHiddenValue(layer, $('#minHigh').val(), $('#maxHigh').val());
+}
+
+function layerSetSave() {
+	var viewList = "";
+	for(var i=1;i<267;i++){
+		var vid = document.getElementById("vImg" + i);
+		obj = $(vid);
+		var src = obj.attr('src');
+		if(src != null){
+			if(src.indexOf('on.gif') != -1){
+				viewList = viewList + i + "#Y" + ",";
+			}else{
+				viewList = viewList + i + "#N" + ",";
+			}
+		}
+	}
+	document.getElementById("saveLayerList").value = viewList;
+	
+	alert("설정하신 레이어 정보가 저장되었습니다.")
+	$('#layerSaveForm').submit();
+	//location.reload(true);
+}
+
+</script>
+</head>
+
+<body style="background: url(${ctx}/images/category_bg1.gif);" onload="loadLayer()">
+<form id="layerSaveForm" name="layerSaveForm" action="${ctx}/layerSaveList.do" method="post">
+	<input type="hidden" id="saveLayerList" name="saveLayerList" />
+	<input type="hidden" id="usrid" name="usrid" value="${pUsrId}" />
+</form>
+	<div style="background: url(${ctx}/images/layer/layer_bg.gif); background-position:bottom; margin:10px 0 0 3px; width: 330px; height: 89px;">
+    	<ul>
+			<li style="float: left;"><img src="${ctx}/images/layer/layer01.gif" /></li>
+			<li style="float: left;"><img src="${ctx}/images/layer/layer02.gif" /></li>
+			<li style="float: left;"><img src="${ctx}/images/layer/layer03.gif" /></li>
+			<li style="float: left;"><img src="${ctx}/images/layer/layer04_.gif" onclick="layerSetSave()" style="cursor: pointer;" /></li>
+		</ul>
+		<ul>
+			<li style="float: left; margin: 22px 0 0 10px;">시야범위</li>
+			<li style="float: left; margin: 20px 5px 0 10px;">
+				<input id="highLayer" name="" type="hidden" style="width: 60px;" value="">
+				<input id="minHigh" name="" type="text" style="width: 60px;" value="">
+				~
+				<input id="maxHigh" name="" type="text" style="width: 60px;" value="">
+			</li>
+			<li style="float: left; margin: 10px 5px 0 10px;">
+				<a href="#" onclick="setLayerHiddenValue()">
+					<img src="${ctx}/images/layer/layer_ok.gif">
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div style="width: 339px; min-height:500px; max-height: 650px; height:100%; overflow: auto;">
+		<table width="310" border="0" cellpadding="2" cellspacing="0" style="margin-top: 10px;" id="bbsCont">
+			<tr>
+				<th >&nbsp;</th>
+			</tr>
+			<tr>
+				<td  style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg1','layer1')">
+						<img id="checkImg1" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;" />
+					</a>&nbsp;&nbsp;지형
+				</td>
+			</tr>
+			<tr>
+			<td id="layer1" style="display: none;"></td>
+		  </tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg2','layer2')">
+						<img id="checkImg2" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;법정경계
+				</td>
+			</tr>
+			<tr>
+				<td id="layer2" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg3','layer3')">
+						<img id="checkImg3" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;행정경계
+				</td>
+			</tr>
+			<tr>
+				<td id="layer3" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5;">
+					<a href="#" onclick="layerCheck('checkImg4','layer4')">
+						<img id="checkImg4" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;지적
+				</td>
+			</tr>
+			<tr>
+				<td id="layer4" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg5','layer5')">
+						<img id="checkImg5" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;도로명주소
+				</td>
+			</tr>
+			<tr>
+				<td id="layer5" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg6','layer6')">
+						<img id="checkImg6" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;건물
+				</td>
+			</tr>
+			<tr>
+				<td id="layer6" style="display: none;"></td>		
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg7','layer7')">
+						<img id="checkImg7" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;도로
+				</td>
+			</tr>
+			<tr>
+				<td id="layer7" style="display: none;"></td>	
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg8','layer8')">
+						<img id="checkImg8" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;보안등
+				</td>
+			</tr>
+			<tr>
+				<td id="layer8" style="display: none;"></td>	
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg9','layer9')">
+						<img id="checkImg9" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;CCTV
+				</td>
+			</tr>
+			<tr>
+				<td id="layer9" style="display: none;"></td>	
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg10','layer10')">
+						<img id="checkImg10" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;대피소
+				</td>
+			</tr>
+			<tr>
+				<td id="layer10" style="display: none;"></td>	
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg11','layer11')">
+						<img id="checkImg11" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;교량
+				</td>
+			</tr>
+			<tr>
+				<td id="layer11" style="display: none;"></td>	
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg12','layer12')">
+						<img id="checkImg12" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;시설물
+				</td>
+			</tr>
+			<tr>
+				<td id="layer12" style="display: none;"></td>			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg13','layer13')">
+						<img id="checkImg13" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;하천
+				</td>
+			</tr>
+			<tr>
+				<td id="layer13" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg14','layer14')">
+						<img id="checkImg14" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;수(水)
+				</td>
+			</tr>
+			<tr>
+				<td id="layer14" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg15','layer15')">
+						<img id="checkImg15" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;녹(綠)
+				</td>
+			</tr>
+			<tr>
+				<td id="layer15" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg16','layer16')">
+						<img id="checkImg16" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;역사적유산
+				</td>
+			</tr>
+			<tr>
+				<td id="layer16" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg17','layer17')">
+						<img id="checkImg17" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;기반시설
+				</td>
+			</tr>
+			<tr>
+				<td id="layer17" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg18','layer18')">
+						<img id="checkImg18" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;용도지역
+				</td>
+			</tr>
+			<tr>
+				<td id="layer18" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg19','layer19')">
+						<img id="checkImg19" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;용도지구
+				</td>
+			</tr>
+			<tr>
+				<td id="layer19" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg20','layer20')">
+						<img id="checkImg20" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;용도구역
+				</td>
+			</tr>
+			<tr>
+				<td id="layer20" style="display: none;"></td>
+			</tr>
+
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg21','layer21')">
+						<img id="checkImg21" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;수치지형도
+				</td>
+			</tr>
+			<tr>
+				<td id="layer21" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg22','layer22')">
+						<img id="checkImg22" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;터미널
+				</td>
+			<tr>
+				<td id="layer22" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg23','layer23')">
+						<img id="checkImg23" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;시장
+				</td>
+			</tr>
+			<tr>
+				<td id="layer23" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg24','layer24')">
+						<img id="checkImg24" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;지하시설물
+				</td>
+			</tr>
+			<tr>
+				<td id="layer24" style="display: none;"></td>
+			</tr>
+			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg25','layer25')">
+						<img id="checkImg25" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;문화재
+				</td>
+			</tr>
+			<tr>
+				<td id="layer25" style="display: none;"></td>
+			</tr>
+<%-- 			<tr>
+				<td style="background:#f2f3f5">
+					<a href="#" onclick="layerCheck('checkImg27','layer27')">
+						<img id="checkImg27" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
+					</a>&nbsp;&nbsp;기타
+				</td>
+			</tr>
+			<tr>
+				<td id="layer27" style="display: none;"></td>
+			</tr> --%>
+		</table>
+	</div>
+</body>
+</html>

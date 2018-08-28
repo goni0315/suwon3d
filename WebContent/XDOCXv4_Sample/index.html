@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>XDWORLD4.0 API</title>
+
+<link rel="stylesheet" href="./css/jquery.treeview.css" />
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="../js/jquery/jquery.js"></script><!--callScript의 제이쿼리 함수를 위해 적용  -->
+<script type="text/javascript" src="../js/jquery/jquery-ui-1.8.custom.min.js"></script><!-- 조망, 네비 등의 속도 조절 슬라이드바 -->
+<script type="text/javascript" src="../js/json2.js"></script><!-- 도로개설 -->
+<script type="text/javascript" src="../js/XDControl.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/layer.js"></script>
+<script type="text/javascript" src="../js/xdk.js"></script>
+
+<script type="text/javascript" language="javascript">
+	$(window).bind("resize", jsWResize);
+
+	var tmp_size_height = document.documentElement.clientHeight;//size.height;
+	var tmp_left_height = document.documentElement.clientHeight;//size.height;
+	var tmp_size_width = document.documentElement.clientWidth;//size.width;
+	var winWidthNum = 290;
+	var libWidthNum = tmp_size_width/100*80;
+	
+	//서버 연결 함수 화면이 시작됨과 동시에 연결
+	window.onload = function() {
+		
+		function xdServerConnect(ip, port, group, start_xpoint, start_ypoint) {
+			var m_IsConnected = XDOCX.XDNetServerConnect(ip, port);
+			switch (m_IsConnected) {
+			case 0:
+				alert("서버 연결에 실패하였습니다.\n관리자에게 문의하세요.");
+				break;
+			case 2:
+				alert("이미 접속중입니다.");
+				break;
+			case 1:
+				XDOCX.XDNetLayerListRequest(group, 0); // 맵 레이어 데이터 요청 (저해상도)
+				layerlist();
+				//XDOCX.XDMapRenderLock(true);
+
+				XDOCX.XDCtrlSetView(2); // 3D인덱스맵 종료
+				//XDOCX.XDMapRenderLock(false);
+
+				XDOCX.XDMapLoad();
+				XDOCX.XDMapResetRTT();
+				XDOCX.XDMapRender();
+				XDOCX.XDMapSetUnderGround(false);//지하보기 설정
+
+				break;
+			}
+		}
+		
+		//서버에 연결 시 사용하는 아이피, 포트, XDServer 그룹 이름
+		xdServerConnect('59.25.182.43', 9830, 'testGroup', 0, 0);//대전 테스트 서버
+		//xdServerConnect('192.168.1.77', 9830, '', 0, 0);
+		
+		
+		var _zn = navigator;
+		// 접속자의 브라우저를 확인해 주는 함수
+		
+		function _zf_bw() {
+				var tb = "", b = tb;
+				if (_zn.userAgent) {
+					tb = navigator.userAgent.toLowerCase();
+				}
+				if (_zf_inStr(tb, 'trident')) {
+					if (_zf_inStr(tb, '6.0'))
+						b = "IE10";
+					else if (_zf_inStr(tb, '5.0'))
+						b = "IE9";
+					else if (_zf_inStr(tb, '4.0'))
+						b = "IE8";
+					else if (_zf_inStr(tb, '3.0'))
+						b = "IE7";
+					else
+						b = "IE";
+				} else if (_zf_inStr(tb, 'opera')) {
+					b = "Opera";
+				} else if (_zf_inStr(tb, 'netscape')) {
+					b = "Netscape";
+				} else if (_zf_inStr(tb, 'firefox/2')) {
+					b = "Firefox2";
+				} else if (_zf_inStr(tb, 'firefox/3')) {
+					b = "Firefox3";
+				} else if (_zf_inStr(tb, 'firefox')) {
+					b = "Firefox";
+				} else if (_zf_inStr(tb, 'safari')) {
+					b = "Safari";
+				} else if (_zf_inStr(tb, 'mozilla')) {
+					b = "Mozilla";
+				} else if (_zf_inStr(tb, 'chrome')) {
+					b = "Chrome";
+				}else{
+					b = "다른 브라우저";
+				}
+				alert(b);
+				return b;
+			}
+	
+			_zf_bw();
+
+		function _zf_inStr(s, t) {
+			if (_zf_NULL(s) == 1)
+				return false;
+			if (s.indexOf(t) > -1)
+				return true;
+			else
+				return false;
+		}
+
+		function _zf_NULL(s) {
+			if (!s || s == "" || s == "undefined" || s == "unknown")
+				return 1;
+			else
+				return 0;
+		}
+	}
+
+	//기본 화면에서 사용하는 툴바 기능들
+	function MapControl(mode) {
+		top.setWorkMode('');
+		if (mode == "move_hand") { // 손이동
+			top.XDOCX.XDUISetWorkMode(1);
+		} else if (mode == "map_clear") { // 클리어
+			top.XDOCX.XDLayClear("Temporary");
+			top.XDOCX.XDUIClearInputPoint();
+			top.XDOCX.XDAnsClear();
+			top.XDOCX.XDSelClear();
+			top.XDOCX.XDUIDistanceClear();
+			top.XDOCX.XDUIAreaClear();
+			top.XDOCX.XDUIClearMemo();
+			top.XDOCX.XDMapResetRTT();
+		} else if (mode == "cam_total") { // 전체보기
+			top.XDOCX.XDCamSetDirect(0); // 북쪽보기
+			var ln = "";
+			for ( var i = 0; i < top.XDOCX.XDLayGetCount(); i++) {
+				ln = top.XDOCX.XDLayGetName(i);
+				if (top.XDOCX.XDLayGetType(ln) == 8) {
+					var tmpRect = top.XDOCX.XDLayGetBox(ln);
+					if (tmpRect != "") {
+						tmpRect = tmpRect.split(",");
+						var cx = (parseInt(tmpRect[0]) + parseInt(tmpRect[3])) / 2;
+						var cz = (parseInt(tmpRect[2]) + parseInt(tmpRect[5])) / 2;
+						top.XDOCX.XDCamLookAt(cx, 25000, cz - 10000, cx, 0, cz);
+					}
+					break;
+				}
+			}
+		} else if (mode == "cam_zoomin") { // 확대
+			top.XDOCX.XDUISetWorkMode(2);
+		} else if (mode == "cam_zoomout") { // 축소
+			top.XDOCX.XDUISetWorkMode(4);
+		} else if (mode == "cam_1stmode") { // 1인칭모드
+			top.XDOCX.XDCamSetMode(1);
+		} else if (mode == "cam_3rdmode") { // 3인칭모드
+			top.XDOCX.XDCamSetMode(0);
+		} else if (mode == "cal_dist") { // 거리측정
+			top.XDOCX.XDUISetWorkMode(81);
+		} else if (mode == "cal_rect") { // 면적측정
+			top.XDOCX.XDUISetWorkMode(80);
+		} else if (mode == "cal_hei") { // 높이측정		
+			top.setWorkMode(mode); // setSimulMode(13);
+			top.XDOCX.XDUISetWorkMode(20);
+			top.XDOCX.XDUIClearInputPoint();
+		} else if (mode == "cal_volume") { // 부피측정
+			top.setWorkMode(mode); //setSimulMode(12);
+			top.XDOCX.XDUISetWorkMode(6);
+			top.XDOCX.XDSelClear();
+		} else if (mode == "img_save") { // 이미지저장
+			try {
+				var fn = top.XDOCX.XDOpenFileDlg(false, "jpg,png,bmp");
+				if (fn != "") {
+					top.XDOCX.XDCapScreenShot(fn);
+					if (!top.XDOCX.XDUIFileExist(fn)) {
+						alert("출력하지 못 하였습니다.");
+					}
+				}
+			} catch (ex) {
+				alert("출력 중 오류가 발생하였습니다.");
+			}
+		} else if (mode == "img_print") { // 프린터인쇄
+			try {
+				top.XDOCX.XDCapScreenToPrint(0);
+			} catch (ex) {
+				alert("인쇄 중 오류가 발생하였습니다.");
+			}
+		}
+		top.XDOCX.XDMapRender();
+	}
+
+	//기본 툴바의 기능 외에 다른 기능을 부를 때 쓰는 함수로 아이디.js로 호출한다.
+	//기능 함수들은 functionjs 폴더 안에 들어있다.
+	function callScript(obj) {
+		var id = obj.id
+
+		var head = document.getElementsByTagName('head')[0];
+		//Refresh(); 맵 초기화
+
+		$('#left_menu').empty(); // 메뉴 비워주기
+		$('#resultset').empty();
+
+		if (id == 'street_tree_3d' || id == 'library' || id == 'street_light') {
+			$('#preview_window').show();
+
+		} else {
+			$('#preview_window').hide();
+
+		}
+
+		var scriptSrc = 'functionjs/' + id + '.js'; //부를 스크립트 주소
+
+		var script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.src = scriptSrc;
+
+		head.appendChild(script);
+
+		$('#left_menu').slideDown("slow"); //슬라이드 효과		
+	}
+
+	function jsWResize() {
+
+		tmp_size_width = document.documentElement.clientWidth;
+		libWidthNum = tmp_size_width / 100 * 80;
+
+		$("#maparea").width(tmp_size_width - winWidthNum);
+		$("#libView").width(tmp_size_width - libWidthNum);
+	}
+	
+	function undergroundView(){
+		
+		if(document.getElementById("under").checked == true){
+			XDOCX.XDMapSetUnderGround(true);//지하보기 설정
+		}else if(document.getElementById("under").checked == false){
+			XDOCX.XDMapSetUnderGround(false);//지하보기 설정
+		}
+	}
+</script>
+<!-- 마우스 업 시 업 된 곳의 위치값을 MouseUpEventHandler에 전달 -->
+<script type="text/javascript" for="XDOCX" event="MouseUp(Button, Shift, sx, sy)" >
+	MouseUpEventHandler(Button, Shift, sx, sy);
+</script>
+</head>
+<body scroll=no>
+<!-- 좌측 메뉴 [START]-->
+	<div id="left_menu" style="position:absolute;top:80px;left:5px; width:280px; height:80%; z-index:100; scrolling:no; #999999">
+	</div> 
+	<div id="preview_window" style="position:absolute;top:400px;left:0px; width:0px; height:0%; z-index:100; scrolling:no; #999999 ">
+		<script type="text/javascript">tds();</script>
+	</div>
+
+	<div>
+		<!-- 맵 영역 --> 
+		<div id="maparea" style="position:absolute;top:80px;left:300px;width:76%;height:82%;display:block;scrolling:no;z-index:2;display:block">
+			<div>
+				<!-- 기본 툴바 --> 
+				<input type="button" value="이동" onclick="MapControl('move_hand')"/>
+				<input type="button" value="거리" onclick="MapControl('cal_dist')"/>
+				<input type="button" value="높이" onclick="MapControl('cal_hei')"/>
+				<input type="button" value="면적" onclick="MapControl('cal_rect')"/>
+				<input type="button" value="부피" onclick="MapControl('cal_volume')"/>
+				<!-- <input type="button" id="side" value="단면(V.1)" onclick="callScript(this)"/> -->
+				<input type="button" id="sliceProce" value="단면(V.2)" onclick="sliceProce()"/>
+				<input type="button" id="grade" value="경사향" onclick="callScript(this)"/>
+				<input type="button" id="slope_aspect" value="경사도" onclick="callScript(this)"/>
+				<input type="button" value="초기화" onclick="MapControl('map_clear')"/>
+				<input type="button" id="simulation_drive" value="모의주행" onclick="callScript(this)"/>
+				<input type="button" value="전체보기" onclick="MapControl('cam_total')"/>
+				<input type="button" value="지도저장" onclick="MapControl('img_save')"/>
+				<input type="button" value="지도인쇄" onclick="MapControl('img_print')"/>
+				<input type="button" value="1인칭" onclick="MapControl('cam_1stmode')"/>
+				<input type="button" value="3인칭" onclick="MapControl('cam_3rdmode')"/>
+			</div>
+		  	<script type="text/javascript">
+		   		xdk();
+		   	</script>
+		</div>
+	</div>
+	<!-- 기능 -->
+	<div style="margin-bottom: 5px;">
+		시설물추가.편집 : 
+		<input type="button" id="library" value="시설물라이브러리" onclick="callScript(this)"/>
+		<input type="button" id="road" value="도로개설" onclick="callScript(this)"/>
+		<input type="button" id="street_tree" value="가로수" onclick="callScript(this)"/>
+		<input type="button" id="street_tree_3d" value="가로수3D" onclick="callScript(this)"/>
+		<input type="button" id="street_light" value="가로등" onclick="callScript(this)"/>
+		<input type="button" id="edit_resize" value="시설물크기변경" onclick="callScript(this)"/>
+		<input type="button" id="edit" value="시설물편집" onclick="callScript(this)"/>
+		침수시뮬레이션 : <input type="button" id="chimsu" value="침수분석" onclick="chimsu()"/>
+		 지하보기 : <input type="checkbox" id="under" name="under" onclick="undergroundView(this)"/>
+	</div>
+	<div>
+		경관시뮬레이션 :
+		<input type="button" id="Gasi" value="가시권" onclick="callScript(this)"/>
+		<input type="button" id="Gasi_round" value="가시권역" onclick="callScript(this)"/>
+		<input type="button" id="jomang_analysis" value="조망권" onclick="callScript(this)"/>
+		<input type="button" id="jomang_axis" value="조망축" onclick="callScript(this)"/>
+		<input type="button" id="jomang_point" value="조망지점관리" onclick="callScript(this)"/>
+		<input type="button" id="average_height" value="평균높이" onclick="callScript(this)"/>
+		<input type="button" id="select_sunlight" value="선택일조" onclick="callScript(this)"/>
+		<input type="button" id="around_sunlight" value="주변건물" onclick="callScript(this)"/>
+		<input type="button" id="areagrid_sunlight" value="영역그리드" onclick="callScript(this)"/>
+		<input type="button" id="land_sunlight" value="지형일조" onclick="callScript(this)"/>
+		<input type="button" id="cut" value="지형성절토" onclick="callScript(this)"/>
+	</div>
+	<hr />
+	<div id="resultset" style="position:absolute; top:170px; overflow:auto; height:300px;"> 
+	</div>
+</body>
+</html>
+

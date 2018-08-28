@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ko" xml:lang="ko">
+<head>
+<link rel="stylesheet" type="text/css" href="../css/gislayout.css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3차원공간정보활용시스템</title>
+</head>
+
+<body style="background:url(../images/category_bg1.gif)">
+<div id="panel">
+    <div id="title">
+        <div id="category1">
+       <ul style="width:320px;">
+        <li style="float:left;"><label for="textfield"><input name="" type="radio" value="" /> 
+          지번</label></li>
+        <li style="float:left;margin:0 0 0 3px;"><label for="textfield"><input name="" type="radio" value="" /> 
+          도로명</label></li>
+        <li style="float:left;margin:0 0 0 3px;"><label for="textfield"><input name="" type="radio" value="" /> 
+         좌표</label></li>  
+        <li style="float:right;"><img src="../images/btn_download.gif"/></li> 
+        <li style="padding-top:10px;clear:both; "><img src="../images/category_SIDE.gif" /></li>
+        <li style="height:200px;">
+<div style="margin:10px;">
+        <h4>양식 내려받기 : 내 주제도 양식 (엑셀파일)을 내려 받을 수 있습니다</h4><br />
+
+        
+        <h4>작성파일 올리기 : 작성된 양식(엑셀파일)을 선택한 후, 검증단계를
+거쳐 지도화면에 표출합니다.
+</h4>
+			<p class="bullet_mf"><strong>양식내용 참고</strong><br />
+					  1. 명칭 <br />2. 소재지<br />3. 산구분<br />4. 본번<br />
+5. 부번<br />6. 정보분류<br />7. 색상<br />8. 수치</div>
+        </li>
+        <li style="clear:both; "><img src="../images/category_SIDE1.gif" /></li>
+        <li class="f_whit_am" style="clear:both;"><img src="../images/btn_upload.gif" style="float:right;"/></li>
+         </ul>
+
+      </div>
+  </div>
+</div>
+</body>
+</html>

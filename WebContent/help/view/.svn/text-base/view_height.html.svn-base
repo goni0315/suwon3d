@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>경관시뮬레이션 > 평균높이</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}
+</script>
+</head>
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_23.jpg" width="373" height="214">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help23_t.gif" alt="평균높이" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('view_height')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('view_height')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>영역선택을 이용하여 시설물들의 평균 높이를 구합니다.</strong></p>
+
+  <h4>&nbsp;</h4>
+  	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		영역(범위)선택
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [객체선택] 버튼을 클릭한 후 지도화면에서 객체를 지정합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [영역선택] 버튼을 클릭한 후 지도화면에서 마우스 왼쪽버튼으로 영역범위를 지정하고 <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마우스 오른쪽버튼을 클릭합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [원형선택] 버튼을 클릭한 후 지도화면에서 마우스 왼쪽버튼으로 영역범위를 지정하고 <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마우스 오른쪽버튼을 클릭합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [분석결과삭제] 버튼을 클릭하면 지도화면에서 선택된 영역표시가 사라집니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		분석대상
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'> 
+		&nbsp;&nbsp;&nbsp;&nbsp;- 층높이에 값을 입력하여 평균높이 결과 값을 조절가능합니다.<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [적용]버튼을 클릭하면 각 건물의 레이어명, 고유번호, 높이가 [분석대상] 칸에 표현됩니다.<br> 
+		&nbsp;&nbsp;&nbsp;&nbsp;- [평균높이 결과 값] 칸에 각 건물들의 평균높이 결과 값이 산출되며 3차원화면에 <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;각 건물의 높이가 표시됩니다. 
+	</span><br><br>	
+  
+<!--   <p class="bullet_mf">검색하고자 하는 구/도로명/건물번호를 선택한 후 검색합니다.  </p>
+  <p class="bullet_mf">검색되어진 리스트에서 원하는 명칭을 클릭하면 해당건물의 위치로 카메라가 이동합니다.  </p>
+  <p class="bullet_mf">
+	  대장 버튼은 토지 대장을 말하는 것으로 클릭 시 토지대앙을 확인할 수 있습니다.</p> -->
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!-- 
+	수원시 3차원 활용시스템 메인 >> 검색기능 >> 도로명검색 결과 페이지
+ -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+<link href="${ctx}/css/admin_common.css" rel="stylesheet"
+	type="text/css">
+</head>
+
+<body>
+	<table border="0" cellspacing="0" cellpadding="0"
+		style="background-image:url(${ctx}/images/admin/title_bg.gif);">
+		<tr>
+			<td height="35"><img src="${ctx}/images/admin/title_left.gif"
+				alt="" width="14" height="35"></td>
+			<td><img src="${ctx}/images/admin/title3.gif" alt="" width="82"
+				height="35"></td>
+			<td><img src="${ctx}/images/admin/title_right.gif" alt=""
+				width="14" height="35"></td>
+		</tr>
+		<tr>
+			<td style="background-image:url(${ctx}/images/admin/left_bg.gif)"></td>
+			<td align="center" valign="top" bgcolor="#FFFFFF"><table
+					width="400" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="149">&nbsp;</td>
+						<td width="74">&nbsp;</td>
+						<td width="177">&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="35" colspan="3"><label>권한을선택하세요</label> <SELECT
+							id="ddlYear2" name="ddlYear2">
+								<option>선택</option>
+						</SELECT></td>
+					</tr>
+					<tr>
+						<td height="25" colspan="3" class="f_orange">선택한 권한이 볼수 있는
+							레이어를 선택하세요</td>
+					</tr>
+					<tr>
+						<td height="5" colspan="3"></td>
+					</tr>
+					<tr>
+						<td height="36" rowspan="2"><label for="select"></label> <select
+							name="select" size="6" id="select" style="width: 150px;">
+						</select></td>
+						<td height="36" align="center"><img
+							src="${ctx}/images/admin/add.gif" width="60" height="31"></td>
+						<td rowspan="2"><select name="select2" size="6" id="select2"
+							style="width: 150px;">
+						</select></td>
+					</tr>
+					<tr>
+						<td align="center"><img src="${ctx}/images/admin/del.gif"
+							width="60" height="31"></td>
+					</tr>
+					<tr>
+						<td height="1" colspan="3" class="f_orange"></td>
+					</tr>
+					<tr>
+						<td colspan="3" align="center" class="f_orange"><div
+								style="margin-top: 10px;">
+								<img src="${ctx}/images/admin/btn_ok.gif" alt="" width="48"
+									height="20"><img src="${ctx}/images/admin/btn_close.gif"
+									alt="" width="48" height="20" style="margin-left: 5px">
+							</div></td>
+					</tr>
+				</table></td>
+			<td style="background-image:url(${ctx}/images/admin/right_bg.gif)">&nbsp;</td>
+		</tr>
+		<tr style="background-image:url(${ctx}/images/admin/end_bg.gif)">
+			<td height="10"><img src="${ctx}/images/admin/end_left.gif"
+				alt="" width="14" height="10"></td>
+			<td align="center"></td>
+			<td><img src="${ctx}/images/admin/end_right.gif" alt=""
+				width="14" height="10"></td>
+		</tr>
+	</table>
+</body>
+</html>
+

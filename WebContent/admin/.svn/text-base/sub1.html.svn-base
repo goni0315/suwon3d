@@ -1,0 +1,136 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+<link href="../css/admin_common.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" style="background-image:url(../images/admin/title_bg.gif);height:100%">
+  <tr>
+    <td width="14" height="35"><img src="../images/admin/title_left.gif" alt="" width="14" height="35"></td>
+    <td width="253" align="center"><img src="../images/admin/title.gif" alt="" width="82" height="35"></td>
+    <td width="11"><img src="../images/admin/title_side.gif" alt="" width="11" height="35"></td>
+    <td>&nbsp;</td>
+    <td width="14"><img src="../images/admin/title_right.gif" alt="" width="14" height="35"></td>
+  </tr>
+  <tr>
+    <td rowspan="2" style="background-image:url(../images/admin/left_bg.gif)"></td>
+    <td rowspan="2" align="center" valign="top" bgcolor="#FFFFFF"><table width="244" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="110">&nbsp;</td>
+        <td width="134">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2"><img src="../images/admin/dot.gif" alt="" width="244" height="5"></td>
+      </tr>
+      <tr>
+        <td height="35">레이어 그룹선택</td>
+        <td><SELECT id="ddlYear" name="ddlYear">
+          <option value="0">건물</option>
+        </SELECT></td>
+      </tr>
+      <tr>
+        <td colspan="2"><img src="../images/admin/dot.gif" alt="" width="244" height="5"></td>
+      </tr>
+      <tr>
+        <td height="35">&nbsp;</td>
+        <td align="right"><img src="../images/admin/search.gif" alt="" width="48" height="20"></td>
+      </tr>
+    </table></td>
+    <td rowspan="2" style="background-image:url(../images/admin/side_bg.gif)">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFFF"><table width="200" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+      <div class="bbsCont">
+        <table align="center" class="wps_90" summary="목록">
+          <thead>
+            <tr>
+              <th width="50%" scope="col">레이어 영문명</th>
+              <th width="50%" scope="col">레이어 한글명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <TR align="center">
+              <TD >bl_aaa</TD>
+              <TD>공동주택</TD>
+            </TR>
+            <TR align="center">
+              <TD >bl_aaa</TD>
+              <TD>문화교육시설</TD>
+            </TR>
+          </tbody>
+        </table>
+      </div>
+      <div class="bbsCont"></div>
+      <div id="bbsBottom">
+        <ul id="bbsPaging">
+          <li><img src="../images/admin/page_first.gif" alt=""   /></li>
+          <li><img src="../images/admin/page_prev.gif" alt="" /></li>
+          <strong>1</strong>  [2][3][4][5]...[68]
+          <li><img src="../images/admin/page_next.gif" alt="" width="22" height="15" /></li>
+          <li><img src="../images/admin/page_last.gif" alt="" width="22" height="15" /></li>
+        </ul>
+      </div>
+      <!-- 컨텐츠 끝 --></td>
+    <td rowspan="2" style="background-image:url(../images/admin/right_bg.gif)">&nbsp;</td>
+  </tr>
+  <tr>
+    <td valign="top" bgcolor="#FFFFFF"><div align="center">
+        <table width="767" class="type1 wps_90" summary="목록">
+
+          <thead>
+            <tr>
+              <th colspan="6" scope="col">상세정보</th>
+            </tr>
+          </thead>
+          <tbody>
+            <TR align="center">
+              <Th width="79" >한글명</Th>
+              <TD width="140"><label for="textfield"></label>
+              <input type="text" name="textfield" id="textfield"></TD>
+              <Th width="73">영문명</Th>
+              <TD width="164">BLDG_aaa</TD>
+              <Th width="88">그룹</Th>
+              <Td><label for="select"></label>
+                <select name="select" id="select">
+                  <option>건물</option>
+              </select></Td>
+            </TR>
+            <TR align="center">
+              <Th >초기가시여부</Th>
+              <TD><p>
+                <label>
+                  <input name="RadioGroup1" type="radio" id="RadioGroup1_0" value="라디오" checked>
+                  on</label>
+
+                <label>
+                  <input type="radio" name="RadioGroup1" value="라디오" id="RadioGroup1_1">
+                  off</label>
+                <br>
+              </p></TD>
+              <Th>가시높이</Th>
+              <TD>
+              <input name="textfield2" type="text" id="textfield2" style="width:60px;" value="0">
+              ~
+              <input name="textfield3" type="text" id="textfield3" style="width:60px;" value="1000"></TD>
+              <Th>보기권한</Th>
+              <TD>공통,관리자,도시계획,상/하수도</TD>
+            </TR>
+          </tbody>
+        </table>
+        <div class="wps_90" style="margin-top:10px;"> <img src="../images/admin/btn_update.gif" style="float:right;"><div class="f_orange">반영된 수정사항을 확인하시려면 3차원 화면을 새로고침해주시기 바랍니다.</div></div>
+      </div></td>
+  </tr>
+  <tr style="background-image:url(../images/admin/end_bg.gif)">
+    <td height="10"><img src="../images/admin/end_left.gif" alt="" width="14" height="10"></td>
+    <td align="center"></td>
+    <td><img src="../images/admin/end_side.gif" alt="" width="11" height="10"></td>
+    <td></td>
+    <td><img src="../images/admin/end_right.gif" alt="" width="14" height="10"></td>
+  </tr>
+</table>
+</body>
+</html>

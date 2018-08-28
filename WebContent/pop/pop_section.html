@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>무제 문서</title>
+<script type="text/javascript" src="../js/XDControl.js"></script>
+<script type="text/javascript" src="../js/xdk.js"></script>
+<script type="text/javascript" language="javascript">
+	
+window.onload = function(){
+		//opener.TDOCX.style.display = "";
+    	var tdwfile = "c:\\wslice.txt"
+    	load(tdwfile);
+    }
+	function load(map){
+		top.TDOCX.XTDReadSliceMapFile(map);
+		top.TDOCX.XDRenderData();
+		top.TDOCX.XTDMapDataLoad();
+		top.TDOCX.XTDZoomAll();
+	}
+    function mousemode(mode){
+    	switch(mode)
+    	{
+    		case "zoomup" :	
+    			TDOCX.XTDSetMouseState(1);
+    			break;
+    		case "zoomdown" :	
+    			TDOCX.XTDSetMouseState(3);
+    			break;
+    		case "all" :
+    			TDOCX.XTDZoomAll();
+    			break;
+    		case "hand" :	
+    			TDOCX.XTDSetMouseState(8);
+    			break;
+    		case "sal" :				
+    			TDOCX.XTDSetMouseState(4);
+    			break;
+    		case "distance" :	
+    			TDOCX.XTDSetMouseState(9);
+    			break;
+    		case "save" :	
+    			TDOCX.XDScreenToBmpFile();
+    			break;
+    		case "print" :	
+    			TDOCX.XTDPrintMap();
+    			break;
+    		case "cansel" :		
+    			window.close();
+    			break;
+    	}
+    	top.TDOCX.XDRenderData();
+    	top.TDOCX.XTDMapDataLoad();
+    }
+    
+</script>
+
+</head>
+
+<body>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width:700px; height:500px">
+
+  <tr>
+    <td height="32" style="background: #2c3445;"><table border="0" cellpadding="0" cellspacing="2">
+      <tr>
+        <td><input name="input" type="image" id="input" onclick="mousemode('zoomup');" src="../images/pop_section_icon/btn_zoomup.gif" width="33" height="24"/></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('zoomdown');" src="../images/pop_section_icon/btn_zoomdown.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('all');" src="../images/pop_section_icon/btn_all.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('hand');" src="../images/pop_section_icon/btn_hand.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('sal');" src="../images/pop_section_icon/btn_sal.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('distance');" src="../images/pop_section_icon/btn_distance.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('save');" src="../images/pop_section_icon/btn_save.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('print');" src="../images/pop_section_icon/btn_print.gif" width="33" height="24" /></td>
+        <td><input name="input" type="image" id="input" onclick="mousemode('cansel');" src="../images/pop_section_icon/btn_cansel.gif" width="33" height="24" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="100%" width="100%"><script type="text/javascript">tdk();</script></td>
+  </tr>
+</table>
+</body>
+</html>

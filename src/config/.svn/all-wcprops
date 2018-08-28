@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/suwon/!svn/ver/605/Suwon3d/src/config
+END
+sqlMapConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/1008/Suwon3d/src/config/sqlMapConfig.xml
+END
+validation.properties
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/suwon/!svn/ver/10/Suwon3d/src/config/validation.properties
+END
+postgreSqlMapConfig.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/suwon/!svn/ver/1008/Suwon3d/src/config/postgreSqlMapConfig.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/suwon/!svn/ver/1011/Suwon3d/src/config/applicationContext.xml
+END
+dbconn.properties
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/suwon/!svn/ver/1010/Suwon3d/src/config/dbconn.properties
+END

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>침수시뮬레이션 &gt; 침수정보</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}
+</script>
+</head>
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_26.jpg" width="373" height="214">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help31_t.gif" alt="침수지역검색" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('flooding_search')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('flooding_search')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;침수지역 검색&gt;</strong></p>
+
+  <h4>&nbsp;</h4>
+  	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		검색
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 검색하고자하는 침수년도/침수지구/침수형태를 선택합니다.<br>
+ 		&nbsp;&nbsp;&nbsp;&nbsp;- [검색]버튼을 클릭하여 검색결과영역에서 검색결과를 확인가능합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		검색결과
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 검색영역에서 입력한 조건으로 검색한 결과값을 출력가능합니다.
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		상세정보
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 검색결과에서 [상세정보] 버튼을 클릭하면 침수지역 정보를 팝업창으로 조회됩니다.
+	</span><br><br>
+	
+<img src="/Suwon3d/images/help/helpImages/help_img_27.jpg" width="373" height="214">
+ <p>&nbsp;</p>
+  <h4><img src="/Suwon3d/images/help/help31_t.gif" alt="침수지역등록" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('flooding_add')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('flooding_add')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;침수지역 등록&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		등록
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 각 입력칸에 내용을 입력하고 [등록] 버튼을 클릭합니다.<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;- [초기화] 버튼을 클릭하면 입력했던 내용들이 지워집니다.<br>
+	</span><br><br>
+<!--   <p class="bullet_mf">검색하고자 하는 구/도로명/건물번호를 선택한 후 검색합니다.  </p>
+  <p class="bullet_mf">검색되어진 리스트에서 원하는 명칭을 클릭하면 해당건물의 위치로 카메라가 이동합니다.  </p>
+  <p class="bullet_mf">
+	  대장 버튼은 토지 대장을 말하는 것으로 클릭 시 토지대앙을 확인할 수 있습니다.</p> -->
+</div>
+</body>
+</html>

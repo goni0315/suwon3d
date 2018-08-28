@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/suwon/!svn/ver/909/Suwon3d/src/suwon/web/vo
+END
+UserInfoVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/suwon/!svn/ver/422/Suwon3d/src/suwon/web/vo/UserInfoVo.java
+END
+SpaceVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/SpaceVo.java
+END
+SttParamVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/suwon/!svn/ver/532/Suwon3d/src/suwon/web/vo/SttParamVo.java
+END
+DeptVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/316/Suwon3d/src/suwon/web/vo/DeptVo.java
+END
+ShelterSearchVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/suwon/!svn/ver/252/Suwon3d/src/suwon/web/vo/ShelterSearchVo.java
+END
+MlogVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/466/Suwon3d/src/suwon/web/vo/MlogVo.java
+END
+LayAutVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/LayAutVo.java
+END
+LayInfoVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/suwon/!svn/ver/264/Suwon3d/src/suwon/web/vo/LayInfoVo.java
+END
+FloodVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/suwon/!svn/ver/887/Suwon3d/src/suwon/web/vo/FloodVo.java
+END
+MenuVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/344/Suwon3d/src/suwon/web/vo/MenuVo.java
+END
+EmdVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/EmdVo.java
+END
+CbndVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/824/Suwon3d/src/suwon/web/vo/CbndVo.java
+END
+AdfInfoVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/AdfInfoVo.java
+END
+UsrLayerLoadVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/suwon/!svn/ver/1011/Suwon3d/src/suwon/web/vo/UsrLayerLoadVo.java
+END
+DongWeatherVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/suwon/!svn/ver/192/Suwon3d/src/suwon/web/vo/DongWeatherVO.java
+END
+SuwonGuVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/suwon/!svn/ver/192/Suwon3d/src/suwon/web/vo/SuwonGuVO.java
+END
+LayerListVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/suwon/!svn/ver/624/Suwon3d/src/suwon/web/vo/LayerListVo.java
+END
+WeekWeatherVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/suwon/!svn/ver/192/Suwon3d/src/suwon/web/vo/WeekWeatherVO.java
+END
+HasuPipeVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/HasuPipeVo.java
+END
+SangsuPipeVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/SangsuPipeVo.java
+END
+SggVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/suwon/!svn/ver/371/Suwon3d/src/suwon/web/vo/SggVo.java
+END
+NoticeVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/suwon/!svn/ver/909/Suwon3d/src/suwon/web/vo/NoticeVo.java
+END
+ModelLibListVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/suwon/!svn/ver/54/Suwon3d/src/suwon/web/vo/ModelLibListVo.java
+END
+SuwonDongVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/suwon/!svn/ver/192/Suwon3d/src/suwon/web/vo/SuwonDongVO.java
+END
+UsrAutVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/suwon/!svn/ver/315/Suwon3d/src/suwon/web/vo/UsrAutVo.java
+END
+UserConnectListVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/suwon/!svn/ver/12/Suwon3d/src/suwon/web/vo/UserConnectListVo.java
+END
+BuildSearchVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/suwon/!svn/ver/576/Suwon3d/src/suwon/web/vo/BuildSearchVo.java
+END
+BoardVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/suwon/!svn/ver/10/Suwon3d/src/suwon/web/vo/BoardVo.java
+END
+ManageVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/suwon/!svn/ver/53/Suwon3d/src/suwon/web/vo/ManageVo.java
+END
+AutVo.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/suwon/!svn/ver/315/Suwon3d/src/suwon/web/vo/AutVo.java
+END

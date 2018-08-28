@@ -1,0 +1,77 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>침수 시뮬레이션 > 대피소</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}
+</script>
+</head>
+
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_28.jpg" width="373" height="214">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help32_t.gif" alt="대피소검색" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('shelter_search')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('shelter_search')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;대피소 검색&gt;</strong></p>
+
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>&nbsp;</span>
+	<br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>① </span>
+	<span style='font-size:9.0pt;font-family:"나눔고딕";font-weight:bold;text-decoration:underline;color:#0000ff;line-height:160%;'>검색영역</span>
+	<br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>
+	&nbsp;&nbsp;&nbsp;&nbsp;- 검색하고자하는 소재지/등급/용도를 선택합니다.<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;- 버튼을 클릭하여 검색결과영역에서 검색결과를 확인합니다.
+	</span><br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>
+	② 
+	</span>
+	<span style='font-size:9.0pt;font-family:"나눔고딕";font-weight:bold;text-decoration:underline;color:#0000ff;line-height:160%;'>검색결과</span>
+	<br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>&nbsp;&nbsp;&nbsp;&nbsp;- 검색영역에서 입력한 조건으로 검색한 결과값을 출력합니다.</span>
+	<br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>③ </span>
+	<span style='font-size:9.0pt;font-family:"나눔고딕";font-weight:bold;text-decoration:underline;color:#0000ff;line-height:160%;'>상세정보</span>
+	<br>
+	
+	<span style='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>&nbsp;&nbsp;&nbsp;&nbsp;- 검색결과에서 [상세정보] 버튼을 클릭하면 침수지역 정보를 팝업창으로 조회합니다.</span>
+	<br><br>
+
+ <img src="/Suwon3d/images/help/helpImages/help_img_29.jpg" width="373" height="214">
+ <p>&nbsp;
+  <h4><img src="/Suwon3d/images/help/help32_t.gif" alt="대피소등록" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('shelter_add')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('shelter_add')" style="img-mode:active" /></a></h4><br>
+
+	<p><strong>&lt;대피소 등록&gt;</strong>
+	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>&nbsp;</SPAN><br>
+	
+	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>① </SPAN>
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";font-weight:bold;text-decoration:underline;color:#0000ff;line-height:160%;'>등록</SPAN>
+	<br>
+	
+	<SPAN STYLE='font-size:9.0pt;font-family:"나눔고딕";line-height:160%;'>
+	&nbsp;&nbsp;&nbsp;&nbsp;- 각 입력칸에 내용을 입력하고 [등록] 버튼을 클릭합니다.<br>
+ 	&nbsp;&nbsp;&nbsp;&nbsp;- [초기화] 버튼을 클릭하면 입력했던 내용들이 지워집니다.
+	</SPAN><br><br>
+</div>	
+</body>
+</html>

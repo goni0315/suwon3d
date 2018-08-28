@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>도 움 말</title>
+<link href="../css/admin_common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+var search_num = 1;
+
+<!--
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_nbGroup(event, grpName) { //v6.0
+  var i,img,nbArr,args=MM_nbGroup.arguments;
+  if (event == "init" && args.length > 2) {
+    if ((img = MM_findObj(args[2])) != null && !img.MM_init) {
+      img.MM_init = true; img.MM_up = args[3]; img.MM_dn = img.src;
+      if ((nbArr = document[grpName]) == null) nbArr = document[grpName] = new Array();
+      nbArr[nbArr.length] = img;
+      for (i=4; i < args.length-1; i+=2) if ((img = MM_findObj(args[i])) != null) {
+        if (!img.MM_up) img.MM_up = img.src;
+        img.src = img.MM_dn = args[i+1];
+        nbArr[nbArr.length] = img;
+    } }
+  } else if (event == "over") {
+    document.MM_nbOver = nbArr = new Array();
+    for (i=1; i < args.length-1; i+=3) if ((img = MM_findObj(args[i])) != null) {
+      if (!img.MM_up) img.MM_up = img.src;
+      img.src = (img.MM_dn && args[i+2]) ? args[i+2] : ((args[i+1])? args[i+1] : img.MM_up);
+      nbArr[nbArr.length] = img;
+    }
+  } else if (event == "out" ) {
+    for (i=0; i < document.MM_nbOver.length; i++) {
+      img = document.MM_nbOver[i]; img.src = (img.MM_dn) ? img.MM_dn : img.MM_up; }
+  } else if (event == "down") {
+    nbArr = document[grpName];
+    if (nbArr)
+      for (i=0; i < nbArr.length; i++) { img=nbArr[i]; img.src = img.MM_up; img.MM_dn = 0; }
+    document[grpName] = nbArr = new Array();
+    for (i=2; i < args.length-1; i+=2) if ((img = MM_findObj(args[i])) != null) {
+      if (!img.MM_up) img.MM_up = img.src;
+      img.src = img.MM_dn = (args[i+1])? args[i+1] : img.MM_up;
+      nbArr[nbArr.length] = img;
+  } }
+}
+function setTabContent(key){
+	set1.style.display = 'none';
+	set2.style.display = 'none';
+	set3.style.display = 'none';
+	set4.style.display = 'none';
+	set5.style.display = 'none';
+	set6.style.display = 'none';
+	document.getElementById("set"+key).style.display = '';
+}
+
+function doUserManualStart(){
+	location.replace("http://105.1.2.121/data/Suwon3DSystem_UserManual.zip");
+}
+//-->
+</script>
+</head>
+
+<body>
+<table width="700"border="0" cellpadding="0" cellspacing="0" style="background-image:url(../images/admin/title_bg.gif);">
+  <tr>
+    <td height="35" colspan="5" style=" background: #414141"><img src="../images/help/title.gif" width="233" height="31"></td>
+  </tr>
+  <tr>
+    <td width="14" height="35"><img src="../images/admin/title_left.gif" alt="" width="14" height="35"></td>
+    <td width="129" align="center">&nbsp;</td>
+    <td width="11"><img src="../images/admin/title_side.gif" alt="" width="11" height="35"></td>
+    <td width="532">&nbsp;</td>
+    <td width="14"><img src="../images/admin/title_right.gif" alt="" width="14" height="35"></td>
+  </tr>
+  <tr>
+    <td height="400" style="background-image:url(../images/admin/left_bg.gif)"></td>
+    <td align="center" valign="top" bgcolor="#FFFFFF">
+    <ul style="margin-top:20px;">
+        <li><a href="help_00.html" target="help_contents" onClick="MM_nbGroup('down','group1','tep0','../images/help/help_menu00_on.gif',1);" onMouseOver="MM_nbGroup('over','tep0','../images/help/help_menu00_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu00_on.gif" alt="" name="tep0" border="0" id="tep0" onload="MM_nbGroup('init','group1','tep0','../images/help/help_menu00_off.gif',1)" /></a></li>
+        <li><a href="javascript:;" target="_top" onClick="MM_nbGroup('down','group1','tep1','../images/help/help_menu01_on.gif',1); setTabContent(1);" onMouseOver="MM_nbGroup('over','tep1','../images/help/help_menu01_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu01_off.gif" alt="" name="tep1" border="0" id="tep1" onload="" /></a></li>
+        <div id="set1" style="display: none;">
+        <ul>
+        <li><a href="search/help_jibunSearch.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help01','../images/help/help01_on.gif',1);" onMouseOver="MM_nbGroup('over','help01','../images/help/help01_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help01_on.gif" alt="" name="help01" border="0" id="help01" onload="MM_nbGroup('init','group2','help01','../images/help/help01_off.gif',1)" /></a></li>
+        <li><a href="search/help_roadSearch.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help02','../images/help/help02_on.gif',1);" onMouseOver="MM_nbGroup('over','help02','../images/help/help02_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help02_off.gif" alt="" name="help02" border="0" id="help02" onload="" /></a></li>
+        <li><a href="search/help_buildSearch.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help03','../images/help/help03_on.gif',1);" onMouseOver="MM_nbGroup('over','help03','../images/help/help03_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help03_off.gif" alt="" name="help03" border="0" id="help03" onload="" /></a></li>
+        <li><a href="search/help_radiusSearch.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help04','../images/help/help04_on.gif',1);" onMouseOver="MM_nbGroup('over','help04','../images/help/help04_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help04_off.gif" alt="" name="help04" border="0" id="help04" onload="" /></a></li>
+        </ul>
+        </div>
+        <li><a href="javascript:;" target="_top" onClick="MM_nbGroup('down','group1','tep2','../images/help/help_menu02_on.gif',1); setTabContent(2)" onMouseOver="MM_nbGroup('over','tep2','../images/help/help_menu02_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu02_off.gif" alt="" name="tep2" border="0" id="tep2" onload="" /></a></li>
+        <div id="set2" style="display: none;" >
+        <ul>
+        <li><a href="facility/facility.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help11','../images/help/help11_on.gif',1);" onMouseOver="MM_nbGroup('over','help11','../images/help/help11_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help11_on.gif" alt="" name="help11" border="0" id="help11" onload="MM_nbGroup('init','group2','help11','../images/help/help11_off.gif',1)" /></a></li>
+        <li><a href="facility/facility_road.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help12','../images/help/help12_on.gif',1);" onMouseOver="MM_nbGroup('over','help12','../images/help/help12_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help12_off.gif" alt="" name="help12" border="0" id="help12" onload="" /></a></li>
+        <li><a href="facility/facility_tree.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help13','../images/help/help13_on.gif',1);" onMouseOver="MM_nbGroup('over','help13','../images/help/help13_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help13_off.gif" alt="" name="help13" border="0" id="help13" onload="" /></a></li>
+        <li><a href="facility/facility_streetLamp.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help14','../images/help/help14_on.gif',1);" onMouseOver="MM_nbGroup('over','help14','../images/help/help14_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help14_off.gif" alt="" name="help14" border="0" id="help14" onload="" /></a></li>
+        <li><a href="facility/facility_edit.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help15','../images/help/help15_on.gif',1);" onMouseOver="MM_nbGroup('over','help15','../images/help/help15_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help15_off.gif" alt="" name="help15" border="0" id="help15" onload="" /></a></li>
+        </ul>
+        </div>
+        <li><a href="javascript:;" target="_top" onClick="MM_nbGroup('down','group1','tep3','../images/help/help_menu03_on.gif',1); setTabContent(3);" onMouseOver="MM_nbGroup('over','tep3','../images/help/help_menu03_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu03_off.gif" alt="" name="tep3" border="0" id="tep3" onload="" /></a></li>
+        <div id="set3" style="display: none;">
+        <ul>
+        <li><a href="view/view_gasi.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help21','../images/help/help21_on.gif',1);" onMouseOver="MM_nbGroup('over','help21','../images/help/help21_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help21_on.gif" alt="" name="help21" border="0" id="help21" onload="MM_nbGroup('init','group2','help21','../images/help/help21_off.gif',1)" /></a></li>
+        <li><a href="view/view_view.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help22','../images/help/help22_on.gif',1);" onMouseOver="MM_nbGroup('over','help22','../images/help/help22_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help22_off.gif" alt="" name="help22" border="0" id="help22" onload="" /></a></li>
+        <li><a href="view/view_height.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help23','../images/help/help23_on.gif',1);" onMouseOver="MM_nbGroup('over','help23','../images/help/help23_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help23_off.gif" alt="" name="help23" border="0" id="help23" onload="" /></a></li>
+        <li><a href="view/view_sunShine.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help24','../images/help/help24_on.gif',1);" onMouseOver="MM_nbGroup('over','help24','../images/help/help24_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help24_off.gif" alt="" name="help24" border="0" id="help24" onload="" /></a></li>
+        <li><a href="view/view_landEdit.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help25','../images/help/help25_on.gif',1);" onMouseOver="MM_nbGroup('over','help25','../images/help/help25_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help25_off.gif" alt="" name="help25" border="0" id="help25" onload="" /></a></li>
+        </ul>
+        </div>
+        <li><a href="javascript:;" target="_top" onClick="MM_nbGroup('down','group1','tep4','../images/help/help_menu04_on.gif',1); setTabContent(4);" onMouseOver="MM_nbGroup('over','tep4','../images/help/help_menu04_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu04_off.gif" alt="" name="tep4" border="0" id="tep4" onload="" /></a></li>
+        <div id="set4" style="display: none;">
+        <ul>
+        <li><a href="flood/flood_flooding.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help31','../images/help/help31_on.gif',1);" onMouseOver="MM_nbGroup('over','help31','../images/help/help31_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help31_on.gif" alt="" name="help31" border="0" id="help31" onload="MM_nbGroup('init','group2','help31','../images/help/help31_off.gif',1)" /></a></li>
+        <li><a href="flood/flood_shelter.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help32','../images/help/help32_on.gif',1);" onMouseOver="MM_nbGroup('over','help32','../images/help/help32_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help32_off.gif" alt="" name="help32" border="0" id="help32" onload="" /></a></li>
+        <li><a href="flood/flood_floodingS.html;" target="help_contents" onClick="MM_nbGroup('down','group2','help33','../images/help/help33_on.gif',1);" onMouseOver="MM_nbGroup('over','help33','../images/help/help33_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help33_off.gif" alt="" name="help33" border="0" id="help33" onload="" /></a></li>
+        </ul>
+        </div>
+        
+        <li><a href="thematic/help_thematic.html" target="help_contents" onClick="MM_nbGroup('down','group1','tep5','../images/help/help_menu05_on.gif',1);" onMouseOver="MM_nbGroup('over','tep5','../images/help/help_menu05_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu05_off.gif" alt="" name="tep5" border="0" id="tep5" onload="" /></a></li>
+        <div id="set5" style="display: none;">
+        </div>
+        
+        <li><a href="safety/help_safety.html" target="help_contents" onClick="MM_nbGroup('down','group1','tep7','../images/help/help_menu07_on.gif',1);" onMouseOver="MM_nbGroup('over','tep7','../images/help/help_menu07_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu07_off.gif" alt="" name="tep6" border="0" id="tep7" onload="" /></a></li>
+      	<div id="set7" style="display: none;">
+        </div>
+        
+        <li><a href="layer/help_layer.html" target="help_contents" onClick="MM_nbGroup('down','group1','tep6','../images/help/help_menu06_on.gif',1);" onMouseOver="MM_nbGroup('over','tep6','../images/help/help_menu06_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img src="../images/help/help_menu06_off.gif" alt="" name="tep6" border="0" id="tep6" onload="" /></a></li>
+      	<div id="set6" style="display: none;">
+        </div>
+        
+      </ul>
+      
+      <a href="#" onclick="doUserManualStart()"><img src="../images/help/bt_manual.png"></a>
+      </td>
+ 
+    <td style="background-image:url(../images/admin/side_bg.gif)">&nbsp;</td>
+    <td valign="top" bgcolor="#FFFFFF">
+    <iframe name="help_contents" src="help_00.html" frameborder="0" width="100%" height="470px" scrolling="auto"></iframe></td>
+    <td style="background-image:url(../images/admin/right_bg.gif)">&nbsp;</td>
+  </tr>
+  <tr style="background-image:url(../images/admin/end_bg.gif)">
+    <td height="10"><img src="../images/admin/end_left.gif" alt="" width="14" height="10"></td>
+    <td align="center"></td>
+    <td><img src="../images/admin/end_side.gif" alt="" width="11" height="10"></td>
+    <td></td>
+    <td><img src="../images/admin/end_right.gif" alt="" width="14" height="10"></td>
+  </tr>
+</table>
+</body>
+</html>
+

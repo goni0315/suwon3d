@@ -1,0 +1,29 @@
+jdbc.driver = oracle.jdbc.driver.OracleDriver
+jdbc.url = jdbc:oracle:thin:@58.123.178.238:1521:orcl
+jdbc.username = kopss
+jdbc.password = kopss
+
+jdbc.driver2 = oracle.jdbc.driver.OracleDriver
+jdbc.url2 = jdbc:oracle:thin:@58.123.178.238:1521:orcl
+jdbc.username2 = sms
+jdbc.password2 = sms
+
+jdbc.driver3 = org.postgresql.Driver
+jdbc.url3 = jdbc:postgresql://58.138.253.27:5432/postgis
+jdbc.username3 = postgres
+jdbc.password3 = ngis
+
+#jdbc.driver = oracle.jdbc.driver.OracleDriver
+#jdbc.url = jdbc:oracle:thin:@105.1.2.121:1521:suwon3d
+#jdbc.username = kopss
+#jdbc.password = kopss
+#
+#jdbc.driver2 = oracle.jdbc.driver.OracleDriver
+#jdbc.url2 = jdbc:oracle:thin:@105.1.2.35:1526:tora
+#jdbc.username2 = sms
+#jdbc.password2 = sms
+#
+#jdbc.driver3 = org.postgresql.Driver
+#jdbc.url3 = jdbc:postgresql://105.1.2.121:5432/kopss
+#jdbc.username3 = postgres
+#jdbc.password3 = kopss

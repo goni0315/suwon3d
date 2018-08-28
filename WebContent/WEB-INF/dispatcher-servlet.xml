@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    
+ 	<!-- controllers -->   	
+ 	<bean id="AdfInfoController"
+    	class="suwon.web.controller.AdfInfoController" />
+
+    <bean id="SggController"
+    	class="suwon.web.controller.SggController" />		
+
+	<bean id="JijukSearchController"
+    	class="suwon.web.controller.JijukSearchController" />
+    	
+    <bean id="BuildSearchController"
+    	class="suwon.web.controller.BuildSearchController" />	
+    	
+    <bean id="RoadSearchController"
+    	class="suwon.web.controller.RoadSearchController" />
+    	
+    <bean id="SpaceSearchController" class="suwon.web.controller.SpaceSearchController" />		
+    	
+    <bean id="BuildInfoSearchController"
+    	class="suwon.web.controller.BuildInfoSearchController" />	
+  
+    <bean id="LayInfoController"
+    	class="suwon.web.controller.LayInfoController" />
+    	
+    <bean id="UserInfoController"
+    	class="suwon.web.controller.UserInfoController" />		
+    	
+    <bean id="AutAddLayerController"
+    	class="suwon.web.controller.AutAddLayerController" />
+    	
+   	<bean id="UserConnectListController"
+    	class="suwon.web.controller.UserConnectListController" />	
+    	
+    <bean id="ModelLibListController"
+    	class="suwon.web.controller.ModelLibListController" />	
+    			 
+    <bean id="LayerListController"
+    	class="suwon.web.controller.LayerListController" />			 
+
+    <bean id="FloodingController"
+    	class="suwon.web.controller.FloodingController" />	    	
+		<!--8개의 지하시설물  -->
+		    	
+    <bean id="SangsuPipeSearchController"
+    	class="suwon.web.facility.controller.SangsuPipeSearchController" />	
+    	<!--8개의 지하시설물 end  -->
+    	
+	<!-- 날씨 -->
+	<bean id="WeatherController"
+    	class="suwon.web.controller.WeatherController" />	
+
+	<!-- 관리자페이지 -->
+	<bean id="adminController" class="suwon.web.controller.AdminController" />
+	    	
+    <!-- 사용자 관리 -->
+	<bean id="UsrAutController" class="suwon.web.controller.UsrAutController" />
+	
+	<!-- 통계 관리 -->
+	<bean id="StasticsController" class="suwon.web.controller.StasticsController" />
+	    		    		
+    <!-- 관리자 > 공지사항 -->
+    <bean id="NoticeController" class="suwon.web.controller.NoticeController" />
+
+    <!-- 내주제도 -->
+    <bean id="ThematicController" class="suwon.web.thematic.controller.ThematicController" />
+    
+    <!-- 부동산 대장정보연계 -->
+    <bean id="realEstateCadastreController" class="suwon.web.realestate.controller.RealEstateCadastreController" />
+    <bean id="realEstateLandUsePlanController" class="suwon.web.realestate.controller.RealEstateLandUsePlanController" />
+    <bean id="realEstatePostedPriceController" class="suwon.web.realestate.controller.RealEstatePostedPriceController" />
+    <bean id="realEstateIndividualHouseController" class="suwon.web.realestate.controller.RealEstateIndividualHouseController" />
+    <bean id="realEstateBulidNoController" class="suwon.web.realestate.controller.RealEstateBulidNoController" />
+    <bean id="realEstateGeneralHeaderController" class="suwon.web.realestate.controller.RealEstateGeneralHeaderController" />
+    <bean id="realEstateUsuallyHeaderController" class="suwon.web.realestate.controller.RealEstateUsuallyHeaderController" />
+    
+    <!-- viewResolver -->
+    <bean id="vewResolver"
+    	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" /> 	
+   		<property name="prefix" value="/WEB-INF/" />
+   		<property name="suffix" value=".jsp" />
+   	</bean>
+   	 	<!-- 파일 업로드를 위한 멀티파트 리졸버 _ 업로드 제한 10mb -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	  	<property name="defaultEncoding">
+	       <value>UTF-8</value>
+	    </property>
+	  <!--   <property name="uploadTempDir" ref="uplaodDirResource"/> -->
+	</bean>
+	
+	<!-- 파일 업로드 폴더 설정 
+	<bean id="uplaodDirResource" class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg>
+			<value>D:/Temp/upload/</value>
+		</constructor-arg>
+	</bean>
+-->
+	<!-- 파일 업로드 예외 처리 	
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<property name="exceptionMappings">
+		<props>
+			<prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">
+						/jsp/admin/noticeUploadError
+			</prop>
+		</props>
+	</property>
+	</bean>
+ -->
+	 <!-- 파일 다운로드를 위한 빈네임 뷰 리졸버 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	</bean>
+	
+	 <!-- 파일 다운로드를 위한 빈네임 뷰 리졸버 -->
+	<bean class="org.springframework.web.context.ContextLoaderListener">
+	</bean>
+	  	   	
+    <!-- validation massage -->
+    <bean id="messageSource"
+    	class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basenames">
+    		<list>
+    			<value>config.validation</value>
+    		</list>
+    	</property>	
+    </bean>    
+
+   	<!-- interceptor -->
+  <!--  	<bean id="multipartResolver"
+   		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+   	</bean>
+   	
+   	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="sessionInterceptor"/>
+			</list>
+		</property>
+	</bean>   	
+   	
+   	<bean id="sessionInterceptor" class="net.nice19.smboard.interceptor.SessionInterceptor" /> -->
+   	
+   	<!--ajax  -->
+   	 <!-- json -->
+  	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	 	<property name="messageConverters">
+	 		<list>
+	 			<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+	 		</list>
+	 	</property>
+	</bean>
+</beans>

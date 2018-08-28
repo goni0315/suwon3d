@@ -1,0 +1,102 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>시설물입지 &gt; 가로수</title>
+<link href="/Suwon3d/css/common.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Suwon3d/js/XDControl.js"></script>
+<script type="text/javascript">
+function goPlay(popUp_path){
+	
+	var w=window.open(WEB_SERVER_URL+"/help/pop/help_pop.jsp?popUp_path="+popUp_path,"_blank","width=1324px,height=750px");
+	var winxpos = (window.screen.width-1324)/2;
+	var winypos = (window.screen.height-750)/2;
+	w.moveTo(winxpos,winypos);		
+}
+function doVOD(val){
+	location.replace(WEB_SERVER_URL_SB + "/helpVideo/" + val + ".flv");
+}	
+</script>
+</head>
+
+<body>
+<div style="margin:10px; height:400px; overflow:y-scroll; ">
+<img src="/Suwon3d/images/help/helpImages/help_img_11.jpg" width="480" height="300">
+<p>&nbsp;</p>
+					
+  <h4><img src="/Suwon3d/images/help/help13_t.gif" alt="가로수" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('tree_choice')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('jibunSearch')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;가로수라이브러리 선택&gt;</strong></p><br>
+
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		가로수 구간설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [구간선택]버튼을 클릭하여 지도 화면에서 가로수구간을 마우스 왼쪽버튼으로 설정합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		가로수 선택 및 설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 가로수를 선택한 후 가로수 옵션을 설정한 후 [시설물 삽입]버튼을 클릭하면 지도화면에 <br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;선택된 가로수가 표현됩니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		미리보기
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- 가로수선택 ⇨ 가로수를 선택하면 해당 가로수가 미리보기에서 나타납니다.
+	</span><br><br>
+
+<img src="/Suwon3d/images/help/helpImages/help_img_12.jpg" width="480" height="300">
+ <p>&nbsp;</p>
+  <h4><img src="/Suwon3d/images/help/help13_t.gif" alt="도로" /><a href="#player"><img src="/Suwon3d/images/help/vod_play.gif" onclick="goPlay('tree_add')" style="img-mode:active" /></a> <a href="#"><img src="/Suwon3d/images/help/vod_down.gif" onclick="doVOD('tree_add')" style="img-mode:active" /></a></h4><br>
+
+  <p><strong>&lt;사용자 라이브러리 추가&gt;</strong></p><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		① 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		가로수구간설정
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [구간선택]버튼을 클릭하여 지도 화면에서 가로수구간을 마우스 왼쪽버튼으로 설정합니다.
+	</span><br>
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		②  
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		사용자 라이브러리 추가
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [찾기]버튼으로 가로수 라이브러리를 추가하고 가로수 옵션을 설정 한 후에 [시설물삽입]<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;버튼으로 선택합니다.
+	</span><br> 
+	
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		③ 
+	</span>
+	<span style='color: #0000ff; line-height: 160%; font-family: "나눔고딕"; font-size: 9pt; font-weight: bold; text-decoration: underline;'>
+		미리보기
+	</span><br>
+	<span style='line-height: 160%; font-family: "나눔고딕"; font-size: 9pt;'>
+		&nbsp;&nbsp;&nbsp;&nbsp;- [찾기]버튼 ⇨ 가로수를 선택하면 해당 가로수가 미리보기에서 나타납니다.
+	</span><br>
+
+<!--   <h4>&nbsp;</h4>
+  <p class="bullet_mf">가로수 데이터를 선택한 후 가로수 높이, 간격, 너비를 설정합니다.  </p>
+  <p class="bullet_mf">시설물삽입 버튼으로 선택한 데이터를 3차원 화면에 불러옵니다. </p>
+  <p class="bullet_mf">구간선택에서 데이터를 선택하면 해당데이터의 이미지를 미리보기에서 볼 수 있습니다.</p> -->	  
+</div>
+</body>
+</html>
