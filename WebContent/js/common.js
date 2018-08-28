@@ -160,7 +160,7 @@ function newResult(result) {
 	}
 }
 
-
+//네비게이션 토글
 function showHistoryToggle(){
 	
 	var chk = document.getElementById("n02");

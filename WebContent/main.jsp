@@ -816,7 +816,7 @@ div.c1 {
                     </ul>
                 </div>
                 <!-- 2 -->
-                <div id="n02" class="set c2" style="z-index:11000; display: none;" >
+                <div id="n02" class="set c2" style="z-index:11000; display: none; " >
                 <iframe id="navitoggle" name="navi" src="tool1.jsp" frameborder="0" width="436" height="112" scrolling="no"></iframe>
                 </div>
             </div>
