@@ -13,6 +13,7 @@
 <script type="text/javascript" src="js/jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="js/jquery/jquery-ui-1.8.custom.min.js"></script><!-- 조망, 네비 등의 속도 조절 슬라이드바 -->
 <script type="text/javascript">
+
 var m_naviPlay = false; // 주행실행 중인지 여부
 var m_naviPause = false; // 중지상태 여부
 function startLoad(){
@@ -446,6 +447,7 @@ function doRecordStop(){
 	}
 	top.XDOCX.XDCapAVIRecordEnd(); 
 }
+
 </script>
 </head>
 
@@ -587,9 +589,11 @@ function doRecordStop(){
 				</tr>
 				<tr>
 					<!-- 정보 -->
+				<%-- 
 					<td>
 						<img src="${ctx}/images/na_tool00.gif">
 					</td>
+					 --%>
 				  <td><a href="#" name="toolMenu" onclick="toggleBtn('na_tool1','toolMenu');" title="정보보기">
 							<img id="na_tool1" src="${ctx}/images/na_tool01_off.gif">
 				  </a></td>
@@ -623,7 +627,10 @@ function doRecordStop(){
 							<img id="na_tool6" src="${ctx}/images/na_tool06_off.gif" alt="">
 						</a>
 					</td>
-					<td><img src="${ctx}/images/na_tool07.gif"></td>
+					<td><a href="#" onclick="window.parent.showHistory('n01',2,'Notab01');">
+					<img src="${ctx}/images/na_tool08.gif" style="width: 29px; height: 100%;">
+					</a></td>
+					<td><img src="${ctx}/images/na_tool07.gif" style="width: 95%; height: 100%;"></td>
 				</tr>
 			</table>
 			<div id="simulation_drive">
