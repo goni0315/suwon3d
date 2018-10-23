@@ -908,7 +908,7 @@
 		where length(location) between 2
 		and 6
 		and state_flag='Y'
-		order by dept_path_name asc
+		order by location asc
 		) where dept_name !=
 		'테스트' and dept_name not like '%폐지%' and status=1
 

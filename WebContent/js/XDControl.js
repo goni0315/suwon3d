@@ -112,14 +112,14 @@ getIEVersion = function() {
  */
 
 //var WEB_SERVER_URL = 'http://105.1.2.121/Suwon3d';
-var WEB_SERVER_URL = 'http://192.168.1.124:8080/Suwon3d';
+var WEB_SERVER_URL = 'http://10.1.2.125:8080/Suwon3d';
 
 //var WEB_SERVER_URL = 'http://localhost:8080/Suwon3d';
 //var WEB_SERVER_URL = 'http://localhost:8989/Suwon3d';
 //var WEB_SERVER_URL = 'http://58.123.178.238:8080/Suwon3d';
 
 //var WEB_SERVER_URL_SB = 'http://105.1.2.121/data';//심볼을 위한 URL
-var WEB_SERVER_URL_SB = 'http://192.168.1.124:8080/data';//심볼을 위한 URL
+var WEB_SERVER_URL_SB = 'http://10.1.2.125:8080/data';//심볼을 위한 URL
 //var WEB_SERVER_URL_SB = 'http://58.123.178.238:8080/data';//심볼을 위한 URL
 
 var thematicPath = "c:\\xdcashe\\"; //내주제도 로컬 경로

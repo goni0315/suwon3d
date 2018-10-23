@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import suwon.web.Service.UserInfoService;
 import suwon.web.vo.MlogVo;
 import suwon.web.vo.UserInfoVo;
-import util.AutoAdminAut;
 @Controller
 public class UserInfoController {
 	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
@@ -28,9 +27,6 @@ public class UserInfoController {
 	@RequestMapping("/getUserInfo.do")
 	@ResponseBody
 	public JSONArray boardList(HttpServletRequest request, HttpServletResponse response){
-						
-		//자동 관리자 권한 변경
-		new AutoAdminAut().autoAdminAut();		
 		
 		String pUsrId= (String)request.getParameter("usrid"); //사용자 아이디 파라미터로 받음
 		

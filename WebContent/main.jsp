@@ -3,6 +3,7 @@
  -->
 <%@page import="java.util.Random"%>
 <%@page import="util.StirngUtil"%>
+<%@page import="util.AutoAdminAut"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -32,7 +33,9 @@
 		
 		usrid = ids;
 	 }
-
+	 
+		//자동 관리자 권한 변경
+		new AutoAdminAut().autoAdminAut();		
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -74,7 +77,7 @@ function initSystem(){
 	        //기본 심볼 다운로드
 	        downSymbols();
 	        //xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);//서버연결
-	        xdServerConnect('192.168.1.124',9830,'Suwon3d',0,0);//서버연결	        
+	        xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);//서버연결	        
 	        //xdServerConnect('58.123.178.238',9830,'Suwon3d',0,0);//서버연결
 	        
 		}else{
@@ -85,7 +88,7 @@ function initSystem(){
 				}
 				XDOCX=pluginobj;
 				//xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);
-				xdServerConnect('192.168.1.124',9830,'Suwon3d',0,0);
+				xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);
 				//xdServerConnect('58.138.253.23',9830,'testGroup',0,0);//서버연결
 		        //기본 심볼 다운로드
 		        downSymbols();
