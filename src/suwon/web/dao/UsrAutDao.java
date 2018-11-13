@@ -7,6 +7,7 @@ import suwon.web.vo.AutVo;
 import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrNameVo;
 
 public interface UsrAutDao {
 	
@@ -29,4 +30,6 @@ public interface UsrAutDao {
 	String updateMenuAut(Map paramMap);
 	
 	String removeMenuAut(Map paramMap);
+	
+	public List<UsrNameVo> getAutUserName(String aut);
 }

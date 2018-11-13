@@ -39,6 +39,7 @@
 	<typeAlias alias="AdminLogListVo"
 		type="suwon.web.vo.AdminLogListVo" />
 	<typeAlias alias="UsrIdVo" type="suwon.web.vo.UsrIdVo" />
+	<typeAlias alias="UsrNameVo" type="suwon.web.vo.UsrNameVo" />
 
 	<insert id="insertadmin" parameterClass="UsrIdVo">
 		insert into
@@ -1699,6 +1700,18 @@
 		logseq desc
 	</select>
 
+<!-- 권한으로 유저 이름 가져옴 -->
+	<select id="getAutUserName"  parameterClass="String" resultClass="UsrNameVo">
+	
+     select 
+     usrname 
+     from sms.usr 
+     where usrid 
+     in     
+     (select usrid from kopss.usr_aut where aut_cde = #aut#)
+     
+	</select>
+	
 
 </sqlMap>
 

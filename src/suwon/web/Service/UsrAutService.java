@@ -12,6 +12,7 @@ import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 import suwon.web.vo.UserInfoVo;
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrNameVo;
 
 public class UsrAutService implements UsrAutDao{
 	
@@ -181,6 +182,18 @@ public class UsrAutService implements UsrAutDao{
 			//System.out.println("removeMenuAut  " + resultCode);
 			return resultCode;
 		}
+
+	@Override
+	public List<UsrNameVo> getAutUserName(String aut) {
+		
+		
+		
+		
+		
+		return sqlMapClientTemplate.queryForList("sms.getAutUserName", aut);
+	}
+
+		
 	
 	
 	

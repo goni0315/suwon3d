@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +28,7 @@ import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrNameVo;
 import util.MyUtil;
 @Controller
 public class  UsrAutController {
@@ -581,6 +583,222 @@ public class  UsrAutController {
 		return returnArr;
 		
 	}
+/*	
+	@RequestMapping("/showAutUser.do")
+	@ResponseBody
+	public JSONArray showAutUser(HttpServletRequest request, HttpServletResponse response, @RequestParam(value="aut") String aut) throws Exception {
+
+		JSONArray returnArr = new JSONArray(); //뷰페이지로 넘길 파라미터 json
+		
+		try {
+			
+			Map returnMap = new HashMap(); //결과값 담을 맵
+			
+			
+			MyUtil myUtil = new MyUtil();
+//			//[사용자 조회 S]
+//			List idList = new ArrayList();
+//			DeptVo vo = new DeptVo();
+System.out.println(aut);
+			List<UsrNameVo> list = usrAutService.getAutUserName(aut);
+			
+			for(int i = 0; i<list.size(); i++)
+		    System.out.println(list.get(i).getUsrname());
+			
+			String name = list.get(0).getUsrname();
+			
+
+			//System.out.println(pUsrName);
+			
+//			String pIds= myUtil.checkNull((String)request.getParameter("grpid")); //메인 부서 아이디 파라미터로 받음
+//			String pageNum= myUtil.checkNull((String)request.getParameter("page")); //메인 부서 아이디 파라미터로 받음
+//			int totalNum= Integer.parseInt((String)request.getParameter("totalpage")); //메인 부서 아이디 파라미터로 받음
+			
+			//System.out.println("pageNum  //  " + pageNum);
+			
+//			int idFlag = pIds.indexOf(",");
+//			
+//			if( idFlag > -1){
+//				String[] idLists = pIds.split(","); 
+//				for(int i = 0; i < idLists.length ; i++){
+//					idList.add(idLists[i]);
+//				}
+//			}else{
+//				idList.add(pIds);
+//			}
+			
+			
+//		    if(pageNum != null && !(pageNum.equals(""))){//페이지 캐스팅
+//		    	currentPage = Integer.parseInt(pageNum);
+//		    }else{
+//		    	currentPage = 1;
+//		    }
+		    
+		    int showArticleLimit = 10;
+		    //showArticleLimit = 5;
+			// expression article variables value
+			startArticleNum = (currentPage - 1) * showArticleLimit + 1; //페이지
+			endArticleNum = startArticleNum + showArticleLimit - 1;      //페이지
+			
+			//System.out.println(startArticleNum + " // " + endArticleNum);
+			
+			Map paramMap = new HashMap();
+			
+//			if(idList.size() == 0 ){
+//				idList = null;
+//			}
+			//[페이징 S]
+			
+			int total_page = 0;
+			int totalNum = 0;
+			String pIds = "";
+						
+			if(totalNum != 0) total_page = myUtil.getPageCount(numPerPage,  totalNum) ;
+			
+			String urlView = "fn_goPage";
+
+			returnMap.put("pageIndexList", myUtil.pageIndexList(currentPage, total_page, urlView, pIds));
+			
+			//[페이징 E]
+			if(aut == ""){
+				aut = null;
+			}
+			
+			aut = "박미열";
+			paramMap.put("usrName", aut); //메인 dept에 포함된 grpid목록
+			paramMap.put("idList", ""); //메인 dept에 포함된 grpid목록
+			paramMap.put("startArticleNum", startArticleNum); //시작 페이지
+			paramMap.put("endArticleNum", endArticleNum); //끝페이지 
+			
+			//System.out.println(paramMap.get("idList"));
+			
+			List<UsrAutVo> u_list  = usrAutService.getUsrAutList(paramMap); //메인부서 목록 요청
+			System.out.println(u_list);
+			//[조합 S]
+			returnMap.put("u_list", u_list);
+			returnMap.put("idList", "");
+			returnMap.put("totalNum", totalNum); //포함되는 총 사용자수
+			returnArr = JSONArray.fromObject(returnMap);
+			
+			//System.out.println(returnArr);
+			
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e2) {
+			e2.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		System.out.println(returnArr);
+		return returnArr;
+		
+	}*/
+	
+	
+	@RequestMapping("/showAutUser.do")
+	@ResponseBody
+	public JSONArray showAutUser(HttpServletRequest request, HttpServletResponse response, @RequestParam(value="aut") String aut) {
+		JSONArray returnArr = new JSONArray(); //뷰페이지로 넘길 파라미터 json
+		
+		try {
+			
+			Map returnMap = new HashMap(); //결과값 담을 맵
+			MyUtil myUtil = new MyUtil();
+			//[사용자 조회 S]
+			List idList = new ArrayList();
+			DeptVo vo = new DeptVo();
+			
+			List<UsrNameVo> list = usrAutService.getAutUserName(aut);
+			
+			String pUsrName = list.get(0).getUsrname();
+			
+			//System.out.println(pUsrName);
+			
+			String pIds= myUtil.checkNull((String)request.getParameter("grpid")); //메인 부서 아이디 파라미터로 받음
+			String pageNum= myUtil.checkNull((String)request.getParameter("page")); //메인 부서 아이디 파라미터로 받음
+			int totalNum= Integer.parseInt((String)request.getParameter("totalpage")); //메인 부서 아이디 파라미터로 받음
+			
+			//System.out.println("pageNum  //  " + pageNum);
+			
+			int idFlag = pIds.indexOf(",");
+			
+			if( idFlag > -1){
+				String[] idLists = pIds.split(","); 
+				for(int i = 0; i < idLists.length ; i++){
+					idList.add(idLists[i]);
+				}
+			}else{
+				idList.add(pIds);
+			}
+			
+			
+		    if(pageNum != null && !(pageNum.equals(""))){//페이지 캐스팅
+		    	currentPage = Integer.parseInt(pageNum);
+		    }else{
+		    	currentPage = 1;
+		    }
+		    
+		    int showArticleLimit = 10;
+		    //showArticleLimit = 5;
+			// expression article variables value
+			startArticleNum = (currentPage - 1) * showArticleLimit + 1; //페이지
+			endArticleNum = startArticleNum + showArticleLimit - 1;      //페이지
+			
+			//System.out.println(startArticleNum + " // " + endArticleNum);
+			
+			Map paramMap = new HashMap();
+			
+			if(idList.size() == 0 ){
+				idList = null;
+			}
+			//[페이징 S]
+			
+			int total_page = 0;
+						
+			if(totalNum != 0) total_page = myUtil.getPageCount(numPerPage,  totalNum) ;
+			
+			String urlView = "fn_goPage";
+
+			returnMap.put("pageIndexList", myUtil.pageIndexList(currentPage, total_page, urlView, pIds));
+			
+			//[페이징 E]
+			if(pUsrName == ""){
+				pUsrName = null;
+			}
+			paramMap.put("usrName", pUsrName); //메인 dept에 포함된 grpid목록
+			paramMap.put("idList", idList); //메인 dept에 포함된 grpid목록
+			paramMap.put("startArticleNum", startArticleNum); //시작 페이지
+			paramMap.put("endArticleNum", endArticleNum); //끝페이지 
+			
+			//System.out.println(paramMap.get("idList"));
+			
+			List<UsrAutVo> u_list  = usrAutService.getUsrAutList(paramMap); //메인부서 목록 요청
+			
+			//[조합 S]
+			returnMap.put("u_list", u_list);
+			returnMap.put("idList", idList);
+			returnMap.put("totalNum", totalNum); //포함되는 총 사용자수
+			returnArr = JSONArray.fromObject(returnMap);
+			
+			//System.out.println(returnArr);
+			
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e2) {
+			e2.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+			
+		return returnArr;
+		
+	}
+	
+	
+	
+	
 	
 }
 

@@ -292,6 +292,7 @@ function fn_nameSearch(){
 	callBackFn = function(result){
 		var userList = result[0].u_list; //메인 부서에 해당하는 사용자 리스트
 		fn_setUserList(userList);				//유저 리스트 넘겨줌
+		alert(userList)
 	};	
 	
 	$.ajax({
@@ -386,6 +387,53 @@ function fn_modifyAut(id){
 		success : callBackFn
 	});
 }
+
+
+function showAutUsr(){
+	
+	var aut = $("#aut").val();
+	
+	if(aut=="SYS001" || aut=="SYS002" || aut=="SYS003"){
+		
+		var url =""; //요청 url
+		
+		var callBackFn = null; // 콜백 함수 설정
+		
+		url=  "${ctx}/showAutUser.do?aut="+aut;
+		
+		callBackFn = function(result){
+			var userList = result[0].u_list; //메인 부서에 해당하는 사용자 리스트
+			fn_setUserList(userList);				//유저 리스트 넘겨줌
+		};	
+		
+		$.ajax({
+			type:"get",
+			//asyn:true,
+			timeout : 10000,
+			url: url,
+			dataType: "json",
+			//contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+			error : function(request, status, error) {
+			     alert("fn_nameSearch // code : " + request.status + "\r\nmessage : " + request.reponseText);
+			    },
+			success : callBackFn
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+
+	
+	
+	
+}
 </script>
 </head>
 
@@ -456,8 +504,17 @@ function fn_modifyAut(id){
 							width="244" height="5"></td>
 					</tr>
 					<tr>
-						<td height="35">&nbsp;</td>
-						<td colspan="2" align="right">&nbsp;</td>
+						<td height="35">권한별 보기</td>
+						<td colspan="2">
+						<SELECT id="aut" onchange='showAutUsr()'>
+								<option>::::::: 권한선택 :::::::</option>
+								<option value="SYS003">일반사용자</option>
+								<option value="SYS002">상하수도사용자</option>
+								<option value="SYS001">관리자</option>
+								</SELECT>		
+						
+						
+						</td>
 					</tr>
 				</table></td>
 			<td style="background-image: url(${ctx}/images/admin/side_bg.gif)">&nbsp;</td>
