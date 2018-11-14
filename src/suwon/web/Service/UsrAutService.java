@@ -12,6 +12,7 @@ import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 import suwon.web.vo.UserInfoVo;
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrIdVo;
 import suwon.web.vo.UsrNameVo;
 
 public class UsrAutService implements UsrAutDao{
@@ -184,13 +185,23 @@ public class UsrAutService implements UsrAutDao{
 		}
 
 	@Override
-	public List<UsrNameVo> getAutUserName(String aut) {
+	public List<UsrIdVo> getAutUserId(String aut) {
 		
 		
 		
 		
 		
-		return sqlMapClientTemplate.queryForList("sms.getAutUserName", aut);
+		return sqlMapClientTemplate.queryForList("sms.getAutUserId", aut);
+	}
+
+	@Override
+	public List<UsrNameVo> getAutUserName(Map paramMap) {
+
+		
+		List<UsrNameVo> list = sqlMapClientTemplate2.queryForList("sms.getAutUserName", paramMap);
+		
+		
+		return list;
 	}
 
 		

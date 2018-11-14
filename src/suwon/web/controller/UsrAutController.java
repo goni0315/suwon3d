@@ -28,6 +28,7 @@ import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrIdVo;
 import suwon.web.vo.UsrNameVo;
 import util.MyUtil;
 @Controller
@@ -709,16 +710,38 @@ System.out.println(aut);
 			List idList = new ArrayList();
 			DeptVo vo = new DeptVo();
 			
-			List<UsrNameVo> list = usrAutService.getAutUserName(aut);
+			List<UsrIdVo> usrIdList = usrAutService.getAutUserId(aut);
 			
-			String pUsrName = list.get(0).getUsrname();
+			HashMap<String, Object> paraMap = new HashMap<String, Object>();
+			List paramList = new ArrayList();
+			for(int i = 0; i<usrIdList.size(); i++) {
+				paramList.add(usrIdList.get(i).getUsrid());				
+			}
+			
+			if(paramList.isEmpty()) {
+				return null;
+			}
+			System.out.println(paramList+"id리스트값");
+			
+			if(aut!="SYS001" && aut!="SYS002" && aut!="SYS003") {
+				
+				
+			}			
+			
+			paraMap.put("list", paramList);			
+			List<UsrNameVo> usrList = usrAutService.getAutUserName(paraMap);
+			
+			for(int i = 0; i<usrList.size(); i++)
+			System.out.println(usrList.get(i).getUsrname());
+			
+			
 			
 			//System.out.println(pUsrName);
 			
-			String pIds= myUtil.checkNull((String)request.getParameter("grpid")); //메인 부서 아이디 파라미터로 받음
+		String pIds= myUtil.checkNull((String)request.getParameter("grpid")); //메인 부서 아이디 파라미터로 받음
 			String pageNum= myUtil.checkNull((String)request.getParameter("page")); //메인 부서 아이디 파라미터로 받음
 			int totalNum= Integer.parseInt((String)request.getParameter("totalpage")); //메인 부서 아이디 파라미터로 받음
-			
+			totalNum=0;
 			//System.out.println("pageNum  //  " + pageNum);
 			
 			int idFlag = pIds.indexOf(",");
@@ -753,7 +776,8 @@ System.out.println(aut);
 				idList = null;
 			}
 			//[페이징 S]
-			
+			String pUsrName=usrList.get(0).getUsrname();
+			System.out.println(pUsrName);
 			int total_page = 0;
 						
 			if(totalNum != 0) total_page = myUtil.getPageCount(numPerPage,  totalNum) ;

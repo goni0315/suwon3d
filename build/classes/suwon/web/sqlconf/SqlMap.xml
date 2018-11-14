@@ -1700,15 +1700,20 @@
 		logseq desc
 	</select>
 
-<!-- 권한으로 유저 이름 가져옴 -->
-	<select id="getAutUserName"  parameterClass="String" resultClass="UsrNameVo">
+<!-- 권한으로 유저 아이디 가져옴 -->
+	<select id="getAutUserId"  resultClass="UsrIdVo">
 	
-     select 
-     usrname 
-     from sms.usr 
-     where usrid 
-     in     
-     (select usrid from kopss.usr_aut where aut_cde = #aut#)
+    select usrid from usr_aut where aut_cde = #aut#
+    
+     
+	</select>
+	
+	
+	<!-- 아이디로 유저이름 가져옴 -->
+	<select id="getAutUserName"  resultClass="UsrNameVo" parameterClass="java.util.HashMap">
+	
+    select usrname from usr <iterate open="where usrid IN (" close=")" conjunction="," property="list">#list[]# </iterate>
+    
      
 	</select>
 	

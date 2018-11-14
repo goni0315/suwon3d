@@ -1,5 +1,6 @@
 package suwon.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import suwon.web.vo.AutVo;
 import suwon.web.vo.DeptVo;
 import suwon.web.vo.MenuVo;
 import suwon.web.vo.UsrAutVo;
+import suwon.web.vo.UsrIdVo;
 import suwon.web.vo.UsrNameVo;
 
 public interface UsrAutDao {
@@ -31,5 +33,10 @@ public interface UsrAutDao {
 	
 	String removeMenuAut(Map paramMap);
 	
-	public List<UsrNameVo> getAutUserName(String aut);
+	List<UsrIdVo> getAutUserId(String aut);
+	
+	List<UsrNameVo> getAutUserName(Map list);
+	
+	
+	
 }
