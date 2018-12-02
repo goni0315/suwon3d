@@ -13,6 +13,21 @@
 
 </style>
 <script type="text/javascript">
+var chk = true;
+
+function moveFocus(chk){
+	
+	if(chk){
+	setTimeout(function() { document.getElementById('bubun').focus(); }, 10);	
+	this.chk=false;
+	return;
+	}
+	
+	this.chk=true;
+	return chk;
+	
+}
+
 function rnSearch(sggName){//나라 검색
 	$.ajax({
 		type:"POST",
@@ -83,9 +98,11 @@ function jibunSearch(){
 	}		
 	$("input[name='sanChk']").val(sanChk);
 
+	if(chk){
 	frm.action = '${ctx}/jijukSearch.do';
 	frm.target = 'searchList';
-	frm.submit();	
+	frm.submit();		
+	}
 	
 }
 function fnc_input_number1(){
@@ -97,7 +114,7 @@ function fnc_input_number1(){
 	   if (e==8 || e==9 || e==46) return;
 	   if(e==13){
 		   
-		   document.getElementById("bubun").focus();
+		   moveFocus(true);
 		  
 	   }
 	   event.returnValue = false;
@@ -108,15 +125,23 @@ function fnc_input_number2(){
 	   if (e>=48 && e<=57) return;
 	   if (e>=96 && e<=105) return;
 	   if (e>=37 && e<=40) return;
-	   if (e==8 || e==9 || e==13 || e==46) return;
+	   if (e==8 || e==9 || e==46) return;
+	   if(e==13){
+		   
+		   moveFocus(false);
+		  
+	   }
 	   event.returnValue = false;
 }
+
+
+
 </script>
 </head>
 
 
 <body >
-	<form id="frm" action="" method="post">
+	<form id="frm" action="" method="post" onsubmit="return false">
 	<input type="hidden" id="sanChk" name="sanChk" value="" />
 	
 <div id="panel" class="panel_main">
