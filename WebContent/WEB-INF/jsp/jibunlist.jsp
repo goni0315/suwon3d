@@ -132,8 +132,8 @@ function doRoadView(keycode,flag){
 							</td>
 							<td>
 								<!-- 로드뷰 기능 삽입 예정 아직 구현 안됨 -->
-								<img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","daum")' />&nbsp;&nbsp;
-								<img src='${ctx}/images/potal/naver.png' alt='거르뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","naver")'/>
+								<%-- <img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","daum")' />&nbsp;&nbsp;
+								<img src='${ctx}/images/potal/naver.png' alt='거르뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","naver")'/> --%>
 							</td>								
 						</tr>
 					</c:forEach>

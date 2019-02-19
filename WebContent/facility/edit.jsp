@@ -283,6 +283,28 @@ function selfChange(type) {
 
 //라이브러리 저장
 function libSave() {
+	
+	if(parent.chk==1){
+		var saveChk = confirm("불러온 레이어(xdl)파일은 저장되지 않습니다. \n 그래도 계속 하시겠습니까? \n (3ds,png,jpg만 저장됩니다)"); 
+		if(saveChk){
+			
+			var fileName = top.XDOCX.XDUIOpenFileDlg(false, 'xdl');
+			if (fileName != ""){
+				top.XDOCX.XDLayerWriteFile("Temporary",fileName);
+				var saveName = fileName.split("\\");
+				var nameSize = saveName.length-1;
+				var rSaveName = saveName[nameSize];
+				alert(rSaveName + " 으로 저장되었습니다.");
+			}else{
+				alert("저장이 취소되었습니다.");
+			}			
+			return;
+		}	
+		
+		return;		
+	}
+	
+	
 	var fileName = top.XDOCX.XDUIOpenFileDlg(false, 'xdl');
 	if (fileName != ""){
 		top.XDOCX.XDLayerWriteFile("Temporary",fileName);
@@ -309,6 +331,8 @@ function libLoad() {
 		var rrLoad = rLoadName.split(".");
 		var popup = top.XDOCX.XDLayerGetBox(rrLoad[0]);
 		alert(rrLoad[0] + " / "+ popup);
+		parent.chk = 1;
+		parent.chkXDL(rrLoad[0]);
 		/* $("#loadList").append($(
 			'<tr id="tr' + cnt + '">'+
 				'<td>' + cnt + '</td><td>'+

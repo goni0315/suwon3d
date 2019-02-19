@@ -117,8 +117,8 @@ function doRoadView(keycode,flag){
 								<c:if test="${sms.lnbr_slno!=0}">- ${sms.lnbr_slno}</c:if>
 							</td>
 							<td>
-								<img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","daum")' />&nbsp;&nbsp;
-								<img src='${ctx}/images/potal/naver.png' alt='거르뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","naver")'/>
+								<%-- <img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","daum")' />&nbsp;&nbsp;
+								<img src='${ctx}/images/potal/naver.png' alt='거르뷰' style='cursor: pointer;' onclick='doRoadView("${sms.pnu}","naver")'/> --%>
 							</td>															
 						</tr>
 					</c:forEach>

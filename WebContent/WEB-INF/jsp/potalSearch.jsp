@@ -358,8 +358,8 @@ function addRow_same(title,addr,roaddr,num,x,y,info) {
 				+"<td>"+addr+"</td>"
 				+"<td align='center'>"
 				
-				+"<img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='RoadViewCoord(\"KTM\",\"WGS84\","+x+","+y+");'/>&nbsp;&nbsp;"
-				+"<img src='${ctx}/images/potal/naver.png' alt='거리뷰' style='cursor: pointer;' onclick='ShowStreetView("+x+","+y+");return false;'/>"
+				/* +"<img src='${ctx}/images/potal/daum.png' alt='로드뷰' style='cursor: pointer;' onclick='RoadViewCoord(\"KTM\",\"WGS84\","+x+","+y+");'/>&nbsp;&nbsp;"
+				+"<img src='${ctx}/images/potal/naver.png' alt='거리뷰' style='cursor: pointer;' onclick='ShowStreetView("+x+","+y+");return false;'/>" */
 			+"</td></tr>"
 	    );
 	

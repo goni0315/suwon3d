@@ -57,6 +57,31 @@
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
 
 <script type="text/javascript">
+//시설물 xdl저장 체크 변수
+var chk = 0;
+
+var arr = [];
+//네비게이션 클리어
+$(document).ready(function(){
+	
+	$("#Notab02").click(function(){		
+		navitoggle.clearMenu();
+	})
+})
+
+//xdl저장 중복 체크
+function chkXDL(param){
+		
+	for(var i=0; i<arr.length; i++){
+	
+		if(arr[i]==param){
+			alert("같은 레이어(xdl) 파일은 여러번 불러올 수 없습니다.");
+			return;
+		}	
+	}
+	arr.push(param);
+			
+}
 
 var mainContextPath = "${ctx}";
 
@@ -76,8 +101,8 @@ function initSystem(){
 
 	        //기본 심볼 다운로드
 	        downSymbols();
-	        //xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);//서버연결
-	        xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);//서버연결	        
+	        xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);//서버연결
+	        //xdServerConnect('192.168.0.3',9830,'Suwon3d',0,0);//서버연결	        
 	        //xdServerConnect('58.123.178.238',9830,'Suwon3d',0,0);//서버연결
 	        
 		}else{
@@ -87,8 +112,8 @@ function initSystem(){
 					window.open("${ctx}/pop/nsSetupPopup.jsp","pluginUpdate","width = 430, height = 330, resizable=no, scrollbars=no, status=no");
 				}
 				XDOCX=pluginobj;
-				//xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);
 				xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);
+				//xdServerConnect('192.168.0.3',9830,'Suwon3d',0,0);
 				//xdServerConnect('58.138.253.23',9830,'testGroup',0,0);//서버연결
 		        //기본 심볼 다운로드
 		        downSymbols();
@@ -692,7 +717,6 @@ div.c1 {
 	clickPosView(xyz);
 </script>
 
-<div>
     <div id="header">
         <div id="head">
             <div id="logo"><a href="#" onclick="location.reload(true);"><img src="images/top_ci.gif" alt="수원시 3차원 공간정보 활용시스템"></a></div>

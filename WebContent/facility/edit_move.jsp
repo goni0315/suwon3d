@@ -12,6 +12,7 @@
 <script type="text/javascript" src="${ctx}/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/common.js"></script>
 <script type="text/javascript">
 var left="left";
 var north="north";
@@ -25,6 +26,24 @@ var m_ox, m_oy, m_oz = 0.0;
 var obj_move_horizon='obj_move_horizon';
 var obj_move_vertical='obj_move_vertical';
 var obj_rotate='obj_rotate';
+
+//키보드로 건물 이동		
+	$(document).keydown(function(event){	
+		
+		if(top.XDOCX.XDSelGetCount() >= 1) {
+			
+				if(event.keyCode == '37'){		
+					objMove("left");
+				}else if(event.keyCode == '38'){
+					objMove("north");
+				} else if(event.keyCode == '39'){
+					objMove("right");
+				} else if(event.keyCode == '40'){
+					objMove("south");				
+				}				
+		}				
+	});	
+
 //객체 선택
 function choose(){ 
 	top.XDOCX.XDUISetWorkMode(6);
@@ -167,6 +186,7 @@ function getObjectCenterPoint(lName, key, by, h) {
 </head>
 
 <body style="background: url(${ctx}/images/category_bg1.gif)">
+    <div id="click_div"></div>
 	<div id="panel">
 		<div id="title">
 			<div id="category1">
