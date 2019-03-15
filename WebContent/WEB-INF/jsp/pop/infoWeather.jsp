@@ -11,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request" />
-<c:set var="staticSourcePath" value="http://58.123.178.238:8080/data" scope="request" />
+<c:set var="staticSourcePath" value="http://105.1.2.121/data" scope="request" />
 
 <link href="${contextPath}/css/weather/base.css" rel="stylesheet" type="text/css" />
 <link href="${contextPath}/css/weather/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -47,7 +47,7 @@
 		        				<td class="f_w_whit">${ item.tmEf }(${ item.dayOfWeek })</td>
 		        			</tr>
 		        			<tr>
-		        				<td width="73"><script type="text/javascript">getWeatherImgTag('${staticSourcePath}/symbols/symbol/weather/', '${ item.wf }');</script><!-- img src="${contextPath}/images/Weather/1.png" width="73" height="50" / --></td>
+		        				<td width="73"><script type="text/javascript">getWeatherImgTag('${staticSourcePath}/symbols/symbol/weather/', '${ item.wf }');</script><!-- img src="${context7Path}/images/Weather/1.png" width="73" height="50" / --></td>
 		        			</tr>
 		        			<tr>
 		        				<td class="f_w_whit">${ item.wf }</td>

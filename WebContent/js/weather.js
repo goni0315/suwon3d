@@ -3,6 +3,7 @@ var weatherLayerName = 'WEATHER'; // 날씨정보 레이어
 var weatherImg = {  '맑음' : 'w_1.png',
 					'구름 조금' : 'w_2.png',
 					'구름 많음' : 'w_3.png',
+					'구름많음' : 'w_3.png',
 					'흐림' : 'w_4.png',
 					'비' : 'w_5.png',
 					'눈/비' : 'w_6.png',
