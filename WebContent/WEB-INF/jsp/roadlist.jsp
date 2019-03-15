@@ -43,6 +43,11 @@ function doView(layer, keycode){
 	var pos = top.XDOCX.XDSrcObjPosition(layer, keycode, false);
 	pos = pos.split(',');
 	//alert(pos);
+	//영통구 이의동 1197
+	if(keycode=="4111710300111970000"){
+		top.searchXDPointPosition(204103.093750, 523309.093750);
+		return;		
+	}
 	top.searchXDPointPosition(pos[0], pos[2]);
 	
 }

@@ -14,6 +14,18 @@
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/XDControl.js"></script>
+<style type="text/css">
+table{
+table-layout: fixed;
+}
+
+th{
+width:100px;
+}
+td{
+width: 150px;
+}
+</style>
 </head>
 <script type="text/javascript">
 var splitLandList = "${landIndividualHouse}".split("&");
@@ -44,7 +56,7 @@ function priceListView() {
 function landAreaListView() {
 	var rLandAreaList = landAreaList.split(",");
 	for(var i=0;i <= rLandAreaList.length-2;i++){
-		$('#land').append($('<td align="center">' + rLandAreaList[i] + '§©</td>'));
+		$('#land').append($('<td align="center">' + numberComma(rLandAreaList[i]) + '§©</td>'));
 	}
 }
 
@@ -52,7 +64,7 @@ function landAreaListView() {
 function bldgAreaListView() {
 	var rBldgAreaList = bldgAreaList.split(",");
 	for(var i=0;i <= rBldgAreaList.length-2;i++){
-		$('#bldg').append($('<td align="center">' + rBldgAreaList[i] + '§©</td>'));
+		$('#bldg').append($('<td align="center">' + numberComma(rBldgAreaList[i]) + '§©</td>'));
 	}
 }
 
@@ -62,6 +74,11 @@ function onLoadLandList() {
 	landAreaListView();
 	bldgAreaListView();
 }
+
+
+function numberComma(x){
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 </script>
 <body onload="onLoadLandList()">
 <div id="wrap">

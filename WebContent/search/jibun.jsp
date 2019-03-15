@@ -96,6 +96,30 @@ function jibunSearch(){
 		alert("읍면동을 선택해주세요"); 	   
 		return false;
 	}		
+	
+	if(bonbun.search(/\s/) != -1){
+		alert("공백은 입력할 수 없습니다");
+		$("#bonbun").focus();
+		return false;
+	}
+	if(bubun.search(/\s/) != -1){
+		alert("공백은 입력할 수 없습니다");
+		$("#bubun").focus();
+		return false;
+	}
+	var reg = /^[0-9]*$/;
+	if(!reg.test(bonbun)){
+		alert("숫자만 입력하세요");
+		$("#bonbun").focus();
+		return false;
+	}
+	if(!reg.test(bubun)){
+		alert("숫자만 입력하세요");
+		$("#bubun").focus();
+		return false;
+	}
+	
+		
 	$("input[name='sanChk']").val(sanChk);
 
 	if(chk){

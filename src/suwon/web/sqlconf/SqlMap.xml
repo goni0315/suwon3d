@@ -68,6 +68,9 @@
 		or
 		part = 
 		'7903'
+		or
+		part = 
+		'541'
 	</select>
 	
 	<update id="updateAut">
@@ -373,7 +376,7 @@
 		0, 19) ORDER BY SPBD.BULD_NM||' '||SPBD.BULD_NM_DC DESC ) ) WHERE RNUM between 
 		#startArticleNum# and #endArticleNum# </select> -->
 	<select id="getManageList" resultClass="ManageVo">
-		SELECT
+		SELECT 
 		rn, buld_mnnm,
 		buld_slno,lnbr_mnnm, lnbr_slno, rds_man_no,
 		(SELECT sgg_nm FROM
@@ -401,9 +404,25 @@
 		WHERE SGG_CD LIKE #sgg_cd#) SGG,
 		(SELECT * FROM TL_SPRD_MANAGE WHERE
 		RN_CD LIKE #rn_cd#) SPRD,
-		(SELECT * FROM TL_SPBD_BULD WHERE BULD_MNNM
+		(SELECT * FROM TL_SPBD_BULD WHERE 
+		BULD_MNNM
+		
+		<isEmpty property="bonbun">
 		LIKE '%' || #bonbun# || '%' AND
-		BULD_SLNO LIKE '%' || #bubun# || '%')
+		</isEmpty>
+		
+				<isNotEmpty property="bonbun">
+		= #bonbun#  AND
+		</isNotEmpty>
+		
+		BULD_SLNO 
+			<isEmpty property="bubun">
+		LIKE '%' || #bubun# || '%')
+		</isEmpty>
+				<isNotEmpty property="bubun">
+		= #bubun#)
+		</isNotEmpty>
+		 
 		SPBD
 		WHERE
 		SPBD.RDS_MAN_NO = SPRD.RDS_MAN_NO AND SGG.SGG_CD =
@@ -413,12 +432,14 @@
 		SPBD.BULD_NM , SPBD.BULD_SLNO, SPBD.BULD_MNNM, LNBR_MNNM,
 		LNBR_SLNO,
 		SPRD.RN, SPBD.RDS_MAN_NO, SPBD.SIG_CD, SPBD.EMD_CD, SPBD.LI_CD,
-		SUBSTR(BD_MGT_SN, 0, 19)
+		SUBSTR(BD_MGT_SN, 0, 19) order by buld_mnnm asc, buld_slno asc
 		)
-		)
-		WHERE
+		)		
+		WHERE 		
 		RNUM between #startArticleNum# and
 		#endArticleNum#
+		
+
 	</select>
 	<!-- 검색기능 > 도로검색 COUNT ****************** 페이징처리 ****************** -->
 	<select id="getRoadTotalNum" resultClass="int">
@@ -537,7 +558,7 @@
 		where
 		idx BETWEEN
 		#startArticleNum# and #endArticleNum#
-		order by lnbr_slno desc
+		order by pnu asc
 	</select>
 	<!--pnu like #pnuCode# || '%' substr(pnu, 1, 5) like '41115' and substr(pnu, 
 		6, 3) like '141' and substr(pnu, 9, 3) like '001' and substr(pnu, 12, 4) 
@@ -1714,6 +1735,13 @@
 	
     select usrname from usr <iterate open="where usrid IN (" close=")" conjunction="," property="list">#list[]# </iterate>
     
+     
+	</select>
+	
+		<!-- 시설물조회 > 수원부동산공부시스템 연계 -->
+	<select id="getBuildPNU"  resultClass="str" parameterClass="java.util.HashMap">
+	
+    select substr(trim(bd_mgt_sn),1,19) as pnu from bldg_newadd_join where bldg_id = #bul_man_no#
      
 	</select>
 	

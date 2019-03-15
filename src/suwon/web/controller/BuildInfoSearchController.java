@@ -35,6 +35,9 @@ public class BuildInfoSearchController {
 			//String[] bul_man_no2 = bul_man_no.split("3DS"); 		
 		 List<BuildSearchVo> buildList=null;		 
 		 
+		 //시설물 조회에서 PNU값 가져와서  부동산공부시스템 조회
+		 String pnu =  buildInfoSearchService.getBuildPNU(bul_man_no);
+		 
 		 if(bul_man_no!=null){
 
 			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);
@@ -73,6 +76,7 @@ public class BuildInfoSearchController {
 	 	 
 		 ModelAndView mav = new ModelAndView();
 			mav.addObject("buildList", buildList);
+			mav.addObject("pnu", pnu);
 			mav.setViewName("../pop/BuildInfo");
 			return mav;
 

@@ -126,10 +126,9 @@ public class RoadSearchController {
 		MyUtil myUtil = new MyUtil();		
 		if(totalNum != 0)
 		   total_page = myUtil.getPageCount(numPerPage,  totalNum) ;
-		
-		
+				
 		// 다른 사람이 자료를 삭제하여 전체 페이지수가 변화 된 경우
-	    String urlView = cp+"/roadSearch.do?rn_cd="+rn_cd+"&bonbun="+bonbun+"&bubun="+bubun;
+	    String urlView = cp+"/roadSearch.do?rn_cd="+rn_cd+"&bonbun="+bonbun+"&bubun="+bubun+"&sggNm="+sgg_cd;
 	    
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("roadList",roadList);

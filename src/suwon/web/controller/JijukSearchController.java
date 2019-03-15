@@ -57,6 +57,14 @@ public class JijukSearchController {
 		String bubun = request.getParameter("bubun");
 		String pageNum = request.getParameter("pageNum");
 		
+		//pnu에서 같은 값을 가져오기위한 자릿수 맞춰주기
+		if(!(bonbun=="" || bonbun==null)) {
+			bonbun = String.format("%04d", Integer.parseInt(bonbun));
+		}			
+		if(!(bubun=="" || bubun==null)) {
+			bubun = String.format("%04d", Integer.parseInt(bubun));
+		}
+		
 /*    if(sanChk == "on"!(sanChk.equals(""))){
     	sanChk = "2";
     	}else if(sanChk.equals(null)){
