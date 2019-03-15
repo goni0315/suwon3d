@@ -8,16 +8,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>건물 정보조회</title>
 <link href="${ctx}/css/common.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx}/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
 <script type="text/javascript">
 function closeWin()
 {
    self.close();     
 } 
+
+// $(document).ready(function(){
+	
+// 	var pnu = $("#pnu").val();
+// 	jibunInfo(pnu);
+// })
+
+function jibunInfo(pnu){	
+		var winform = window.open("${ctx}/realEstateCadastre.do?pnu=" + pnu,"대장정보조회","toolbar=0, status=0, scrollbars=auto, location=0, menubar=0, width=913px, height=370px");
+		winform.moveTo(screen.availWidth/2-1220/2,screen.availHeight/2 - 680/2);
+		winform.focus();
+	}
 </script>
 </head>
 
 
 <body>
+<input type="text" id="pnu" value="${pnu}" style="display: none" />
 <!--건물 정보조회-->
 	<div style="width: 450px; height: 200px; border: solid 1px #2c3445;">
 		<div style="background: #2c3445; margin: 2px;">
