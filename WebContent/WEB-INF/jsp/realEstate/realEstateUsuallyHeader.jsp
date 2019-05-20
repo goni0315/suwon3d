@@ -84,23 +84,28 @@ function bldgAreaListView() {
 <div id="wrap">
 	<div id="header">
     	<ul class="menu_tab">
-        	<li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}">토지정보</a></li>
-            <li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}" class="on">건축정보</a></li>
+        	<li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">토지정보</a></li>
+            <li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>" class="on">건축정보</a></li>
+               <c:if test="${not empty buildList}">
+        <c:forEach items="${buildList}" var="buld">        
+        <li><h3 style="color: white; padding: 10px 10px 10px 100px; margin-left: 100px;">${buld.sgg_nm} ${buld.rn} ${buld.buld_mnnm} <c:if test="${buld.buld_slno!=0}"> - ${buld.buld_slno}</c:if> (지번) ${buld.emd_nm} ${buld.jibun}</h3></li>
+        </c:forEach>
+        </c:if>
         </ul>
     </div>
     <div id="container">
     	<ul class="sub_tab">
-        	<li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}">건축물대장 총괄표제부</a></li>
-            <li><a href="${ctx}/realEstateUsuallyHeader.do?pnu=${pnu}" class="on">건축물대장 일반/표제부</a></li>
+        	<li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">건축물대장 총괄표제부</a></li>
+            <li><a href="${ctx}/realEstateUsuallyHeader.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>" class="on">건축물대장 일반/표제부</a></li>
             <!-- <li><a href="#">건축물대장 전유부</a></li> -->
         </ul>
 		<div class="content">
-          <table id="landUsually" cellpadding="0" cellspacing="0" class="t_style02">
+          <table id="landUsually" cellpadding="0" cellspacing="0" class="t_style02" style="width: 860px;">
           	<colgroup>
-            	<col width="20%" />
-                <col width="20%" />
-                <col width="20%" />
-                <col width="20%" />
+            	<col width="15%" />
+                <col width="25%" />
+                <col width="25%" />
+                <col width="15%" />
                 <col width="20%" />
             </colgroup>
           	<tr>

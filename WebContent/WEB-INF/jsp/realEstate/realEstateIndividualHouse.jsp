@@ -84,16 +84,21 @@ function numberComma(x){
 <div id="wrap">
 	<div id="header">
     	<ul class="menu_tab">
-        	<li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}" class="on">토지정보</a></li>
-            <li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}">건축정보</a></li>
+        	<li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>" class="on">토지정보</a></li>
+            <li><a href="${ctx}/realEstateGeneralHeader.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">건축정보</a></li>
+             <c:if test="${not empty buildList}">
+        <c:forEach items="${buildList}" var="buld">        
+        <li><h3 style="color: white; padding: 10px 10px 10px 100px; margin-left: 100px;">${buld.sgg_nm} ${buld.rn} ${buld.buld_mnnm}<c:if test="${buld.buld_slno!=0}">- ${buld.buld_slno}</c:if> (지번) ${buld.emd_nm} ${buld.jibun}</h3></li>
+        </c:forEach>
+        </c:if>
         </ul>
     </div>
     <div id="container">
     	<ul class="sub_tab">
-            <li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}">토지대장</a></li>
-            <li><a href="${ctx}/realEstateLandUsePlan.do?pnu=${pnu}">토지이용계획</a></li>
-            <li><a href="${ctx}/realEstatePostedPrice.do?pnu=${pnu}">공시지가</a></li>
-            <li><a href="${ctx}/realEstateIndividualHouse.do?pnu=${pnu}"  class="on">개별주택</a></li>
+            <li><a href="${ctx}/realEstateCadastre.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">토지대장</a></li>
+            <li><a href="${ctx}/realEstateLandUsePlan.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">토지이용계획</a></li>
+            <li><a href="${ctx}/realEstatePostedPrice.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>">공시지가</a></li>
+            <li><a href="${ctx}/realEstateIndividualHouse.do?pnu=${pnu}<c:if test="${not empty bul_man_no}">&bul_man_no=${bul_man_no}</c:if>"  class="on">개별주택</a></li>
         </ul>
         <div class="content">
           <div style="overFlow-x : scroll;width: 100%">
