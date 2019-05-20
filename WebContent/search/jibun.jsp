@@ -13,21 +13,6 @@
 
 </style>
 <script type="text/javascript">
-var chk = true;
-
-function moveFocus(chk){
-	
-	if(chk){
-	setTimeout(function() { document.getElementById('bubun').focus(); }, 10);	
-	this.chk=false;
-	return;
-	}
-	
-	this.chk=true;
-	return chk;
-	
-}
-
 function rnSearch(sggName){//나라 검색
 	$.ajax({
 		type:"POST",
@@ -122,11 +107,11 @@ function jibunSearch(){
 		
 	$("input[name='sanChk']").val(sanChk);
 
-	if(chk){
+	
 	frm.action = '${ctx}/jijukSearch.do';
 	frm.target = 'searchList';
 	frm.submit();		
-	}
+	
 	
 }
 function fnc_input_number1(){
@@ -138,7 +123,8 @@ function fnc_input_number1(){
 	   if (e==8 || e==9 || e==46) return;
 	   if(e==13){
 		   
-		   moveFocus(true);
+		   setTimeout(function() { document.getElementById('bubun').focus(); }, 10);	
+		   return;
 		  
 	   }
 	   event.returnValue = false;
@@ -152,7 +138,7 @@ function fnc_input_number2(){
 	   if (e==8 || e==9 || e==46) return;
 	   if(e==13){
 		   
-		   moveFocus(false);
+		   jibunSearch();return;
 		  
 	   }
 	   event.returnValue = false;
@@ -169,8 +155,8 @@ function fnc_input_number2(){
 	<input type="hidden" id="sanChk" name="sanChk" value="" />
 	
 <div id="panel" class="panel_main">
-    <div id="title">
-        <div id="category">
+    <div id="title"> 
+        <div id="category" style="height: 100px;">
         <ul>
         <li><label>시구</label><select id="sggNm" name="sggNm" style="width:130px" onChange="rnSearch(this.value)">        
 			<option value="0">선택</option>
@@ -196,9 +182,11 @@ function fnc_input_number2(){
 			&nbsp;-&nbsp; 
 			  <input type="text" name="bubun" id="bubun"  onkeydown="fnc_input_number2()" style="width:45px; height:20px;padding-left:5px"  />        
 		  	&nbsp;
-			  <input type="image" src="${ctx}/images/btn_search.gif"   align="absmiddle" onClick="jibunSearch()"/>		           
-        </li>
+		  	</li>
+        
         </ul>
+			 <img src="${ctx}/images/btn_search.gif" onclick="jibunSearch()" style="position: relative; left: 243px; bottom: 26px; "/>
+<%-- <input type="image" src="${ctx}/images/btn_search.gif"   align="absmiddle" onClick="jibunSearch()"/> --%>		           
 	  </div>
     </div>
     <div>

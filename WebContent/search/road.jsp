@@ -11,20 +11,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>3차원공간정보활용시스템</title>
 <script type="text/javascript">
-var chk = true;
-
-function moveFocus(chk){
-	
-	if(chk){
-	setTimeout(function() { document.getElementById('bubun').focus(); }, 10);	
-	this.chk=false;
-	return;
-	}
-	
-	this.chk=true;
-	return chk;
-	
-}
 
 function searchCombo(sggName){//시군구 조회 
 
@@ -130,11 +116,11 @@ function jibunSearch(){
 		return false;
 	}
 
-	if(chk){
+
 	frm.action = '${ctx}/roadSearch.do';
 	frm.target = 'searchRn';
 	frm.submit();	
-	}
+
 	
 }
 function fnc_input_number1(){
@@ -146,7 +132,8 @@ function fnc_input_number1(){
 	   if (e==8 || e==9 || e==46) return;
 	   if(e==13){
 		   
-		   moveFocus(true);
+		   setTimeout(function() { document.getElementById('bubun').focus(); }, 10);	
+		   return;
 		  
 	   }
 	   event.returnValue = false;
@@ -160,7 +147,8 @@ function fnc_input_number2(){
 	   if (e==8 || e==9 || e==46) return;
 	   if(e==13){
 		   
-		   moveFocus(false);
+		   jibunSearch();
+		   return;
 		  
 	   }
 	   event.returnValue = false;
@@ -229,9 +217,11 @@ function fnc_input_number2(){
 		&nbsp;-&nbsp; 
 		<input type="text" id="bubun" name="bubun" onKeyDown="fnc_input_number2()"  style=" width:60px;height:20px;padding-left:5px"/>
 		&nbsp;	
-			<input type="image" src="${ctx}/images/btn_search.gif"   align="absmiddle"  onclick="jibunSearch()"/>
+			
         </li>
         </ul>
+        <%-- <input type="image" src="${ctx}/images/btn_search.gif"   align="absmiddle"  onclick="jibunSearch()"/> --%>
+			<img src="${ctx}/images/btn_search.gif" onclick="jibunSearch()" style="position: relative; left: 240px; bottom: 26px; "/>
 	  </div>
     </div>
     <div>
