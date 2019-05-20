@@ -187,7 +187,7 @@ function keypress() { // 엔터로 검색 할 수 있게 이벤트
          <ul>
         <li class="f_whit_am">반경 위치 설정</li>
         <li style="float:left;"><img src="${ctx}/images/btn_Loc_point.gif" onclick="radiusSelectPoint();" style="cursor:pointer"/></li>       
-        <li></li>
+        <li style="margin-top: 10px;"></li>
         </ul>
 <fieldset style="padding:5px;">
         <legend class="f_whit_am">반경검색 옵션</legend>

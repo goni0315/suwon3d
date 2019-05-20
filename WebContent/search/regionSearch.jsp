@@ -180,7 +180,7 @@ function keypress() { // 엔터로 검색 할 수 있게 이벤트
         <li style=" padding-top:15px;clear:both; "><img src="${ctx}/images/category_SIDE.gif" /></li>
         <li class="f_whit_am">반경 위치 설정</li>
         <li style="float:left;margin:0 3px 0 0;"><img src="${ctx}/images/btn_A_set.gif" onClick="rangeWriteMode()" style="cursor:pointer"/></li>
-        <li><img src="${ctx}/images/btn_A_reset.gif" onClick="clearRect()" style="cursor:pointer"/></li>
+        <li style="margin-bottom: 10px;"><img src="${ctx}/images/btn_A_reset.gif" onClick="clearRect()" style="cursor:pointer"/></li>
         </ul>
 		<fieldset style="padding:5px;" >
         <legend class="f_whit_am">반경검색 옵션</legend>
