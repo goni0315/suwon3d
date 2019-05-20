@@ -11,7 +11,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" scope="request" />
+
+<%--수원실서버  --%>
 <c:set var="staticSourcePath" value="http://105.1.2.121/data" scope="request" />
+<%--테스트서버  --%>
+<%-- <c:set var="staticSourcePath" value="http://localhost:8080/data" scope="request" /> --%>
 
 <link href="${contextPath}/css/weather/base.css" rel="stylesheet" type="text/css" />
 <link href="${contextPath}/css/weather/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css" />
