@@ -438,15 +438,21 @@
 	//주행속도 조절버튼
 	function naviSpeed(val) {
 		var set_speed = document.getElementById('set_speed').value;
-		if (set_speed > 9 || set_speed < 2) {
-			alert('내비게이션 속도는 1 ~ 10 사이로 입력해주세요.');
-			document.getElementById('set_speed').value = 5;
-			return;
-		}
+
 		if (val == 'up') {
+			if(set_speed==10){
+				alert("최대 속도는 10입니다");
+				return;
+			}
 			document.getElementById('set_speed').value = parseInt(set_speed) + 1;
 		} else {
-			document.getElementById('set_speed').value = set_speed - 1;
+			
+			if(set_speed==1){
+				alert("최저 속도는 1입니다");
+				return;
+			}
+			document.getElementById('set_speed').value =parseInt(set_speed) - 1;
+			
 
 		}
 	}
