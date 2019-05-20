@@ -138,7 +138,7 @@ function punChange(value){
 	<input type="hidden" id="dep_addr" name="dep_addr" value="" />	
 <div id="panel">
     <div id="title">
-        <div id="category1">
+        <div id="category1" style="margin-top: 35px;">
        <ul style="width:320px;">
        <li style="float:right;"><a href="shelter_add.jsp" target="left"><img src="${ctx}/images/btn_shelter_add_on.gif" alt="침수 지역 등록"/></a>
         </li>

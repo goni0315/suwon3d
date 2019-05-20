@@ -191,7 +191,7 @@
 <body style="background:url(../images/category_bg1.gif)" onLoad="page_load()">
 <div id="panel">
     <div id="title">
-        <div id="category1">
+        <div id="category1" style="margin-top: 35px;">
        <ul style="width:320px;">
         <li class="f_whit_am">물판 생성</li>
         <li style="float:left; margin-top:5px;"><a href="#" onclick="setRect()"><img src="../images/btn_edit.gif"/></a></li>

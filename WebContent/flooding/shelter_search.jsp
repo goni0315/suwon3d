@@ -74,7 +74,7 @@ function ShelterSearch(){//(최종)전체검색
 <input type="hidden" id="useText" name="useText" value=""></input>
 <div id="panel">
     <div id="title">
-        <div id="category">
+        <div id="category" style="margin-top: 35px;">
        <ul style="width:320px;">
        <li style="float:right;"><a href="shelter_add.jsp" target="left"><img src="${ctx}/images/btn_shelter_add_off.gif" alt="가시권"/></a>
         </li>

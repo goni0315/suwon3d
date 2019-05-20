@@ -61,7 +61,7 @@ function floodInfo(flo_seq){
 <input type="hidden" id="flo_sot" name="flo_sot" value=""></input>
 <div id="panel">
     <div id="title">
-        <div id="category1">
+        <div id="category1" style="margin-top: 35px;">
        <ul style="width:320px;">
        <li style="float:right;"><a href="${ctx}/flooding/flooding_add.jsp" target="left"><img src="${ctx}/images/btn_flooding_add_off.gif" alt="가시권"/></a>
         </li>

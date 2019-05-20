@@ -87,7 +87,7 @@ function floodAdd(){
 <input type="hidden" id="flo_sot" name="flo_sot" value=""></input>
 <div id="panel">
     <div id="title">
-        <div id="category">
+        <div id="category" style="margin-top: 35px;">
        <ul style="width:320px;">
        <li style="float:right;"><a href="${ctx}/flooding/flooding_add.jsp" target="left"><img src="${ctx}/images/btn_flooding_add_on.gif" alt="침수 지역 등록"/></a>
         </li>
