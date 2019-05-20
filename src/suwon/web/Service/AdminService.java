@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import suwon.web.dao.AdminDao;
+import suwon.web.vo.AdminIpVo;
+import suwon.web.vo.BldgInfoVo;
 import suwon.web.vo.LayInfoVo;
 
 public class AdminService implements AdminDao{
@@ -67,6 +69,61 @@ public class AdminService implements AdminDao{
 		int returns = (Integer)sqlMapClientTemplate.queryForObject("sms.getLayerListCntForManagerInlayerListPage", msg); 
 		return returns;
 	}
+	
+	//로그인한 id, ip로 DB 조회
+	public List<AdminIpVo> getAdminIP(String usrid, String conip) {
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("usrid",usrid);
+		param.put("conip",conip);
+		
+		List<AdminIpVo> li = new ArrayList<AdminIpVo>();
+		li = sqlMapClientTemplate.queryForList("sms.getAdminIP", param); 
+		return li;
+	}
+	
+	//로그인한 id, ip로 DB 입력
+	public void setAdminIP(String usrid, String conip) {
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("usrid",usrid);
+		param.put("conip",conip);
+		
+		sqlMapClientTemplate.insert("sms.setAdminIP", param); 
+		 
+		
+	}
+	public void delAdminIP(String usrid, String conip) {
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("usrid",usrid);
+		param.put("conip",conip);
+		
+		sqlMapClientTemplate.delete("sms.delAdminIP", param); 
+		
+		
+	}
+	public List<BldgInfoVo> getBldgList(String year, Integer startNum, Integer endNum) {
+		
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("year",year);
+		param.put("startNum",startNum.toString());
+		param.put("endNum",endNum.toString());
+		
+		List<BldgInfoVo>list = sqlMapClientTemplate.queryForList("sms.getBldgList", param);
+		return list; 
+		
+	}
+	
+	public int getTotalCount() {
+		
+		
+		int count = (Integer) sqlMapClientTemplate.queryForObject("sms.getTotalCount");
+		return count; 
+		
+	}
+
 	
 	
 }
