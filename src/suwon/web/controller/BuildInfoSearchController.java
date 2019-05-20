@@ -1,7 +1,6 @@
 package suwon.web.controller;
 
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +26,7 @@ public class BuildInfoSearchController {
 	private BuildInfoSearchService buildInfoSearchService = (BuildInfoSearchService) context.getBean("buildInfoSearchService");
 
 	@RequestMapping("/buildInfoSearch.do")
-	public ModelAndView boardList(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public void boardList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
 
 		
@@ -35,8 +34,12 @@ public class BuildInfoSearchController {
 			//String[] bul_man_no2 = bul_man_no.split("3DS"); 		
 		 List<BuildSearchVo> buildList=null;		 
 		 
-		 //시설물 조회에서 PNU값 가져와서  부동산공부시스템 조회
 		 String pnu =  buildInfoSearchService.getBuildPNU(bul_man_no);
+		 
+		 
+		 if(pnu==null || pnu=="") {
+				response.sendRedirect("errBldgInfo.do");
+			}
 		 
 		 if(bul_man_no!=null){
 
@@ -74,11 +77,30 @@ public class BuildInfoSearchController {
 			 }
 */		 }
 	 	 
-		 ModelAndView mav = new ModelAndView();
-			mav.addObject("buildList", buildList);
-			mav.addObject("pnu", pnu);
-			mav.setViewName("../pop/BuildInfo");
-			return mav;
+	     	
+			if(pnu!=null)
+				response.sendRedirect("realEstateCadastre.do?bul_man_no="+bul_man_no+"&pnu="+pnu);							
+			
+			
+			
+			//이전 건물정보조회코드
+			//ModelAndView mav = new ModelAndView();
+			//mav.addObject("buildList", buildList);
+			//mav.addObject("pnu", pnu);
+			//mav.setViewName("../pop/BuildInfo");
+			//return mav;
 
 	}
+	
+	@RequestMapping("/errBldgInfo.do")
+	public ModelAndView errBldgInfo(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+		ModelAndView mav = new ModelAndView();		
+		mav.setViewName("jsp/realEstate/errBldgInfo");
+		return mav;
+	}
+
+	
+	
+	
 }
