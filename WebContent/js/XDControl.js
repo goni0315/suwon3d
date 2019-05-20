@@ -2152,7 +2152,10 @@ clickShowInfo = function() {
 
 //지하시설물, 건물 정보조회 (툴 > 정보조회)
 function sangseInfo(layerName,key){
- 
+ if(layerName==null && key==null){
+	 return false;
+ }
+	
 	switch (layerName) {	
 
 	/**************지하시설물***************/
@@ -2197,47 +2200,47 @@ function sangseInfo(layerName,key){
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;		
 		/*****************************건물******************************/
-	case "KO3D_BLDG_3D_PUBLIC"://
+	case "KO3D_BLDG_3D_PUBLIC":
 		//alert("KO3D_BLDG_3D_PUBLIC");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
-		var winxpos = (window.screen.width-1250)/2;
-		var winypos = (window.screen.height-685)/2;		
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
+		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
-	case "KO3D_BLDG_3D_COMMON"://
+	case "KO3D_BLDG_3D_COMMON":
 		//alert("KO3D_BLDG_3D_COMMON");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
-	case "KO3D_BLDG_3D_CULTURALEDUACTION"://
-		//alert("KO3D_BLDG_3D_CULTURALEDUACTION");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+	case "KO3D_BLDG_3D_CULTURALEDUCATION":
+		//alert("KO3D_BLDG_3D_CULTURALEDUCATION");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;		
-	case "KO3D_BLDG_3D_ETC"://
-		//alert("KO3D_BLDG_3D_ETC");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+		w.moveTo(winxpos,winypos);break;
+	case "KO3D_BLDG_3D_ETC":
+	//	alert("KO3D_BLDG_3D_ETC");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;		
-	case "KO3D_BLDG_3D_GENERAL"://
+		w.moveTo(winxpos,winypos);break;
+	case "KO3D_BLDG_3D_GENERAL":
 		//alert("KO3D_BLDG_3D_GENERAL");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
-	case "KO3D_BLDG_3D_INDUSTRY"://
+	case "KO3D_BLDG_3D_INDUSTRY":
 		//alert("KO3D_BLDG_3D_INDUSTRY");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
+		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
+		w.moveTo(winxpos,winypos);break;	
+	case "KO3D_BLDG_3D_MEDICALWELFARE":
+		//alert("KO3D_BLDG_3D_MEDICALWELFARE");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;		
-	case "KO3D_BLDG_3D_MEDICALWELFARE"://KO3D_BLDG_3D_3D_SERVICE
-		//alert("KO3D_BLDG_3D_MEDICALWELFARE");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
+	case "KO3D_BLDG_3D_SERVICE":
+		//alert("KO3D_BLDG_3D_SERVICE");
+		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank", "toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;					
-	case "KO3D_BLDG_3D_3D_SERVICE":
-		//alert("KO3D_BLDG_3D_3D_SERVICE");
-		var w=window.open(WEB_SERVER_URL+"/buildInfoSearch.do?key="+key,"_blank","width=450px,height=200px");
-		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;				
+		w.moveTo(winxpos,winypos);break;
+		
 	}	
 }
 
