@@ -716,7 +716,6 @@ text-decoration: none;
 line-height: 40px;
 color: black;
 font-weight: bold;
-font-family: 
 }
 .pc:hover {
 	text-decoration: none;
@@ -847,7 +846,7 @@ font-family:
                     <li><a href="#" onClick="javascript:showHistory('n01',2,'Notab01');return false;" onKeyPress=""><img src="${ctx}/images/set01_on.gif" alt="분석도구" id="Notab01"></a></li>
                     <li><a href="#" onClick="javascript:showHistoryToggle();return false;" onKeyPress=""><img src="${ctx}/images/set02_off.gif" id="Notab02" alt="내비게이션"></a></li>
                     <li><a href="javascript:adminSubmit()"><img src="/Suwon3d/images/goadmin.png" alt="분석도구" id="goadmin" style="display: none;"></a></li>
-                    <li><a href="javascript:buildingManagement()" id="gobldg" class="pc" style="display: none;">시설물관리</a></li>
+                    <li><a href="javascript:buildingManagement()" id="gobldg" class="pc" style="display: none; margin-right: 5px;">시설물리스트</a></li>
 	                <li><a href="javascript:addPC()" id="addPC" class="pc" style="display: none;">지정PC등록</a></li>
 	                <li><a href="javascript:delPC()" class="pc" id="delPC" style="display: none;">지정PC해지</a></li>
                 </ul>
