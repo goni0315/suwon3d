@@ -38,7 +38,7 @@ function jibunInfo(pnu){
 		
 	}); */
 	//var winform = window.open("${ctx}/realEstateCadastre.do?pnu=" + pnu + "&bulidNo=" + bulidNo,"대장정보조회","toolbar=0, status=0, scrollbars=auto, location=0, menubar=0, width=913px, height=370px");
-	var winform = window.open("${ctx}/realEstateCadastre.do?pnu=" + pnu,"대장정보조회","toolbar=0, status=0, scrollbars=auto, location=0, menubar=0, width=913px, height=370px");
+	var winform = window.open("${ctx}/realEstateCadastre.do?pnu=" + pnu,"대장정보조회","toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
 	winform.moveTo(screen.availWidth/2-1220/2,screen.availHeight/2 - 680/2);
 	winform.focus();
 }
