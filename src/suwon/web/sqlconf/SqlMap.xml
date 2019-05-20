@@ -40,6 +40,8 @@
 		type="suwon.web.vo.AdminLogListVo" />
 	<typeAlias alias="UsrIdVo" type="suwon.web.vo.UsrIdVo" />
 	<typeAlias alias="UsrNameVo" type="suwon.web.vo.UsrNameVo" />
+	<typeAlias alias="AdminIpVo" type="suwon.web.vo.AdminIpVo" />
+	<typeAlias alias="BldgInfo" type="suwon.web.vo.BldgInfoVo" />
 
 	<insert id="insertadmin" parameterClass="UsrIdVo">
 		insert into
@@ -1744,6 +1746,39 @@
     select substr(trim(bd_mgt_sn),1,19) as pnu from bldg_newadd_join where bldg_id = #bul_man_no#
      
 	</select>
+	
+		<select id="getAdminIP"  resultClass="AdminIpVo" parameterClass="java.util.HashMap">
+	
+select nvl(max(usrid), '0') as usrid, nvl(max(conip), '0') as conip from admin_pc_nominate where usrid = #usrid#
+     
+	</select>
+	
+			<insert id="setAdminIP"   parameterClass="java.util.HashMap">
+	
+	insert into admin_pc_nominate values(#usrid#, #conip#)
+     
+	</insert>
+			<delete id="delAdminIP"   parameterClass="java.util.HashMap">
+	
+	delete from admin_pc_nominate where usrid = #usrid# and conip = #conip#
+     
+	</delete>
+	
+   <select id="getBldgList"  resultClass="BldgInfo" parameterClass="java.util.HashMap">
+	     
+          select * from 
+(
+select rownum as rnum, bi.* from bldg_info bi where bldg_year = #year#
+)
+where rnum between #startNum# and #endNum#
+	</select>
+	
+	   <select id="getTotalCount"  resultClass="int">
+	
+	select count(*) from bldg_info
+     
+	</select>
+	
 	
 
 </sqlMap>
