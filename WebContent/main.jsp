@@ -1,9 +1,10 @@
-﻿﻿<!-- 
+﻿﻿﻿<!-- 
 	수원시 3차원 활용시스템 메인 >> 검색기능 >> 도로명검색 결과 페이지
  -->
 <%@page import="java.util.Random"%>
 <%@page import="util.StirngUtil"%>
 <%@page import="util.AutoAdminAut"%>
+<%@page import="util.ConIP"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -35,8 +36,11 @@
 	 }
 	 
 		//자동 관리자 권한 변경
-		new AutoAdminAut().autoAdminAut();		
+		new AutoAdminAut().autoAdminAut();	
+		//클라이언트 IP가져오기
+		String conip = new ConIP().getConIP(request);
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -55,7 +59,6 @@
 <script type="text/javascript" src="${ctx}/js/xdk.js"></script>
 <script type="text/javascript" src="${ctx}/js/weather.js"></script>
 <script type="text/javascript" src="${ctx}/js/common.js"></script>
-
 <script type="text/javascript">
 //시설물 xdl저장 체크 변수
 var chk = 0;
@@ -76,7 +79,7 @@ function chkXDL(param){
 	
 		if(arr[i]==param){
 			alert("같은 레이어(xdl) 파일은 여러번 불러올 수 없습니다.");
-			return;
+			return true;
 		}	
 	}
 	arr.push(param);
@@ -90,7 +93,7 @@ function getMainContextPath(){
 }
 
 window.onload = function(){
-	
+    setAdminPcNominate("<%=usrid%>", "<%=conip%>");
 	doLogin("<%=usrid%>","main");
 	doLayerLoad("<%=usrid%>");
 	};
@@ -102,8 +105,7 @@ function initSystem(){
 	        //기본 심볼 다운로드
 	        downSymbols();
 	        xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);//서버연결
-	        //xdServerConnect('192.168.0.3',9830,'Suwon3d',0,0);//서버연결	        
-	        //xdServerConnect('58.123.178.238',9830,'Suwon3d',0,0);//서버연결
+	        //xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);
 	        
 		}else{
 			if(objectCheck("Xdworld plugin")){
@@ -113,9 +115,9 @@ function initSystem(){
 				}
 				XDOCX=pluginobj;
 				xdServerConnect('10.1.2.125',9830,'Suwon3d',0,0);
-				//xdServerConnect('192.168.0.3',9830,'Suwon3d',0,0);
-				//xdServerConnect('58.138.253.23',9830,'testGroup',0,0);//서버연결
-		        //기본 심볼 다운로드
+				//xdServerConnect('105.1.2.121',9830,'Suwon3d',0,0);
+
+				//기본 심볼 다운로드
 		        downSymbols();
 			}else{
 				openSetupPage();
@@ -596,14 +598,15 @@ function levelChk(level) {
 	
 	//우측상단 툴바 토글키
 	function mainToolMenu(objNm) {
-		if(objNm == 'tool8'){ //날씨정보
-			document.getElementById("tool8").src = "${ctx}/images/tool08_on.gif";
-			document.getElementById("tool1").src = "${ctx}/images/tool01_off.gif";
-			document.getElementById("tool2").src = "${ctx}/images/tool02_off.gif";
-			document.getElementById("tool3").src = "${ctx}/images/tool03_off.gif";
-			document.getElementById("tool4").src = "${ctx}/images/tool04_on.gif";
+ 		if(objNm == 'tool8'){ //날씨정보
+ 			document.getElementById("tool8").src = "${ctx}/images/tool08_on.gif";
+ 			document.getElementById("tool1").src = "${ctx}/images/tool01_off.gif";
+ 			document.getElementById("tool2").src = "${ctx}/images/tool02_off.gif";
+ 			document.getElementById("tool3").src = "${ctx}/images/tool03_off.gif";
+ 			document.getElementById("tool4").src = "${ctx}/images/tool04_on.gif";
 	
-		}else if(objNm == 'tool1'){//시설물정보조회
+		}
+		 if(objNm == 'tool1'){//시설물정보조회
 			MapControl('cam_3rdmode');
 			document.getElementById("tool8").src = "${ctx}/images/tool08_off.gif";
 			document.getElementById("tool1").src = "${ctx}/images/tool01_on.gif";
@@ -683,11 +686,12 @@ function levelChk(level) {
 			};
 	}
 	
-/* 	function setLayerLoad() {
-		
-	} */
+function doBldgView(pnu){	
 	
-
+	var pos = top.XDOCX.XDSrcObjPosition('KO3D_PL_BBND', pnu, false);
+	pos = pos.split(',');
+	top.searchXDPointPosition(pos[0], pos[2]);
+	}
 </script>
 <style type="text/css">
 div.c5 {
@@ -707,6 +711,16 @@ div.c2 {
 div.c1 {
 	margin-left: 2em
 }
+.pc{
+text-decoration: none;
+line-height: 40px;
+color: black;
+font-weight: bold;
+font-family: 
+}
+.pc:hover {
+	text-decoration: none;
+}
 </style>
 <meta>
 </head>
@@ -724,8 +738,8 @@ div.c1 {
                 <ul id="topMenu">
                     <li><a href="#" onClick="javascript:showHistory('m01',7,'menu01');MM_nbGroup('down','group1','subMenu01off','${ctx}/images/subMenu01_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu01_on.gif" alt="지도검색" name="menu01" id="menu01"></a></li>
                     <li><a href="#" onClick="javascript:showHistory('m02',7,'menu02');MM_nbGroup('down','group2','subMenu11off','${ctx}/images/subMenu11_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu02_off.gif" alt="시설물입지" name="menu02" id="menu02"></a></li>
-                    <li><a href="#" onClick="javascript:showHistory('m03',7,'menu03');MM_nbGroup('down','group3','subMenu21off','${ctx}/images/subMenu21_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu03_off.gif" alt="경관시뮬레이션" name="menu03" id="menu03"></a></li>
-                    <li><a href="#" onClick="javascript:showHistory('m04',7,'menu04');MM_nbGroup('down','group4','subMenu31off','${ctx}/images/subMenu31_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu04_off.gif" alt="침수시뮬레이션" name="menu04" id="menu04"></a></li>
+                    <li><a href="#" onClick="javascript:showHistory('m03',7,'menu03');MM_nbGroup('down','group3','subMenu21off','${ctx}/images/subMenu21_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu03_off.gif" alt="시뮬레이션" name="menu03" id="menu03"></a></li>
+                    <li style="display: none;"><a href="#" onClick="javascript:showHistory('m04',7,'menu04');MM_nbGroup('down','group4','subMenu31off','${ctx}/images/subMenu31_on.gif',1);" onKeyPress=""><img src="${ctx}/images/menu04_off.gif" alt="침수시뮬레이션" name="menu04" id="menu04"></a></li>
                     <li><a href="#" onClick="javascript:showHistory('m05',7,'menu05');return false; MapControl('map_clear')" onKeyPress=""><img src="${ctx}/images/menu05_off.gif" alt="내주제도" name="menu05" id="menu05"></a></li>
                     <li><a href="#" onClick="javascript:showHistory('m07',7,'menu07');return false;" onKeyPress=""><img src="${ctx}/images/menu07_off.gif" alt="안전길" name="menu07" id="menu07"></a></li>
                     <li><a href="#" onClick="javascript:showHistory('m06',7,'menu06');return false;" onKeyPress=""><img src="${ctx}/images/menu06_off.gif" alt="레이어" name="menu06" id="menu06"></a></li>
@@ -735,7 +749,7 @@ div.c1 {
                     <ul>
                         <li><a href="${ctx}/search/jibun.jsp" target="left" onClick="MM_nbGroup('down','group1','subMenu01off','${ctx}/images/subMenu01_on.gif',1)" onMouseOver="MM_nbGroup('over','subMenu01off','${ctx}/images/subMenu01_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="01" src="${ctx}/images/subMenu01_on.gif" alt="" name="subMenu01off" border="0" onload="MM_nbGroup('init','group1','subMenu01off','${ctx}/images/subMenu01_off.gif',1)"></a></li>
                         <li><a href="${ctx}/search/road.jsp" target="left" onClick="MM_nbGroup('down','group1','subMenu02off','${ctx}/images/subMenu02_on.gif',1)" onMouseOver="MM_nbGroup('over','subMenu02off','${ctx}/images/subMenu02_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="02" src="${ctx}/images/subMenu02_off.gif" alt="" name="subMenu02off"  border="0" onload=""></a></li>
-                        <li><a href="${ctx}/search/build.jsp" target="left" onClick="MM_nbGroup('down','group1','subMenu03off','${ctx}/images/subMenu03_on.gif',1)" onMouseOver="MM_nbGroup('over','subMenu03off','${ctx}/images/subMenu03_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="03" src="${ctx}/images/subMenu03_off.gif" alt="" name="subMenu03off"  border="0" onload=""></a></li>
+<%-- 네이버검색 --%><li style="display: none;"><a href="${ctx}/search/build.jsp" target="left" onClick="MM_nbGroup('down','group1','subMenu03off','${ctx}/images/subMenu03_on.gif',1)" onMouseOver="MM_nbGroup('over','subMenu03off','${ctx}/images/subMenu03_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="03" src="${ctx}/images/subMenu03_off.gif" alt="" name="subMenu03off"  border="0" onload=""></a></li>
                         <li><a href="${ctx}/search/radiousSearch.jsp" target="left" onClick="MM_nbGroup('down','group1','subMenu04off','${ctx}/images/subMenu04_on.gif',1)" onMouseOver="MM_nbGroup('over','subMenu04off','${ctx}/images/subMenu04_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="04" src="${ctx}/images/subMenu04_off.gif" alt="" name="subMenu04off"  border="0" onload=""></a></li>
                         <li><img id="left_toggle1" src="${ctx}/images/subMenu_close.gif" onclick="toggleVisibleLeftMenu(1)" ></li>
                         <li>
@@ -774,9 +788,12 @@ div.c1 {
 	                       	&nbsp; <B>X</B> : <input id="xVal3" type="text" value="" size="15" style="background-color: #ECEDED; border:0; margin-top: 4px" readonly>
 	               			<B>Y</B> : <input id="yVal3" type="text" value="" size="15" style="background-color: #ECEDED; border:0;" readonly>
 	               		</li>
+	               		<li style="clear: left;"><a href="${ctx}/flooding/flooding_search.jsp" target="left" onClick="MM_nbGroup('down','group3','subMenu26off','${ctx}/images/subMenu26_on.gif',1);MapControl('map_clear')" onMouseOver="MM_nbGroup('over','subMenu26off','${ctx}/images/subMenu26_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="26" src="${ctx}/images/subMenu26_off.gif" alt="" name="subMenu26off"  border="0" onload=""></a></li>
+                        <li style="float: left;"><a href="${ctx}/flooding/shelter_search.jsp" target="left" onClick="MM_nbGroup('down','group3','subMenu27off','${ctx}/images/subMenu27_on.gif',1);MapControl('map_clear')" onMouseOver="MM_nbGroup('over','subMenu27off','${ctx}/images/subMenu27_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="27" src="${ctx}/images/subMenu27_off.gif" alt="" name="subMenu27off" border="0" onload=""></a></li>
+                        <li style="float: left;"><a href="${ctx}/flooding/floodingS.jsp" target="left" onClick="MM_nbGroup('down','group3','subMenu28off','${ctx}/images/subMenu28_on.gif',1);MapControl('map_clear')" onMouseOver="MM_nbGroup('over','subMenu28off','${ctx}/images/subMenu28_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="28" src="${ctx}/images/subMenu28_off.gif" alt="" name="subMenu28off" border="0" onload=""></a></li>
                     </ul>
                 </div> 
-                <div id="m04" class="subMenu c2">
+                <div id="m04" class="subMenu c2" style="display: none;">
                     <ul>
                         <li><a href="${ctx}/flooding/flooding_search.jsp" target="left" onClick="MM_nbGroup('down','group4','subMenu31off','${ctx}/images/subMenu31_on.gif',1);MapControl('map_clear')" onMouseOver="MM_nbGroup('over','subMenu31off','${ctx}/images/subMenu31_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="31" src="${ctx}/images/subMenu31_on.gif" alt="" name="subMenu31off"  border="0" onload="MM_nbGroup('init','group4','subMenu31off','${ctx}/images/subMenu31_off.gif',1)"></a></li>
                         <li><a href="${ctx}/flooding/shelter_search.jsp" target="left" onClick="MM_nbGroup('down','group4','subMenu32off','${ctx}/images/subMenu32_on.gif',1);MapControl('map_clear')" onMouseOver="MM_nbGroup('over','subMenu32off','${ctx}/images/subMenu32_on.gif','',1)" onMouseOut="MM_nbGroup('out')"><img id="32" src="${ctx}/images/subMenu32_off.gif" alt="" name="subMenu32off" border="0" onload=""></a></li>
@@ -829,6 +846,10 @@ div.c1 {
                 <ul id="tabmenu">
                     <li><a href="#" onClick="javascript:showHistory('n01',2,'Notab01');return false;" onKeyPress=""><img src="${ctx}/images/set01_on.gif" alt="분석도구" id="Notab01"></a></li>
                     <li><a href="#" onClick="javascript:showHistoryToggle();return false;" onKeyPress=""><img src="${ctx}/images/set02_off.gif" id="Notab02" alt="내비게이션"></a></li>
+                    <li><a href="javascript:adminSubmit()"><img src="/Suwon3d/images/goadmin.png" alt="분석도구" id="goadmin" style="display: none;"></a></li>
+                    <li><a href="javascript:buildingManagement()" id="gobldg" class="pc" style="display: none;">시설물관리</a></li>
+	                <li><a href="javascript:addPC()" id="addPC" class="pc" style="display: none;">지정PC등록</a></li>
+	                <li><a href="javascript:delPC()" class="pc" id="delPC" style="display: none;">지정PC해지</a></li>
                 </ul>
                 <!-- 1 -->
                 <div id="n01" class="set">
@@ -850,7 +871,7 @@ div.c1 {
             <div id="tool">
                 <ul>
 					<!-- 날씨 S -->
-                    <li><a href="#" onclick="weatherOnOff();mainToolMenu('tool8')" title="날씨정보"><img id="tool8" src="${ctx}/images/tool08_off.gif" alt="날씨정보"></a></li>
+                     <li><a href="#" onclick="weatherOnOff();mainToolMenu('tool8')" title="날씨정보"><img id="tool8" src="${ctx}/images/tool08_off.gif" alt="날씨정보"></a></li> 
 <%--                     <li><a href="#" onclick="weeklyWeatherInfo()" class="roll"><img src="${ctx}/images/tool09_off.gif" alt="주간날씨"><img src="${ctx}/images/tool09_on.gif" alt="주간날씨" class="over"></a></li> --%>
                 	<!-- 날씨 E -->
 
@@ -898,6 +919,9 @@ div.c1 {
                 </ul>
             </div>
             <div class="aside_line"></div>
+        </div>
+        <div id=aside2>
+        <iframe src="${ctx}/images/subMenu_close.gif"></iframe>
         </div>
         <hr>
         <div id="content">
