@@ -129,9 +129,8 @@ public class BuildSearchController {
 	@RequestMapping("/textSearch/potalSearch.do")
 	public @ResponseBody String potalSearch(HttpServletRequest request){
 		 
-		 String clientId = "hWB4M5y5P_fPowNBamLl";//애플리케이션 클라이언트 아이디값";
-	     String clientSecret = "iTjZeScUPC";//애플리케이션 클라이언트 시크릿값";
-	     
+		 String clientId = "d6Dw3YlRBGw3KdEB9yWZ";//애플리케이션 클라이언트 아이디값";
+	     String clientSecret = "IbE8hfpgdC";//애플리케이션 클라이언트 시크릿값";
 	     String searchText = request.getParameter("searchText");
 	     String searchList = null;
 	     try {
