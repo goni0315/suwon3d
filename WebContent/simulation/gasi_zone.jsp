@@ -87,7 +87,7 @@ function gasiClear(){
 <body>
 	<div id="panel">
 		<div id="title">
-			<div id="category">
+			<div id="category" style="margin-top: 35px;">
 				<ul style="width: 320px;">
 					<li style="float: left;">
 						<a href="gasi.jsp" target="left">

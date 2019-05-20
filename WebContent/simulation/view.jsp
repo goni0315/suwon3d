@@ -277,7 +277,7 @@ function makeTbl(countNo, pos_X, pos_Y, pos_Z, str){
 <body style="background: url(${ctx}/images/category_bg1.gif)">
 	<div id="panel">
 		<div id="title">
-			<div id="category1">
+			<div id="category1" style="margin-top: 35px;">
 				<ul style="width: 320px;">
 					<li style="float: left;">
 						<a href="view.jsp" target="left">

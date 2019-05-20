@@ -112,7 +112,7 @@ function gasiClear(){
 <body>
 	<div id="panel">
 		<div id="title">
-			<div id="category">
+			<div id="category" style="margin-top: 35px;">
 				<ul style="width: 320px;">
 					<li style="float: left;"><a href="gasi.jsp" target="left"><img src="${ctx}/images/btn_gasi_on.gif" alt="가시권" /></a></li>
 					<li style="float:left;margin-left: 4px;"><a href="gasi_zone.jsp" target="left"><img src="${ctx}/images/btn_gasiZone_off.gif" alt="가시권역" /></a></li>
@@ -162,6 +162,7 @@ function gasiClear(){
 					</tr>
 				</table>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

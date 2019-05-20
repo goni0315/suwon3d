@@ -179,7 +179,7 @@ function cutLoad() {
 <body style="background: url(${ctx}/images/category_bg1.gif)">
 	<div id="panel">
 		<div id="title">
-			<div id="category1">
+			<div id="category1" style="margin-top: 35px;">
 				<ul style="width: 320px;">
 					<li class="f_whit_am">선택영역 설정</li>
 					<li style="float: left;">

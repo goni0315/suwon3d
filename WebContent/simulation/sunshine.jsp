@@ -5,14 +5,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${ctx}/css/gislayout.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>3차원공간정보활용시스템</title>
+<link href="${ctx}/css/admin_common.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="${ctx}/css/gislayout.css" />
 
-<script type="text/javascript" src="${ctx}/js/calendar.js"></script>
+<%-- <script type="text/javascript" src="${ctx}/js/calendar.js"></script> --%>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
-<script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.18.custom.min.js"></script>
 
 <script type="text/javascript">
 
@@ -194,7 +196,7 @@ function doAnalysis(){
 	    	
 	    	<c:if test="${ not empty param.deli_idx }">
     		top.inc_busi_if.receiveData(
-    			${ param.deli_idx }, 
+    			${param.deli_idx},
 				{
 	    			'일조량': result_time[0]+'시간 '+result_time[1]+'분',
 	    			'TX': input_pos[0],
@@ -283,12 +285,43 @@ function btnSunView_onclick() {
     }
 }
 </script>
+<script type="text/javascript">
+$(function(){
+	var todayDate = new Date();
+	
+	/* $("#datepicker1").val(todayDate.getFullYear()+"-"+addZero(eval(todayDate.getMonth()))+"-"+todayDate.getDate());
+	$("#datepicker2").val(todayDate.getFullYear()+"-"+addZero(eval(todayDate.getMonth()+1))+"-"+todayDate.getDate()); */
+	
+	//달력 관련
+	$.datepicker.setDefaults({
+        changeMonth: true,
+        changeYear: true,
+		monthNames: ['년 1월','년 2월','년 3월','년 4월','년 5월','년 6월','년 7월','년 8월','년 9월','년 10월','년 11월','년 12월'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],	    
+		dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	    showMonthAfterYear:true,
+	    dateFormat: 'yy-mm-dd',
+	    buttonImageOnly: true,
+	    buttonText: "달력",
+	    buttonImage: ""
+	});
+	
+	$("#txtDate").datepicker({
+	    defaultDate: todayDate,//(2013, 1-1, 27),
+	    //showOn: "both", // focus, button, both
+	    showAnim: "clip", // blind, clip, drop, explode, fold, puff, slide, scale, size, pulsate, bounce, highlight, shake, transfer (효과)
+	    showOptions: {direction: 'horizontal'},
+	    duration: 500
+	}); 
+});
+
+</script>
 </head>
 
 <body style="background: url(${ctx}/images/category_bg1.gif)" onload="sunStart();">
 	<div id="panel">
 		<div id="title">
-			<div id="category1">
+			<div id="category1" style="margin-top: 35px;">
 				<ul style="width: 320px;">
 					<li class="f_whit_am">일조분석 대상</li>
 					<li style="clear: both; float: left;">
@@ -307,38 +340,40 @@ function btnSunView_onclick() {
 						</a>
 					</li>
 					<li style="clear: both; margin-top:5px;">
-					<label for="textfield"> 
-						<input type="radio" name="RadioGroup1" value="라디오" id="RadioGroup1_1" />레이어
-					</label>
-						<select name="" style="margin-top:5px;">
-								<option>객체선택모드</option>
-						</select>
-					</li>
-					<li style="height: 120px;">
-						<div id="bbsCont" style="height: 100px; overflow-y: scroll; width: 310px; background: #FFF; border: solid 1px #333333;">
-							<table border="0" cellpadding="0" cellspacing="0" class="wps_100" summary="가시결과list">
-								<col class="w_40" />
-								<col />
-								<tr>
-									<th>No</th>
-									<th>레이어</th>
-								</tr>
-							</table>
-						</div>
-					</li>
+					
+<!-- 					레이어 선택 기능은 개발이 안된것인가 소스상으로 기능구현이 안되어 있어보임 -->
+<!-- 					<label for="textfield">  -->
+<!-- 						<input type="radio" name="RadioGroup1" value="라디오" id="RadioGroup1_1" />레이어 -->
+<!-- 					</label> -->
+<!-- 						<select name="" style="margin-top:5px;"> -->
+<!-- 								<option>객체선택모드</option> -->
+<!-- 						</select> -->
+<!-- 					</li> -->
+<!-- 					<li style="height: 120px;"> -->
+<!-- 						<div id="bbsCont" style="height: 100px; overflow-y: scroll; width: 310px; background: #FFF; border: solid 1px #333333;"> -->
+<!-- 							<table border="0" cellpadding="0" cellspacing="0" class="wps_100" summary="가시결과list"> -->
+<%-- 								<col class="w_40" /> --%>
+<%-- 								<col /> --%>
+<!-- 								<tr> -->
+<!-- 									<th>No</th> -->
+<!-- 									<th>레이어</th> -->
+<!-- 								</tr> -->
+<!-- 							</table> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
 					<li style="height: 120px;">
 						<fieldset style="padding:5px;">
 							<legend class="f_whit_am">시간 설정</legend>
 							<ul>
 								<li style="float: left;">
-									<form>
 									<label for="textfield" style="width: 80px;">현재날짜</label>
 									<!-- <input type="text" value="" id="today" readonly/> -->
-								        <input name="txtDate" id="txtDate" />
+<!-- 								        <input name="txtDate" id="txtDate" /> -->
+								        <input type="text" id="txtDate" name="txtDate"/>
 								</li>
 								<li>
-										<img src="${ctx}/images/bbs/date.gif" style="cursor: pointer;"  onclick="popUpCalendar(this, txtDate, 'yyyy-mm-dd');"/>
-								   </form>
+<!-- 								캘린더js의 createpopup은 ie 내장함수인데 11부터 삭제됨 > 제이쿼리ui datepicker로 변경함 -->
+<%-- 										<img src="${ctx}/images/bbs/date.gif" style="cursor: pointer;"  onclick="popUpCalendar(this, txtDate, 'yyyy-mm-dd');"/> --%>
 								</li>
 								<li><label for="s_flag" style="width: 80px;">시작시간</label>
 									<select name="s_flag" id="s_flag">
