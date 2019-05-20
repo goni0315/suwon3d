@@ -1,7 +1,6 @@
 package suwon.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.SocketException;
 import java.util.HashMap;
 import java.util.List;
@@ -11,16 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONArray;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,12 +23,13 @@ import com.mymgr.framework.controller.ResponseUtil;
 import suwon.web.Service.AdminLogService;
 import suwon.web.Service.AdminService;
 import suwon.web.dao.AdminDao;
+import suwon.web.vo.AdminIpVo;
 import suwon.web.vo.AdminLogListVo;
 import suwon.web.vo.AdminLogVo;
-import suwon.web.vo.LayAutVo;
+import suwon.web.vo.BldgInfoVo;
 import suwon.web.vo.LayInfoVo;
-import suwon.web.vo.SuwonDongVO;
 import util.MyUtil;
+import util.Paging;
 /**
  * 
  * 이 클래스는 관리자페이지를 위한 클래스다. 
@@ -279,9 +274,7 @@ public class AdminController implements AdminDao{
 			
 					return mav;
 				}
-	
-		
-		
+			
 			MyUtil myUtil = new MyUtil();
 			int numPerPage = 5;
 			int viewPage = 0;
@@ -290,22 +283,11 @@ public class AdminController implements AdminDao{
 		
 			String pageNum  = request.getParameter("pageNum");
 			String menuname = request.getParameter("menu");
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
+						
 			if("0".equals(menuname)) {
 				return new ModelAndView("redirect:adminLogList.do");				
 			} else if(menuname==null)  {
-				
-				
+							
 				session = request.getSession(false);
 				
 				usrid=(String)session.getAttribute("usrid");
@@ -510,6 +492,101 @@ public class AdminController implements AdminDao{
 	
 		ModelAndView mav = new ModelAndView("../error");
 	
+	return mav;
+		
+	}	
+		
+	@RequestMapping(value="/adminPCNominate.do")
+	@ResponseBody
+	public int adminPCNominate (HttpServletRequest request, HttpServletResponse response){
+		
+		String usrid = request.getParameter("usrid");
+		String conip = request.getParameter("conip");
+		
+		
+		//로그인한 id, ip로 DB 조회
+		List<AdminIpVo> result = adminService.getAdminIP(usrid, conip);
+		
+		//DB에 값이 없는경우 
+		if(result.get(0).getConip().equals("0") && result.get(0).getUsrid().equals("0")) {
+			//adminService.setAdminIP(usrid, conip);
+//			System.out.println(result.get(0).getConip());
+//			System.out.println(result.get(0).getUsrid());
+//			System.out.println("DB에"+usrid+"이름으로"+conip+"아이피를 입력함");
+			return 0;
+		//db에 usrid, conip가 둘다 같은값이 잇을경우
+		} else if(result.get(0).getConip().equals(conip) && result.get(0).getUsrid().equals(usrid)) {
+		return 1;
+			
+		} else if(result.get(0).getUsrid().equals(usrid)	 && !(result.get(0).getConip().equals(conip))	) {
+			return 2;
+		} 
+		
+	return 3;
+		
+	}	
+	
+	@RequestMapping(value="/addAdminPCNominate.do")
+	@ResponseBody
+	public int addAdminPCNominate (HttpServletRequest request, HttpServletResponse response){
+		
+		String usrid = request.getParameter("usrid");
+		String conip = request.getParameter("conip");
+			
+			adminService.setAdminIP(usrid, conip);
+
+			return 0;	
+		
+	}	
+	
+	@RequestMapping(value="/delAdminPCNominate.do")
+	@ResponseBody
+	public int delAdminPCNominate (HttpServletRequest request, HttpServletResponse response){
+		
+		String usrid = request.getParameter("usrid");
+		String conip = request.getParameter("conip");
+			
+			adminService.delAdminIP(usrid, conip);
+
+			return 0;	
+		
+	}	
+	
+	
+	@RequestMapping(value="/buildingManagement.do")
+	public ModelAndView goBuildingManagement(HttpServletRequest request, HttpServletResponse response){
+		
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+
+		Paging paging = new Paging();
+		paging.setTotalCount(adminService.getTotalCount()); // 전체 게시물
+		paging.setPageNum(pageNum); // 현재 페이지 세팅
+		paging.setContentNum(15); // 한 페이지 보여줄 게시물 개수
+		paging.setCurrentBlock(pageNum); //현재 페이지 블록 세팅
+		paging.setLastBlock(paging.getTotalCount()); // 마지막 블록 세팅
+		paging.prevnext(pageNum); // 현재 페이지 번호로 앞, 뒤 화살표 세팅
+		paging.setStartPage(paging.getCurrentBlock()); //현재 페이지 블록으로 시작 페이지 세팅
+		paging.setEndPage(paging.getLastBlock(), paging.getCurrentBlock()); 
+		//마지막 페이지 블록과 현재 페이지 블록으로 마지막 페이지 세팅
+		
+		
+		//현재년도 구하기
+		//int year = Calendar.getInstance().get(Calendar.YEAR);	
+		
+		int startNum = (paging.getPageNum()-1)*paging.getContentNum()+1;
+		int endNum = paging.getContentNum()*paging.getPageNum();
+
+		List<BldgInfoVo> list = adminService.getBldgList("2018", startNum,  endNum);
+	
+		ModelAndView mav = new ModelAndView("jsp/buildingManagement");
+	    mav.addObject("bldgList", list);
+	    mav.addObject("startPage", paging.getStartPage());
+	    mav.addObject("endPage", paging.getEndPage());
+	    mav.addObject("prev", paging.isPrev());
+	    mav.addObject("next", paging.isNext());
+	    mav.addObject("pageNum", paging.getPageNum());
+	    mav.addObject("totalCount",paging.calcPage(paging.getTotalCount(), paging.getContentNum()));    
+		
 	return mav;
 		
 	}	
