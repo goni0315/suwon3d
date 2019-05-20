@@ -7,21 +7,23 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.commons.codec.binary.Base64;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.gpki.gpkiapi.GpkiApi;
 import com.gpki.gpkiapi.cert.X509Certificate;
@@ -30,8 +32,13 @@ import com.gpki.gpkiapi.crypto.PrivateKey;
 import com.gpki.gpkiapi.exception.GpkiApiException;
 import com.gpki.gpkiapi.storage.Disk;
 
+import suwon.web.Service.BuildInfoSearchService;
+import suwon.web.vo.BuildSearchVo;
+
 @Controller
 public class RealEstateUsuallyHeaderController {
+	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
+	private BuildInfoSearchService buildInfoSearchService = (BuildInfoSearchService) context.getBean("buildInfoSearchService");
 	/**
 	 *	일반표제부
 	 * @param request
@@ -47,8 +54,19 @@ public class RealEstateUsuallyHeaderController {
 		//String landUsuallyHeader = "1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,& ,1.기숙사,10.동측강의동,11.학군단강의동,12.변전실,13.실험동,14.인문사회관,대강의동,15.수위실,16.본관,17.도서관,18.기숙사,19.기숙사식당,2.본관[제1이공관],20.교육연구동(송재관),21.파워플랜트,22.팔달관,23.부속병원(본관),24.병원영안실,26.전자계산소,27.종합연구소,28.기숙사[제3생활관]A동,29.기숙사[제3생활관]B동,3.서관,30.의과대학,31.체육관,32.국가지정연구소,33동,34.산학협력원,35.정문화장실,36.토목실험동및영상표시연구소,37.대형지반 연구실험동,38.토목실험동창고-2,42.폐기물 보관소,43.버스관리소,45.동물사육장,47.테니스장 관리동,49.화공실험동 창고,5.학생회관,50.식당창고,52.신학생회관,53.교량실험실동,54.종합관,55.종합설계동,56.비품창고 1동,57.비품창고 2동,58.임상수기센터 및 실험동물센터,59.약학대약학관,6.실습공장,국제학사, , ,&아주대학교, , , , , , , , , , , , , , , ,원천동 5-1 의료시설 (학교법인대우학원), , , , , , , , , , , , , , , , , , , , , , , , ,아주대학교,아주대학교,아주대학교,아주대학교, , , ,아주대학교,창현고등학교,의과대학,&총괄,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,일반,& ,4121.53,1991.62,1418.49,396,1759.47,7571.68,50.28,13120.03,13311.67,5416.09,2910.225,11283.99,19120.22,2483.75,15683.88,101627.45,36,5115.39,11147.2,5873.9,6647.19,4893.18,38197.9,6991.79,1492.86,230,10714.77,62.38,1485.21,500.17,35.11,95.92,34.56,172.8,63.36,50.84,4000.17,54.26,5180.87,600,25757.21,745.63,330,330,4268.39,3967.86,4266.08,10096.78,7480.08, ,";
 		
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("pnu", pnu);
+		String bul_man_no = (String)request.getParameter("bul_man_no");
+		List<BuildSearchVo> buildList=null;	
+		 if(bul_man_no!=null){
+
+			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);
+				mav.addObject("buildList", buildList);
+				mav.addObject("bul_man_no", bul_man_no);
+			 //System.out.println("buildList2:::::::"+buildList);
+		 }
+		 
+		 if(pnu!=null){
+			 mav.addObject("pnu", pnu);
+		 }
 		mav.addObject("landUsuallyHeader", landUsuallyHeader);
 		mav.setViewName("/jsp/realEstate/realEstateUsuallyHeader");
 		

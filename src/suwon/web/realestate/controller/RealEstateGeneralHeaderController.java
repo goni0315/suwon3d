@@ -7,8 +7,11 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.List;
 
 import net.sf.json.JSONArray;
+import suwon.web.Service.BuildInfoSearchService;
+import suwon.web.vo.BuildSearchVo;
 
 import org.apache.commons.codec.binary.Base64;
 import org.w3c.dom.Document;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +40,8 @@ import com.gpki.gpkiapi.storage.Disk;
 
 @Controller
 public class RealEstateGeneralHeaderController {
+	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
+	private BuildInfoSearchService buildInfoSearchService = (BuildInfoSearchService) context.getBean("buildInfoSearchService");
 	/**
 	 *	총괄표제부
 	 * @param request
@@ -50,9 +57,19 @@ public class RealEstateGeneralHeaderController {
 		//String landGeneralHeader = "1111&21,677.4&39,864.26&수원시청&6,375.33&22,827.83&2&29.41&105.31& &업무시설&1985-10-17&1987-11-13& &";
 		
 		ModelAndView mav = new ModelAndView();
-		
-		//System.out.println("realEstateGeneralHeader : " + pnu);
-		mav.addObject("pnu", pnu);
+		String bul_man_no = (String)request.getParameter("bul_man_no");
+		List<BuildSearchVo> buildList=null;	
+		 if(bul_man_no!=null){
+
+			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);
+			 mav.addObject("buildList", buildList);
+			mav.addObject("bul_man_no", bul_man_no);
+			 //System.out.println("buildList2:::::::"+buildList);
+		 }
+		 
+		 if(pnu!=null){
+			 mav.addObject("pnu", pnu);
+		 }
 		mav.addObject("landGeneralHeader", landGeneralHeader);
 		mav.setViewName("/jsp/realEstate/realEstateGeneralHeader");
 		

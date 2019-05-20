@@ -7,21 +7,23 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.commons.codec.binary.Base64;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
 import com.gpki.gpkiapi.GpkiApi;
 import com.gpki.gpkiapi.cert.X509Certificate;
@@ -30,8 +32,13 @@ import com.gpki.gpkiapi.crypto.PrivateKey;
 import com.gpki.gpkiapi.exception.GpkiApiException;
 import com.gpki.gpkiapi.storage.Disk;
 
+import suwon.web.Service.BuildInfoSearchService;
+import suwon.web.vo.BuildSearchVo;
+
 @Controller
 public class RealEstateLandUsePlanController {
+	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
+	private BuildInfoSearchService buildInfoSearchService = (BuildInfoSearchService) context.getBean("buildInfoSearchService");
 	/**
 	 *	토지이용계획
 	 * @param request
@@ -47,8 +54,20 @@ public class RealEstateLandUsePlanController {
 		//String landUsePlan = "경기도 수원시 팔달구 인계동 &1111번지&대&21677.4&도시지역, 중심상업지역, 방화지구, 일반미관지구, 제1종지구단위계획구역, 공공청사, 광로2류(접함), 소로1류(접함), 소로2류(접함)&가축사육제한구역<가축분뇨의 관리 및 이용에 관한 법률>, 비행안전제6구역(전술)<군사기지 및 군사시설 보호법> &";
 		
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("pnu", pnu);
+		String bul_man_no = (String)request.getParameter("bul_man_no");
+
+		List<BuildSearchVo> buildList=null;	
+		 if(bul_man_no!=null){
+
+			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);
+			 mav.addObject("buildList", buildList);
+				mav.addObject("bul_man_no", bul_man_no);
+			 //System.out.println("buildList2:::::::"+buildList);
+		 }
+		 
+		 if(pnu!=null){
+			 mav.addObject("pnu", pnu);
+		 }
 		mav.addObject("landUsePlan", landUsePlan);
 		mav.setViewName("/jsp/realEstate/realEstateLandUsePlan");
 		

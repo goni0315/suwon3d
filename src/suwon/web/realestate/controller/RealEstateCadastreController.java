@@ -7,32 +7,34 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-
-import org.apache.commons.codec.binary.Base64;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 
-import com.gpki.gpkiapi.GpkiApi;
-import com.gpki.gpkiapi.cert.X509Certificate;
-import com.gpki.gpkiapi.cms.EnvelopedData;
-import com.gpki.gpkiapi.crypto.PrivateKey;
 import com.gpki.gpkiapi.exception.GpkiApiException;
-import com.gpki.gpkiapi.storage.Disk;
+
+import suwon.web.Service.BuildInfoSearchService;
+import suwon.web.vo.BuildSearchVo;
 
 
 @Controller
 public class RealEstateCadastreController {
+	private ApplicationContext context = new ClassPathXmlApplicationContext("/config/applicationContext.xml");
+	private BuildInfoSearchService buildInfoSearchService = (BuildInfoSearchService) context.getBean("buildInfoSearchService");
+
 	/**
 	 *	토지대장
 	 * @param request
@@ -41,15 +43,33 @@ public class RealEstateCadastreController {
 	 * @throws GpkiApiException 
 	 */
 	static String xml = "";
+	 	
 	@RequestMapping("/realEstateCadastre.do")
 	public ModelAndView realEstateCadastre(HttpServletRequest request, HttpServletResponse response) throws GpkiApiException{
+	
 		String pnu = (String)request.getParameter("pnu");
+		String bul_man_no = (String)request.getParameter("bul_man_no");
+		
 		String landCadastre = landCadastreInfo(pnu);
 		//String landCadastre = "1111대&08&대&21677.4&경기도 수원시 권선구 에서 행정관할구역변경&1993-02-01& &0&소유권보존&군유지&0&*****& &1989-12-16&02&11690000& &232&19940101& ";
 		
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("pnu", pnu);
+		List<BuildSearchVo> buildList=null;	
+		 if(bul_man_no!=null){
+
+			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);
+			 mav.addObject("bul_man_no", bul_man_no);
+			 mav.addObject("buildList", buildList);
+			 //System.out.println("buildList2:::::::"+buildList);
+		 }
+//		 else{						 
+//			 buildList = buildInfoSearchService.getBuildInfoList(bul_man_no);	 
+//		 }
+		 
+		 if(pnu!=null){
+			 mav.addObject("pnu", pnu);
+		 }
+		 
 		mav.addObject("landCadastre", landCadastre);
 		mav.setViewName("/jsp/realEstate/realEstateCadastre");
 		
