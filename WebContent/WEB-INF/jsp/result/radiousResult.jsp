@@ -20,18 +20,21 @@
 <script>
 /*KLIS 한국토지 정보 시스템연계 링크걸기(부동산 정보 열람) */
 function jibunInfo(pnu){
-	var w=window.open("http://klis.gg.go.kr/sis/main.do","_blank","width=100px,height=100px");
-	var url="http://klis.gg.go.kr/sis/info/baseInfo/baseInfo.do?";
-	url+="service=baseInfo&landcode="+pnu+"&gblDivName=baseInfo&scale=0&gyujae=0";
-	var win="";
-	try{
-		win=window.open(url,"addrInfoWin","");
-		w.close();
-	}catch(e){
-		if(w!='null'){
-			w.close();
-		}
-	}	
+// 	var w=window.open("http://klis.gg.go.kr/sis/main.do","_blank","width=100px,height=100px");
+// 	var url="http://klis.gg.go.kr/sis/info/baseInfo/baseInfo.do?";
+// 	url+="service=baseInfo&landcode="+pnu+"&gblDivName=baseInfo&scale=0&gyujae=0";
+// 	var win="";
+// 	try{
+// 		win=window.open(url,"addrInfoWin","");
+// 		w.close();
+// 	}catch(e){
+// 		if(w!='null'){
+// 			w.close();
+// 		}
+// 	}	
+	var winform = window.open("${ctx}/realEstateCadastre.do?pnu=" + pnu,"대장정보조회","toolbar=no, status=no, scrollbars=no, location=no, menubar=no, width=909px, height=370px");
+	winform.moveTo(screen.availWidth/2-1220/2,screen.availHeight/2 - 680/2);
+	winform.focus();
 }
 function listPage(page){
 	var form = parent.document.getElementById('frm');
