@@ -21,7 +21,7 @@ function openerControl(pnu){
 }
 </script>
 <div style="text-align: right; padding-bottom: 5px;">
-전체 ${totalCount}, 페이지 ${pageNum} / ${totalCount}
+전체 ${totalCount}, 페이지 ${pageNum} / ${totalPage}
 </div>
 				<div class="bbsCont">
 					<table class="wps_100">

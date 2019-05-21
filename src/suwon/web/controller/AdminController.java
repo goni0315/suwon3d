@@ -585,8 +585,8 @@ public class AdminController implements AdminDao{
 	    mav.addObject("prev", paging.isPrev());
 	    mav.addObject("next", paging.isNext());
 	    mav.addObject("pageNum", paging.getPageNum());
-	    mav.addObject("totalCount",paging.calcPage(paging.getTotalCount(), paging.getContentNum()));    
-		
+	    mav.addObject("totalPage",paging.calcPage(paging.getTotalCount(), paging.getContentNum()));    
+	    mav.addObject("totalCount",paging.getTotalCount());    
 	return mav;
 		
 	}	
