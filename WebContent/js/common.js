@@ -168,6 +168,7 @@ function addPC(){
 				$("#goadmin").show();
 				$("#addPC").hide();
 				$("#delPC").show();
+				$("#gobldg").show();
 			}	
 			
 		});
@@ -197,6 +198,7 @@ function delPC(){
 				$("#goadmin").hide();
 				$("#addPC").show();
 				$("#delPC").hide();
+				$("#gobldg").hide();
 			}	
 			
 		});
