@@ -136,6 +136,7 @@ if(result==0){
 	$("#addPC").hide();
 	$("#delPC").hide();
 	$("#gobldg").hide();
+	$("#goadmin").hide();
 } else if(result==3){
 	alert("에러");
 	
