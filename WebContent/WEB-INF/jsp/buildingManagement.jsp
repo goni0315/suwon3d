@@ -46,9 +46,15 @@ function openerControl(pnu){
 									<td align="center" >${list.bldg_year}</td>
 									
 									<td align="center">${list.utl3d_type}</td>
-									
-									<td align="center">${list.utl3d_bn}</td>
-									
+																		
+									<c:choose>
+									<c:when test="${not empty list.utl3d_bn}">
+									<td align="center">${list.utl3d_bn}</td>	
+									</c:when>
+									<c:otherwise>
+									<td align="center">-</td>	
+									</c:otherwise>									
+									</c:choose>																
 								
 									<td align="center"><a href="javascript:openerControl('${list.pnu}')">
 									${list.utl_3d_rna}</a></td>
