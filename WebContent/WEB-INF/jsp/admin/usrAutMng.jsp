@@ -292,7 +292,6 @@ function fn_nameSearch(){
 	callBackFn = function(result){
 		var userList = result[0].u_list; //메인 부서에 해당하는 사용자 리스트
 		fn_setUserList(userList);				//유저 리스트 넘겨줌
-		alert(userList)
 	};	
 	
 	$.ajax({
