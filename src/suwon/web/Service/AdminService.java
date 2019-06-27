@@ -8,6 +8,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import suwon.web.dao.AdminDao;
 import suwon.web.vo.AdminIpVo;
+import suwon.web.vo.BldgChartVo;
 import suwon.web.vo.BldgInfoVo;
 import suwon.web.vo.LayInfoVo;
 
@@ -122,6 +123,23 @@ public class AdminService implements AdminDao{
 		int count = (Integer) sqlMapClientTemplate.queryForObject("sms.getTotalCount");
 		return count; 
 		
+	}
+	public List<BldgChartVo> getBldgChartYear() {
+		
+		List<BldgChartVo> list = sqlMapClientTemplate.queryForList("sms.getBldgChartYear");
+		
+		return list;
+	}
+	
+	public String getBldgChartCount(String year, String type) {
+		
+		HashMap<String, String> param = new HashMap<String, String>();
+		param.put("year", year);
+		param.put("type", type);
+		
+		String count = (String) sqlMapClientTemplate.queryForObject("sms.getBldgChartCount" ,param);
+		
+		return count;
 	}
 
 	

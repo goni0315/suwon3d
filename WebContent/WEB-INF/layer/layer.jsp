@@ -187,7 +187,9 @@ function layerAppend(high, kor_nm, eng_nm, num, appLayNum, view) {
 				'</td>' +
 				'<td width="16">' +
 					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' + 
-						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						//'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						//title 지움
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" width="16" height="16">' +
 					'</a>' +
 				'</td>' +
 			'</tr>'+
@@ -227,7 +229,9 @@ function layerAppend2(high, kor_nm, eng_nm, num, appLayNum, view, r,g,b) {
 				'</td>' +
 				'<td width="16">' +
 					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' + 
-						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						//'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						//title지움
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" width="16" height="16">' +						
 					'</a>' +
 				'</td>' +
 			'</tr>'+
@@ -268,14 +272,19 @@ function layerAppendTerr(high, kor_nm, eng_nm, num, appLAyNM, view) {
 				'</td>' +
 				'<td width="16">' +
 					'<a href="#" onclick="setLayerVis(vImg' + num + ',' + eng_nm +')">' +
-						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						//'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" title="vImg' + num + '" width="16" height="16">' +
+						// title지움
+						'<img id="vImg' + num + '" src="${ctx}/images/layer/icon_light_on.gif" width="16" height="16">' +
 					'</a>' +
 				'</td>' +
-				'<td width="13">' +
-					'<a href="#" onclick="setLayerAlp(aImg' + num + ')">' +
-						'<img id="aImg' + num + '" src="${ctx}/images/layer/icon_opacity_off.gif" title="vImg' + num + '" width="17" height="17">' +
-					'</a>' +
-				'</td>'+
+				//기존 투명도 버튼 위치 옮김
+			//	'<td width="13">' +
+		//			'<a href="#" onclick="setLayerAlp(aImg' + num + ')">' +
+					//'<img id="aImg' + num + '" src="${ctx}/images/layer/icon_opacity_off.gif" title="vImg' + num + '" width="17" height="17">' +	
+					//title지움
+	//				'<img id="aImg' + num + '" src="${ctx}/images/layer/icon_opacity_off.gif" width="17" height="17">' +
+		//			'</a>' +
+	//			'</td>'+
 			'</tr>'+
 		'</table>'
 	));
@@ -688,7 +697,11 @@ function layerSetSave() {
 					<a href="#" onclick="layerCheck('checkImg24','layer24')">
 						<img id="checkImg24" src="${ctx}/images/layer/plus.gif" alt=""   style=" margin-left:5px;"/>
 					</a>&nbsp;&nbsp;지하시설물
-				</td>
+					<!-- 				지형옆에있는 투명도 버튼옮김			 -->			
+					<a href="#" onclick="setLayerAlp(aImg1)">
+				<img id="aImg1" src="${ctx}/images/layer/icon_opacity_off.gif" width="17" height="17" title="지형 투명도" style="float: right; margin-top: 2px; margin-right: 7px;">	
+					</a>
+				</td>			
 			</tr>
 			<tr>
 				<td id="layer24" style="display: none;"></td>

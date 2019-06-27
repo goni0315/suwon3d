@@ -2160,45 +2160,61 @@ function sangseInfo(layerName,key){
 
 	/**************지하시설물***************/
 	case "UF_WTL_PIPE_LM":	//상수관로WTL_PIPE_LM
-		//alert("UFL_WTL_PIPE_LM");
-		var w=window.open(WEB_SERVER_URL+"/SangsuInfo.do?key="+key,"_blank","width=400px,height=200px");
-		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;
+		//alert("UFL_WTL_PIPE_LM");		
+		if(XDOCX.XDLayGetVisible("UF_WTL_PIPE_LM")==true){
+			var w=window.open(WEB_SERVER_URL+"/SangsuInfo.do?key="+key,"_blank","width=400px,height=200px");
+			var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
+			w.moveTo(winxpos,winypos);break;			
+		}break;	
 	case "UF_SWL_PIPE_LM":	//하수관거SWL_PIPE_LM
 		//alert("UF_SWL_PIPE_LM");
+		if(XDOCX.XDLayGetVisible("UF_SWL_PIPE_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/HasuInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_BPIP_LM":	//전력지중관로UFL_BPIP_LM
 		//alert("UF_UFL_BPIP_LM");
+		if(XDOCX.XDLayGetVisible("UF_UFL_BPIP_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/ElcPipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_GLPI_LM":	//LPG배관UFL_GLPI_LM
 		//alert("UF_UFL_GLPI_LM");
+		if(XDOCX.XDLayGetVisible("UF_UFL_GLPI_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/LpgPipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_GPIP_LM":	//천연가스배관UFL_GPIP_LM
 		//alert("UF_UFL_GPIP_LM");
+		if(XDOCX.XDLayGetVisible("UF_UFL_GPIP_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/GasPipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_HPIP_LM":	//난방열배관UFL_HPIP_LM
 		//alert("UF_UFL_HPIP_LM");
+		if(XDOCX.XDLayGetVisible("UF_UFL_HPIP_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/HeatPipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_KPIP_LS":	//통신선로UFL_KPIP_LS
 		//alert("UF_UFL_KPIP_LS");
+		if(XDOCX.XDLayGetVisible("UF_UFL_KPIP_LS")==true){
 		var w=window.open(WEB_SERVER_URL+"/ComPipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
 		w.moveTo(winxpos,winypos);break;
+		}break;	
 	case "UF_UFL_PIPE_LM":	//광역상수관UFL_PIPE_LM
 		//alert("UF_UFL_PIPE_LM");
+		if(XDOCX.XDLayGetVisible("UF_UFL_PIPE_LM")==true){
 		var w=window.open(WEB_SERVER_URL+"/WidePipeInfo.do?key="+key,"_blank","width=400px,height=200px");
 		var winxpos = (window.screen.width-1250)/2;var winypos = (window.screen.height-685)/2;
-		w.moveTo(winxpos,winypos);break;		
+		w.moveTo(winxpos,winypos);break;	
+		}break;	
 		/*****************************건물******************************/
 	case "KO3D_BLDG_3D_PUBLIC":
 		//alert("KO3D_BLDG_3D_PUBLIC");

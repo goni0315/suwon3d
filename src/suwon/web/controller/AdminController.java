@@ -2,6 +2,7 @@ package suwon.web.controller;
 
 import java.io.IOException;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import suwon.web.dao.AdminDao;
 import suwon.web.vo.AdminIpVo;
 import suwon.web.vo.AdminLogListVo;
 import suwon.web.vo.AdminLogVo;
+import suwon.web.vo.BldgChartVo;
 import suwon.web.vo.BldgInfoVo;
 import suwon.web.vo.LayInfoVo;
 import util.MyUtil;
@@ -591,5 +593,139 @@ public class AdminController implements AdminDao{
 		
 	}	
 	
-	
+	@RequestMapping(value="/showBldgChart.do")
+	public ModelAndView showBldgChart(HttpServletRequest request, HttpServletResponse response){
+		
+		List<BldgChartVo> list = adminService.getBldgChartYear();
+				
+		String common="", culturaleducation="", etc="", general="", industry="", medicalwelfare="", public1="", service ="";
+		String categories = "";
+		
+       String bldgType [] = {"공동주택", "문화교육", "기타시설", "일반시설", "산업시설", "의료복지", "공공기관", "서비스시설"};
+		
+       
+       for(int i = 0; i<list.size(); i++) {
+    	   if(list.size()==1) {
+    		   categories+="'"+list.get(i).getBldg_year()+"'";
+    		   } else if(list.size()>=2) {
+    			   
+    			   if(list.size()-1==i) {
+    				   categories+="'"+list.get(i).getBldg_year()+"'";
+				   }else {
+					   categories+="'"+list.get(i).getBldg_year()+"',";
+				   }
+    		   }    	   
+       }       
+       
+    	   for(int j =  0; j<8; j++) {
+    		   for(int i = 0; i<list.size(); i++) {    			 
+    			   
+    		   String count = adminService.getBldgChartCount(list.get(i).getBldg_year(), bldgType[j]);
+    		   
+    		   //System.out.println(list.get(i).getBldg_year()+"  "+bldgType[j]+"  "+count);
+    		   if(bldgType[j]=="공동주택") {
+    			   if(list.size()==1) {
+    				   common+=count;    				   
+    			   }else if(list.size()>=2) {
+    				   if(list.size()-1==i) {
+    					   common+=count;  
+    				   }else {
+    					   common+=count+",";    					   
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="문화교육") {
+    			   if(list.size()==1) {
+    				   culturaleducation+=count;    				   
+    			   }else if(list.size()>=2) {
+    				   if(list.size()-1==i) {
+    					   culturaleducation+=count;  
+    				   }else {
+    					   culturaleducation+=count+","; 
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="기타시설") {
+    			   if(list.size()==1) {
+    				   etc+=count;    				   
+    			   }else if(list.size()>=2) {    				   
+    				   if(list.size()-1==i) {
+    					   etc+=count;  
+    				   } else {    					   
+    					   etc+=count+","; 
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="일반시설") {
+    			   if(list.size()==1) {
+    				   general+=count;    				   
+    			   }else if(list.size()>=2) {
+    				  
+    				   if(list.size()-1==i) {
+    					   general+=count;  
+    				   } else {
+    					   general+=count+",";
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="산업시설") { 
+    			   if(list.size()==1) {
+    				   industry+=count;    				   
+    			   }else if(list.size()>=2) {
+    				   
+    				   if(list.size()-1==i) {
+    					   industry+=count;  
+    				   } else {
+    					   industry+=count+",";
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="의료복지") { 
+    			   if(list.size()==1) {
+    				   medicalwelfare+=count;    				   
+    			   }else if(list.size()>=2) {
+    				   
+    				   if(list.size()-1==i) {
+    					   medicalwelfare+=count;  
+    				   }else {
+    					   medicalwelfare+=count+",";
+    				   }
+    			   }
+    		   }else if(bldgType[j]=="공공기관") { 
+    			   if(list.size()==1) {
+    				   public1+=count;    				   
+    			   }else if(list.size()>=2) {
+    				   
+    				   if(list.size()-1==i) {
+    					   public1+=count;  
+    				   }else {
+    					   public1+=count+","; 
+    				   }
+    			   }
+    		   } else {
+    			   if(list.size()==1) {
+    				   service+=count;    				   
+    			   }else if(list.size()>=2) {
+    				 
+    				   if(list.size()-1==i) {
+    					   service+=count;  
+    				   }else {
+    					   service+=count+",";
+    				   }    				   
+    			   }
+    		   }
+    	   }   	   
+       }
+		  	   
+       ModelAndView mav = new ModelAndView("jsp/bldgChart");       
+       
+		mav.addObject("categories", categories);   
+		mav.addObject("common", common);  
+		mav.addObject("culturaleducation", culturaleducation);  
+		mav.addObject("etc", etc);  
+		mav.addObject("general", general);  
+		mav.addObject("industry", industry);  
+		mav.addObject("medicalwelfare", medicalwelfare);  
+		mav.addObject("public1", public1);  
+		mav.addObject("service", service);  
+
+	return mav;
+		
+	}
+		
 }

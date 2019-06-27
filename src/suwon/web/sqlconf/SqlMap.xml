@@ -42,6 +42,7 @@
 	<typeAlias alias="UsrNameVo" type="suwon.web.vo.UsrNameVo" />
 	<typeAlias alias="AdminIpVo" type="suwon.web.vo.AdminIpVo" />
 	<typeAlias alias="BldgInfo" type="suwon.web.vo.BldgInfoVo" />
+		<typeAlias alias="BldgChart" type="suwon.web.vo.BldgChartVo" />
 
 	<insert id="insertadmin" parameterClass="UsrIdVo">
 		insert into
@@ -1779,10 +1780,20 @@ where rnum between #startNum# and #endNum#
      
 	</select>
 	
+		   <select id="getBldgChartYear"  resultClass="BldgChart">
+	
+	select distinct bldg_year from bldg_info order by bldg_year asc
+     
+	</select>
+	
+	<select id="getBldgChartCount"  resultClass="str">
+	
+	select count(utl3d_type) from bldg_info where bldg_year = #year# and utl3d_type = #type#
+     
+	</select>
 	
 
 </sqlMap>
-
 
 
 

@@ -566,7 +566,7 @@ function fn_getViewCheck(){
 }
 function fn_downExcel(){
 	
-	document.getElementById("tempFrm").src = "${ctx}/connStatExcelDown.do?"+fn_getParamList();;
+	document.getElementById("tempFrm").src = "${ctx}/connStatExcelDown.do?"+fn_getParamList();
 }
 </script>
 <style type="text/css">

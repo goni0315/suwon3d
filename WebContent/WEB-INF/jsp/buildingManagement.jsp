@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>시설물 리스트</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <script type="text/javascript" src="${ctx}/js/jquery/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="${ctx}/js/jquery/jquery-ui-1.8.custom.min.js"></script>
@@ -18,6 +19,10 @@
 //자식창에서 부모창 함수 호출 ex
 function openerControl(pnu){
 	window.opener.doBldgView(pnu);	
+}
+function showChart(){
+	window.open("${ctx}/showBldgChart.do","시설물 차트", "resizable=no, scrollbars=no, status=no, width=1100px; height=550px;");
+	
 }
 </script>
 <div style="text-align: right; padding-bottom: 5px;">
@@ -68,7 +73,7 @@ function openerControl(pnu){
 						 	
 					</table>
 				</div>
-				<div style="text-align: center; font-size: 12px; vertical-align: middle; padding-top:20px; position: fixed; left: 280px;" >
+				<div style="font-size: 12px; vertical-align: middle; padding-top:20px; position: fixed; left: 280px;" >
 				<c:if test="${prev}">
 				<a href="${ctx}/buildingManagement.do?pageNum=${startPage-1}" style="text-decoration: none;"><img  src="${ctx}/images/bbs/page_first.gif" style="vertical-align: middle;"></a>				
 				</c:if>
@@ -87,6 +92,8 @@ function openerControl(pnu){
 				<c:if test="${next}">
 				<a href="${ctx}/buildingManagement.do?pageNum=${endPage+1}" style="text-decoration: none;"><img  src="${ctx}/images/bbs/page_last.gif" style="vertical-align: middle;"></a>				
 				</c:if>
+				
+				<a href="javascript:showChart()"><span style="background-color:#016da0; padding: 5px; border-radius: 5px; color: #FFFFFF; position: fixed; left: 620px;">차트보기</span></a>
 				</div>
 	
 	
